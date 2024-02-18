@@ -1,0 +1,62 @@
+/* Global Style Variables */
+
+:root {
+    --ff-base: "Open Sans", system-ui;
+    --fw-regular: 400;
+    --fw-bold: 600;
+    --primary-color: hsl(153, 56%, 31%);
+    --background-color: hsl(153, 56%, 97%);
+
+}
+
+/* Global Style Variables */
+
+* {
+    font-family: var(--ff-base);
+    background-color: var(--background-color);
+}
+
+/* Responsive Breakpoints */
+
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+@media (min-width: 475px) {
+    .wrapper {
+        max-width: 475px;
+    }
+}
+
+@media (min-width: 640px){
+    .wrapper {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px){
+    .wrapper {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .wrapper {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .wrapper {
+        max-width: 1280px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .wrapper {
+        max-width: 1536px;
+    }
+}

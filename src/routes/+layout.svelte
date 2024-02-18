@@ -1,6 +1,8 @@
 <script>
     import '../reset.css'
     import '../app.css'
+    import Search from '$lib/components/Search.svelte'
+    import Button from '$lib/components/Button.svelte'
 </script>
 
 <svelte:head>
@@ -9,16 +11,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="wrapper">
-    <header>
-        
-    </header>
+<div class="wrapper navigation">
+    <nav>
+        <div class="logo-container">
+            <img src="/assets/logo.svg" alt="tafthanan logo">
+            <h1>tafthanan</h1>
+        </div>
+        <Search/>
+        <Button name="login" text="Sign in"/>
+    </nav>
 </div>
+<div class="wrapper">
+    <hr>
+</div>
+
 
 
 <slot>
 
 </slot>
 <style>
-    
+
+    h1 {
+        font-size: var(--fs-xl);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navigation {
+        margin-top: var(--fs-m);
+    }
+
+    .logo-container {
+        display: flex;
+        gap: var(--fs-m);
+    }
+
 </style>

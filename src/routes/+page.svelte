@@ -14,13 +14,11 @@
     }, 2000)
 
 </script>
+
 <div class="wrapper">
     <p>The number of times I've had it is {count}</p>
 </div>
-<style>
-    button {
-        width: 5rem;
-        height: 5rem;
 
-    }
+<style>
+
 </style>

@@ -6,7 +6,25 @@
     --fw-bold: 600;
     --primary-color: hsl(153, 56%, 31%);
     --background-color: hsl(153, 56%, 97%);
+    --contrast-color: hsl(153, 56%, 95%); 
 
+    --fs-xl: 1.5rem;
+    --fs-l: 1rem;
+    --fs-m: 0.75rem;
+
+}
+
+hr {
+    margin-top: var(--fs-m);
+    margin-bottom: var(--fs-m);
+    border-top: 0.25px lightgray solid;
+    border-bottom: 0;
+}
+
+/* USE FOR TESTING */
+
+.wrapper {
+    border: 1px solid black;
 }
 
 /* Global Style Variables */
@@ -23,23 +41,35 @@
     margin-right: auto;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    
 }
+
+
 
 @media (min-width: 475px) {
     .wrapper {
         max-width: 475px;
     }
+
 }
 
 @media (min-width: 640px){
     .wrapper {
         max-width: 640px;
     }
+
+
 }
 
 @media (min-width: 768px){
     .wrapper {
         max-width: 768px;
+    }
+
+    :root {
+        --fs-xl: 2rem;
+        --fs-l: 1.5rem;
+        --fs-m: 1rem;
     }
 }
 
@@ -53,10 +83,17 @@
     .wrapper {
         max-width: 1280px;
     }
+
+    :root {
+        --fs-xl: 2.25rem;
+        --fs-l: 1.75rem;
+        --fs-m: 1.25rem;
+    }
 }
 
 @media (min-width: 1536px) {
     .wrapper {
         max-width: 1536px;
     }
+
 }

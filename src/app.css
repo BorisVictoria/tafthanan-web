@@ -45,10 +45,15 @@ hr {
     
 }
 
-.main {
+.main{
+    padding-top: var(--fs-m);
     background-color: var(--contrast-color);
     min-height: 100vh;
     max-height: auto;
+}
+
+.main > *{
+    background-color: var(--contrast-color);
 }
 
 @media (min-width: 475px) {

@@ -30,7 +30,7 @@
     </nav>
 </div>
 <div class="wrapper">
-    <hr>
+    <hr class="hr-no-bottom-margin">
 </div>
 
 <slot>
@@ -41,6 +41,10 @@
 
     h1 {
         font-size: var(--fs-xl);
+    }
+
+    .hr-no-bottom-margin{
+        margin-bottom: 0;
     }
 
     nav {

@@ -1,6 +1,5 @@
 <script>
-
-
+    
 </script>
 
 <div class="search-container">

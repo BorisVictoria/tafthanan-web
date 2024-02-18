@@ -24,7 +24,7 @@
             {/if}
         </div>
         {#if width > 640}
-            <Search/>
+            <Search type="search"/>
         {/if}
         <Button name="login" text="Sign in"/>
     </nav>

@@ -16,6 +16,7 @@
 </script>
 
 <div class="wrapper main">
+    dito pala dapat nilalagay
 </div>
 
 <style>

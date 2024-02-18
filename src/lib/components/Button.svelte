@@ -15,6 +15,7 @@
         align-items: center;
         padding: calc(var(--fs-l) * 0.25) calc(var(--fs-l) * 0.5) ;
 
+        gap: calc(var(--fs-m) * 0.75);
         cursor: pointer;
         text-decoration: none;
         font-size: var(--fs-l);
@@ -29,7 +30,7 @@
         width: var(--fs-m);
         height: var(--fs-m);
         background-image: url("assets/search.svg") 
-    }
+    } 
 
     button:hover {
         background-color: var(--accent-color);

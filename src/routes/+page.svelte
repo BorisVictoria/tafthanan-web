@@ -15,10 +15,29 @@
 
 </script>
 
-<div class="wrapper">
-    <p>The number of times I've had it is {count}</p>
+<div class="wrapper main">
 </div>
 
 <style>
+    .main {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+        .main {
+            grid-template-columns: 3fr 1fr;
+            grid-template-areas: "middle right";
+        }
+
+    }
+
+    @media (min-width: 1280px) {
+        .main {
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-areas: "left middle right";
+        }
+        
+    }
 
 </style>

@@ -17,11 +17,13 @@
 
 <div class="wrapper navigation">
     <nav>
-        <div class="logo-container">
+        <div class="logo-container"> 
             <img src="/assets/logo.svg" alt="tafthanan logo">
-            <h1>tafthanan</h1>
+            {#if width > 475}
+                <h1>tafthanan</h1>
+            {/if}
         </div>
-        {#if width > 475}
+        {#if width > 640}
             <Search/>
         {/if}
         <Button name="login" text="Sign in"/>

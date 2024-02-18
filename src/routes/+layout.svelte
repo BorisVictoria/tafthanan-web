@@ -3,6 +3,8 @@
     import '../app.css'
     import Search from '$lib/components/Search.svelte'
     import Button from '$lib/components/Button.svelte'
+
+    let width = 0;
 </script>
 
 <svelte:head>
@@ -11,13 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </svelte:head>
 
+<svelte:window bind:innerWidth={width}/>
+
 <div class="wrapper navigation">
     <nav>
         <div class="logo-container">
             <img src="/assets/logo.svg" alt="tafthanan logo">
             <h1>tafthanan</h1>
         </div>
-        <Search/>
+        {#if width > 475}
+            <Search/>
+        {/if}
         <Button name="login" text="Sign in"/>
     </nav>
 </div>
@@ -25,11 +31,10 @@
     <hr>
 </div>
 
-
-
 <slot>
 
 </slot>
+
 <style>
 
     h1 {

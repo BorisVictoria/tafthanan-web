@@ -8,7 +8,6 @@
     --accent-color: hsl(153, 56%, 29%);
     --background-color: hsl(153, 56%, 100%);
     --contrast-color: hsl(153, 56%, 97%); 
-    --header-color: hsl(0.50, 0.14, 0.99);
 
     --fs-xl: 1.5rem;
     --fs-l: 1rem;
@@ -33,7 +32,7 @@ hr {
 
 * {
     font-family: var(--ff-base);
-    /*background-color: var(--background-color);*/
+    background-color: var(--background-color);
 }
 
 /* Responsive Breakpoints */
@@ -49,8 +48,9 @@ hr {
 .main {
     padding-top: var(--fs-m);
     background-color: var(--contrast-color);
-    min-height: 100vh;
-    max-height: auto;
+    /* DANGEROUS PROPERTY, will cause overflow when margins are applied to main container
+        min-height: 100vh;
+    */
 }
 
 .main > * {

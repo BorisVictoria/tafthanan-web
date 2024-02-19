@@ -42,6 +42,7 @@
 
     h1 {
         font-size: var(--fs-xl);
+        color: var(--primary-color);
     }
 
     .hr-no-bottom-margin{

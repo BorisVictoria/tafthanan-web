@@ -15,6 +15,8 @@
        
     }, 2000)
 
+    let articles = 5;
+
 </script> 
 
 <div class="wrapper main">
@@ -22,14 +24,9 @@
         dito pala dapat nilalagay
     </div>
     <div class="middle">
-        <Article>
-        </Article>
-
-        <Article>
-        </Article>
-
-        <Article>
-        </Article>
+    {#each {length: articles} as _, i}
+        <Article/>
+    {/each}
     </div>
     <div class="right">
         Test
@@ -40,7 +37,8 @@
 <style>
 
 
-    @media (min-width: 475px){
+    @media (min-width: 0px) {
+
         .main {
             display: grid;
             grid-template-columns: 1fr;
@@ -50,41 +48,39 @@
             display: none;
         }
 
-        .middle{
+        .middle {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
     }   
 
     @media (min-width: 768px) {
+
         .main {
             grid-template-columns: 3fr 1fr;
             grid-template-areas: "middle right";
         }
 
-        .left{
-            display: none;
-        }
-
-        .middle, .right{
+        .right{
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
     }
 
     @media (min-width: 1280px) {
+
         .main {
             grid-template-columns: 1fr 3fr 1fr;
             grid-template-areas: "left middle right";
         }
 
-        .left, .middle, .right{
+        .left {
             display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
     }

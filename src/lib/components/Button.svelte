@@ -22,14 +22,16 @@
         border: 0;
         border-radius: 0.25rem;
         background-color: var(--primary-color);
-        color: white;
+        color: var(--contrast-color);
+
     }
 
     button::before {
         content: "";
         width: var(--fs-m);
         height: var(--fs-m);
-        background-image: url("assets/search.svg") 
+        background-image: url("assets/search.svg");
+        background-size: contain;
     } 
 
     button:hover {

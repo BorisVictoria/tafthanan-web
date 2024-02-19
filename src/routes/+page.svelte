@@ -1,88 +1,92 @@
 <script>
 
-    import Article from '$lib/components/Article.svelte'
-    
-    let count = 0;
-    $: double = count * 2;
+    import Text from '$lib/components/Text.svelte';
+    import Button from '$lib/components/Button.svelte';
+    import Password from '$lib/components/Password.svelte';
 
-    function increment() {
-        count++;
-        
-    }
+    import '../login.css'
+    import { onMount } from 'svelte';
 
-    setInterval(() => {
-        count++;
-       
-    }, 2000)
+    let width = 0;
 
-    let articles = 5;
+</script>
 
-</script> 
+<svelte:window bind:innerWidth={width}/>
 
-<div class="wrapper main">
-    <div class="left">
-        
-    </div>
-    <div class="middle">
-    {#each {length: articles} as _, i}
-        <Article/>
-    {/each}
-    </div>
-    <div class="right">
-        
+<div class="wrapper">
+    <div class="login-container">
+        {#if width > 768}
+            <img src="assets/login-poster.png" alt="login poster">
+        {/if}
+        <form class="input-container">
+            <header>
+                <h1>Life is Taft.</h1>
+                <hr>
+                <h2>Let's make it bearable pare.</h2>
+            </header>
+            <p>
+                Username:
+            </p>
+            <Text name="Username" placeholder="Username"/>
+            <p>
+                Password:
+            </p>
+            <Password name="Password" placeholder="Password"/>
+            <div class="button-container">
+                <Button name="login" text="Sign in" --width="100%" --display="none"/>
+                <hr>
+                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)"/>
+                <p class="text-align">continue without an account</p>
+            </div>
+        </form>
     </div>
 </div>
 
-
+    
 <style>
 
-
-    @media (min-width: 0px) {
-
-        .main {
-            display: grid;
-            grid-template-columns: 1fr;
-        }
-
-        .left, .right{
-            display: none;
-        }
-
-        .middle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    }   
-
-    @media (min-width: 768px) {
-
-        .main {
-            grid-template-columns: 3fr 1fr;
-            grid-template-areas: "middle right";
-        }
-
-        .right{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+    h1 {
+        font-size: var(--fs-xxl);
     }
 
-    @media (min-width: 1280px) {
+    h2 {
+        font-size: var(--fs-l);
+    }
 
-        .main {
-            grid-template-columns: 1fr 3fr 1fr;
-            grid-template-areas: "left middle right";
-        }
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: var(--fs-m);
+        border-radius: 0.5rem;
+        min-width: 80%;
+    }
 
-        .left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+    .login-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        gap: var(--fs-m);
+        min-width: 100%;
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        padding: var(--fs-m);
+        gap: var(--fs-m);
+        border-radius: 0.5rem;
+        background: var(--background-color);
+    }
+
+    .input-container:hover {
+        border: 2px var(--primary-color) solid;
+    }
+
+    @media (min-width: 768px) {
+        .login-container {
+            grid-template-columns: 1fr 1fr;
         }
-        
     }
 
 </style>

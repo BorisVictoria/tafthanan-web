@@ -1,19 +1,19 @@
 <script>
     export let name = 'name'
-    export let width = 'auto';
     export let text = 'Button'
-    export let src = '';
 </script>
 
-<button type="button" style="width:{width}" name={name}>{text}</button>
+<button type="button" name={name}>{text}</button>
 
 <style>
 
     button {
+
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        padding: calc(var(--fs-l) * 0.25) calc(var(--fs-l) * 0.5) ;
+        padding: calc(var(--fs-l) * 0.25) calc(var(--fs-l) * 0.5);
+        width: var(--width);
 
         gap: calc(var(--fs-m) * 0.75);
         cursor: pointer;
@@ -26,10 +26,11 @@
     }
 
     button::before {
+        display: var(--display, block);
         content: "";
         width: var(--fs-m);
         height: var(--fs-m);
-        background-image: url("assets/search.svg");
+        background-image: var(--url, url("assets/search.svg"));
         background-size: contain;
     } 
 

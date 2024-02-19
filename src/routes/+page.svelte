@@ -52,7 +52,7 @@
 
                 <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)"/>
                 <footer>
-                <a href="/home">continue without an account</a>
+                <a data-sveltekit-reload href="home">continue without an account</a>
                 </footer>
             </div>
         </form>

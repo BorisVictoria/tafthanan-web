@@ -22,7 +22,7 @@
         border: 0;
         border-radius: 0.25rem;
         background-color: var(--primary-color);
-        color: var(--contrast-color);
+        color: white;
     }
 
     button::before {

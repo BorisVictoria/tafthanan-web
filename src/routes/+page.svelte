@@ -16,10 +16,15 @@
 <div class="wrapper">
     <div class="login-container">
         {#if width > 768}
+            <div class="poster-container">
             <img src="assets/login-poster.png" alt="login poster">
+            </div>
         {/if}
         <form class="input-container">
             <header>
+                <div class="logo-text-container">
+                <img src="../assets/logo.svg" alt="logo"><h2>tafthanan</h2>
+                </div>
                 <h1>Life is Taft.</h1>
                 <hr>
                 <h2>Let's make it bearable pare.</h2>
@@ -34,9 +39,21 @@
             <Password name="Password" placeholder="Password"/>
             <div class="button-container">
                 <Button name="login" text="Sign in" --width="100%" --display="none"/>
-                <hr>
-                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)"/>
-                <p class="text-align">continue without an account</p>
+
+                <div class="divider">
+                    <div class="divider-line">
+                        <hr>
+                    </div>
+                    OR
+                    <div class="divider-line">
+                        <hr>
+                    </div>
+                </div>
+
+                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)"/>
+                <footer>
+                <a href="/home">continue without an account</a>
+                </footer>
             </div>
         </form>
     </div>
@@ -44,13 +61,26 @@
 
     
 <style>
-
     h1 {
         font-size: var(--fs-xxl);
     }
 
     h2 {
         font-size: var(--fs-l);
+    }
+
+    a {
+        color: var(--accent-color);
+        transition: color 0.5s ease;
+    }
+    a:hover{
+        color: hsl(153, 56%, 45%);;
+    }
+
+    footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .wrapper {
@@ -60,6 +90,12 @@
         padding: var(--fs-m);
         border-radius: 0.5rem;
         min-width: 80%;
+        max-height: 100vh;
+    }
+
+    .poster-container{
+        max-height: 100vh;
+        overflow: hidden;
     }
 
     .login-container {
@@ -68,25 +104,47 @@
         align-items: center;
         gap: var(--fs-m);
         min-width: 100%;
+        max-height: 100vh;
+        overflow: auto;
     }
 
     .input-container {
         display: flex;
         flex-direction: column;
         padding: var(--fs-m);
+        margin: calc(var(--fs-m) * 0.5);
         gap: var(--fs-m);
         border-radius: 0.5rem;
         background: var(--background-color);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 1s ease;
+        border: 0px;
     }
 
     .input-container:hover {
-        border: 2px var(--primary-color) solid;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo-text-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+
+    .logo-text-container > img{
+        height: 1rem;
     }
 
     @media (min-width: 768px) {
         .login-container {
             grid-template-columns: 1fr 1fr;
         }
+
+        .logo-text-container{
+            display: none;
+        }
+
     }
 
 </style>

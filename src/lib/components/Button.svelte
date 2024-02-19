@@ -22,6 +22,7 @@
         border-radius: 0.25rem;
         background-color: var(--primary-color);
         color: var(--contrast-color);
+        transition: background-color 0.3s ease;
 
     }
 

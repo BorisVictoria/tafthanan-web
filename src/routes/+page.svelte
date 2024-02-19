@@ -9,6 +9,11 @@
 
     let width = 0;
 
+    $: test="<style> #login-form{display:block} #create-acc-form{display:none} </style>"
+    function showCreateAcc(){
+        test = "<style> #login-form{display:none} #create-acc-form{display:block} </style>"
+    }
+
 </script>
 
 <svelte:window bind:innerWidth={width}/>
@@ -20,11 +25,17 @@
             <img src="assets/login-poster.png" alt="login poster">
             </div>
         {/if}
-        <form class="input-container">
-            <header>
-                <div class="logo-text-container">
+        <div class="input-container">
+
+            {@html test}
+
+            <div class="logo-text-container">
                 <img src="../assets/logo.svg" alt="logo"><h2>tafthanan</h2>
-                </div>
+            </div>
+
+            <form id="login-form">
+            <header>
+
                 <h1>Life is Taft.</h1>
                 <hr>
                 <h2>Let's make it bearable pare.</h2>
@@ -50,12 +61,18 @@
                     </div>
                 </div>
 
-                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)"/>
-                <footer>
-                <a data-sveltekit-reload href="home">continue without an account</a>
-                </footer>
+                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)" on:click={showCreateAcc}/>
+                
             </div>
-        </form>
+            <footer>
+                <a data-sveltekit-reload href="home">continue without an account</a>
+            </footer>
+            </form>
+
+            <form id="create-acc-form">
+                <h1>Welcome to tafthanan</h1>
+            </form>
+        </div>
     </div>
 </div>
 

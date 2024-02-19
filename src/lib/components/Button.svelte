@@ -1,9 +1,10 @@
 <script>
     export let name = 'name'
     export let text = 'Button'
+
 </script>
 
-<button type="button" name={name}>{text}</button>
+<button type="button" name={name} on:click>{text}</button>
 
 <style>
 

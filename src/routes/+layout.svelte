@@ -5,6 +5,7 @@
     import Button from '$lib/components/Button.svelte'
 
     let width = 0;
+
 </script>
 
 <svelte:head>
@@ -13,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </svelte:head>
 
-<svelte:window bind:innerWidth={width}/>
+<svelte:window bind:innerWidth={width}/> 
 
 <div class="wrapper navigation">
     <nav>
@@ -24,7 +25,7 @@
             {/if}
         </div>
         {#if width > 640}
-            <Search type="search"/>
+            <Search/>
         {/if}
         <Button name="login" text="Sign in"/>
     </nav>

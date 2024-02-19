@@ -45,8 +45,6 @@ hr {
     
 }
 
-
-
 @media (min-width: 475px) {
     .wrapper {
         max-width: 475px;
@@ -58,7 +56,6 @@ hr {
     .wrapper {
         max-width: 640px;
     }
-
 
 }
 

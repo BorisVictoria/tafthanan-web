@@ -25,7 +25,8 @@
         <Article>
         </Article>
 
-        <hr>
+        <Article>
+        </Article>
 
         <Article>
         </Article>
@@ -38,6 +39,7 @@
 
 <style>
 
+
     @media (min-width: 475px){
         .main {
             display: grid;
@@ -49,7 +51,10 @@
         }
 
         .middle{
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
     }   
 
@@ -65,6 +70,7 @@
 
         .middle, .right{
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
@@ -78,7 +84,7 @@
         }
 
         .left, .middle, .right{
-            display: block;
+            display: flex;
         }
         
     }

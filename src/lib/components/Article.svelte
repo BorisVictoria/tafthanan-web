@@ -25,7 +25,7 @@ article {
   margin-bottom: 1rem;
   padding: 1rem 1rem;
   border-radius: 0.25rem;
-  background: #ffffff;
+  background: var(--background-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   width: 90%;
@@ -35,7 +35,7 @@ article > footer {
   margin-right: calc(1rem * -1);
   margin-left: calc(1rem * -1);
   padding: calc(1rem * 0.66) 1rem;
-  background-color: #fbfcfc;
+  background-color: var(--header-color);
 }
 article > header {
   margin-top: calc(1rem * -1);

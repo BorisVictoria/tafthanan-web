@@ -18,7 +18,6 @@
         gap: calc(var(--fs-m) * 0.75);
         cursor: pointer;
         text-decoration: none;
-        font-size: var(--fs-l);
         border: 0;
         border-radius: 0.25rem;
         background-color: var(--primary-color);

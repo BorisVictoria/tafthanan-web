@@ -11,7 +11,7 @@
 <svelte:head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,87.5,100..900;1,87.5,100..900&display=swap" rel="stylesheet">
 </svelte:head>
 
 <svelte:window bind:innerWidth={width}/> 
@@ -41,7 +41,8 @@
 <style>
 
     h1 {
-        font-size: var(--fs-xl);
+        display: flex;
+        align-items: center;
         color: var(--primary-color);
     }
 

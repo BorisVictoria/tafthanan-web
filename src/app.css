@@ -1,15 +1,15 @@
 /* Global Style Variables */
 
 :root {
-    --ff-base: "Open Sans", system-ui;
+    --ff-base: "Noto Sans", verdana;
     --fw-regular: 400;
-    --fw-bold: 600;
+    --fw-bold: 900;
     --primary-color: hsl(153, 56%, 31%);
     --accent-color: hsl(153, 56%, 29%);
     --background-color: hsl(153, 56%, 100%);
     --contrast-color: hsl(153, 56%, 97%); 
 
-    --fs-xl: 1.5rem;
+    --fs-xl: 1.25rem;
     --fs-l: 1rem;
     --fs-m: 0.75rem;
 
@@ -32,9 +32,17 @@ hr {
 
 * {
     font-family: var(--ff-base);
+    font-size: var(--fs-m);
     background-color: var(--background-color);
 }
 
+button {
+    font-size: var(--fs-l);
+}
+
+h1 {
+    font-size: var(--fs-xl);
+}
 /* Responsive Breakpoints */
 
 .wrapper {
@@ -69,6 +77,13 @@ hr {
         max-width: 640px;
     }
 
+    :root {
+        --fs-xl: 1.375rem;
+        --fs-l: 1.125rem;
+        --fs-m: 0.875rem;
+    }
+
+
 }
 
 @media (min-width: 768px){
@@ -76,17 +91,22 @@ hr {
         max-width: 768px;
     }
 
-    :root {
-        --fs-xl: 2rem;
-        --fs-l: 1.5rem;
-        --fs-m: 1rem;
-    }
+
+
+
 }
 
 @media (min-width: 1024px) {
     .wrapper {
         max-width: 1024px;
     }
+
+    :root {
+        --fs-xl: 1.5rem;
+        --fs-l: 1.25rem;
+        --fs-m: 1rem;
+    }
+
 }
 
 @media (min-width: 1280px) {
@@ -94,11 +114,7 @@ hr {
         max-width: 1280px;
     }
 
-    :root {
-        --fs-xl: 2.25rem;
-        --fs-l: 1.75rem;
-        --fs-m: 1.25rem;
-    }
+
 }
 
 @media (min-width: 1536px) {

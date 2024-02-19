@@ -21,7 +21,7 @@
 
 <div class="wrapper main">
     <div class="left">
-        dito pala dapat nilalagay
+        
     </div>
     <div class="middle">
     {#each {length: articles} as _, i}
@@ -29,7 +29,7 @@
     {/each}
     </div>
     <div class="right">
-        Test
+        
     </div>
 </div>
 

@@ -13,7 +13,9 @@
     <header>
         <strong>{title}</strong> — <i>{author}</i> <small>{time}</small>
     </header>
+    <p>
       {content}
+    </p>
     <footer>
         {upvote}
     </footer>

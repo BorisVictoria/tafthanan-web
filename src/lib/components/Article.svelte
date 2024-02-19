@@ -36,6 +36,10 @@ article {
   max-width: 90%;
 }
 
+article:hover {
+  border: 2px var(--primary-color) solid;
+}
+
 article > header {
   border-bottom: 1px solid lightgray;
   padding: 0 0 var(--fs-m) 0;

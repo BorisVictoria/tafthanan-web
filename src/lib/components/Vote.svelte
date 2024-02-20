@@ -15,7 +15,7 @@
 			if(ud === 1){
 				votes--;
 				ud = 0;
-				uStatus = ""
+				uStatus = "u"
 			}
 			else{
 				if(ud == -1){
@@ -23,8 +23,8 @@
 				}
 				
 				ud = 1;
-				uStatus = "<style>#u{color:orange}</style>"
-				dStatus = ""
+				uStatus = "u-clicked"
+				dStatus = "d"
 			}
 			refreshVotes();
 		}
@@ -33,26 +33,23 @@
 			if(ud === -1){
 				votes++;
 				ud = 0;
-				dStatus = ""
+				dStatus = "d"
 			} else{
 				if(ud == 1){
 					votes --;
 				}
 
 				ud = -1;
-				dStatus = "<style> #d{color:blue} </style>"
-				uStatus = ""
+				dStatus = "d-clicked"
+				uStatus = "u"
 			}
 			refreshVotes();
 		}
 	
 </script>
 
-{@html uStatus}
-{@html dStatus}
-
 <div class ="votes-container">
-    <button id="u" on:click={uClicked}>U</button> <div class="vote-count-container"> {votes} </div> <button id="d" on:click={dClicked}>D</button>
+    <button class={uStatus} on:click={uClicked}>U</button> <div class="vote-count-container"> {votes} </div> <button class={dStatus} on:click={dClicked}>D</button>
 </div>
 
 <style>
@@ -67,4 +64,13 @@
         width: var(--fs-m);
         text-align: center;
     }
+
+    .u-clicked{
+        color: orange;
+    }
+
+    .d-clicked{
+        color: blue;
+    }
+
 </style>

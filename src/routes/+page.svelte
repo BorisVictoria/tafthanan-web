@@ -3,6 +3,7 @@
     import Text from '$lib/components/Text.svelte';
     import Button from '$lib/components/Button.svelte';
     import Password from '$lib/components/Password.svelte';
+    import Back from '$lib/components/Back.svelte';
 
     import '../login.css'
     import { onMount } from 'svelte';
@@ -12,6 +13,10 @@
     $: test="<style> #login-form{display:block} #create-acc-form{display:none} </style>"
     function showCreateAcc(){
         test = "<style> #login-form{display:none} #create-acc-form{display:block} </style>"
+    }
+
+    function showLogIn(){
+        test= "<style> #login-form{display:block} #create-acc-form{display:none} </style>"
     }
 
 </script>
@@ -70,7 +75,31 @@
             </form>
 
             <form id="create-acc-form">
-                <h1>Welcome to tafthanan</h1>
+                <header>
+                    
+                    <h1><Back --width="calc(var(--fs-l) * 2)" on:click={showLogIn}/>Welcome to tafthanan</h1>
+                    <hr>
+                </header>
+                <p>
+                    Email:
+                </p>
+                <Text name="email" placeholder="Email"/>
+                <p>
+                    Username:
+                </p>
+                <Text name="Username" placeholder="Username"/>
+                <p>
+                    Password:
+                </p>
+                <Password name="Password" placeholder="Password"/>
+                <p>
+                    Confirm password:
+                <Password name="Password" placeholder="Confirm Password"/>
+                
+                <div class="button-container">
+                    <Button name="createAcc" text="Create a new Account" --width="100%" --display="none"/>
+                </div>
+
             </form>
         </div>
     </div>
@@ -161,7 +190,10 @@
         .logo-text-container{
             display: none;
         }
+    }
 
+    .button-container{
+        margin-top: var(--fs-m);
     }
 
 </style>

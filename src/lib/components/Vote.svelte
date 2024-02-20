@@ -50,4 +50,21 @@
 
 {@html uStatus}
 {@html dStatus}
-<button id="u" on:click={uClicked}>U</button> {votes} <button id="d" on:click={dClicked}>D</button>
+
+<div class ="votes-container">
+    <button id="u" on:click={uClicked}>U</button> <div class="vote-count-container"> {votes} </div> <button id="d" on:click={dClicked}>D</button>
+</div>
+
+<style>
+    .votes-container{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        gap: calc(0.5 * var(--fs-m));
+    }
+
+    .vote-count-container{
+        width: var(--fs-m);
+        text-align: center;
+    }
+</style>

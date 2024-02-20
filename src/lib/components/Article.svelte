@@ -1,4 +1,7 @@
 <script>
+
+    import Vote from '$lib/components/Vote.svelte';
+
     let title = 'this is a test title';
     let author = 'n\\eggylord';
     let time = '1d';
@@ -17,12 +20,17 @@
       {content}
     </p>
     <footer>
-        {upvote}
+        <Vote/>
     </footer>
 </article>
 
 
 <style>
+
+footer{
+  display: flex;
+  justify-content: right;
+}
 
 article {
   display: flex;
@@ -33,11 +41,12 @@ article {
   border-radius: 0.5rem;
   background: var(--background-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
   max-width: 90%;
 }
 
 article:hover {
-  border: 2px var(--primary-color) solid;
+  box-shadow: 0 0 10px rgba(0, 100, 0, 0.5)
 }
 
 article > header {

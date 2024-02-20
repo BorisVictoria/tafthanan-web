@@ -2,7 +2,7 @@
 
     import Vote from '$lib/components/Vote.svelte';
 
-    let title = 'this is a test title';
+    let title = 'baka naman pumangit if mahaba-haba yung title...';
     let author = 'n\\eggylord';
     let time = '1d';
 
@@ -14,7 +14,7 @@
 
 <article>
     <header>
-        <strong>{title}</strong> — <i>{author}</i> <small>{time}</small>
+        <h1>{title}</h1> — <i>{author}</i> <small>{time}</small>
     </header>
     <p>
       {content}
@@ -26,6 +26,11 @@
 
 
 <style>
+
+small{
+  font-size: calc(0.8 * var(--fs-m));
+  opacity: 0.85;
+}
 
 footer{
   display: flex;

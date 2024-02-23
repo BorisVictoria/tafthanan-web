@@ -70,7 +70,7 @@
                 
             </div>
             <footer>
-                <a data-sveltekit-reload href="home">continue without an account</a>
+                <a data-sveltekit-reload href="/home">continue without an account</a>
             </footer>
             </form>
 

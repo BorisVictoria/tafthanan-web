@@ -12,7 +12,7 @@
     </div>
     <div class="middle">
     {#each {length: articles} as _, i}
-        <Article/>
+        <Article hidden/>
     {/each}
     </div>
     <div class="right">

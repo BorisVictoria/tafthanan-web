@@ -53,14 +53,14 @@
 </div>
 
 <style>
-    .votes-container{
+    .votes-container {
         display:flex;
         justify-content: center;
         align-items: center;
         gap: calc(0.5 * var(--fs-m));
     }
 
-    .vote-count-container{
+    .vote-count-container {
         width: var(--fs-m);
         text-align: center;
     }

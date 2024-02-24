@@ -10,13 +10,14 @@
 
     let width = 0;
 
-    $: test="<style> #login-form{display:block} #create-acc-form{display:none} </style>"
+    let test = "<style> #login-form{display:block} #create-acc-form{display:none} </style>"
+
     function showCreateAcc(){
         test = "<style> #login-form{display:none} #create-acc-form{display:block} </style>"
     }
 
     function showLogIn(){
-        test= "<style> #login-form{display:block} #create-acc-form{display:none} </style>"
+        test = "<style> #login-form{display:block} #create-acc-form{display:none} </style>"
     }
 
 </script>
@@ -66,7 +67,7 @@
                     </div>
                 </div>
 
-                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)" on:click={showCreateAcc}/>
+                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color)" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)" on:click={showCreateAcc}/>
                 
             </div>
             <footer>
@@ -76,7 +77,6 @@
 
             <form id="create-acc-form">
                 <header>
-                    
                     <h1><Back --width="calc(var(--fs-l) * 2)" on:click={showLogIn}/>Welcome to tafthanan</h1>
                     <hr>
                 </header>
@@ -117,7 +117,7 @@
 
     a {
         color: var(--accent-color);
-        transition: color 0.5s ease;
+        transition: color 0.1s ease;
     }
     a:hover{
         color: hsl(153, 56%, 45%);;
@@ -136,11 +136,11 @@
         padding: var(--fs-m);
         border-radius: 0.5rem;
         min-width: 80%;
-        max-height: 100vh;
+        max-height: 100dvh;
     }
 
     .poster-container{
-        max-height: 100vh;
+        max-height: 100dvh;
         overflow: hidden;
     }
 
@@ -150,7 +150,7 @@
         align-items: center;
         gap: var(--fs-m);
         min-width: 100%;
-        max-height: 100vh;
+        max-height: 100dvh;
         overflow: auto;
     }
 
@@ -162,13 +162,6 @@
         gap: var(--fs-m);
         border-radius: 0.5rem;
         background: var(--background-color);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 1s ease;
-        border: 0px;
-    }
-
-    .input-container:hover {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     }
 
     .logo-text-container{

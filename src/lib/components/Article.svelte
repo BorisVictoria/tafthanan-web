@@ -2,8 +2,6 @@
 
       import Vote from '$lib/components/Vote.svelte';
 
-
-
       //if component is hidden, show only first 150 characters of the post then add like an "ombre" or box-shadow top to the footer so that it looks transparent.
       export let hidden = false;
 
@@ -15,7 +13,7 @@
 
       //make a media component, either one video or 1-10 pics let's go team!
 
-      if(hidden){
+      if (hidden) {
         content = content.slice(0, 450);
         content += "  ...";
       }
@@ -55,12 +53,12 @@
     z-index: 1;
   }
 
-  small{
+  small {
     font-size: calc(0.8 * var(--fs-m));
     opacity: 0.85;
   }
 
-  footer{
+  footer {
     display: flex;
     justify-content: right;
   }
@@ -73,13 +71,7 @@
     padding: var(--fs-m);
     border-radius: 0.5rem;
     background: var(--background-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s ease;
     max-width: 90%;
-  }
-
-  article:hover {
-    box-shadow: 0 0 10px rgba(0, 100, 0, 0.5)
   }
 
   article > header {
@@ -89,7 +81,6 @@
 
   article > footer {
     border-top: 1px solid lightgray;
-
     padding: var(--fs-m) 0 0 0; 
   }
 

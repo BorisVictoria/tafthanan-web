@@ -15,7 +15,6 @@
         align-items: center;
         padding: calc(var(--fs-l) * 0.25) calc(var(--fs-l) * 0.5);
         width: var(--width);
-
         gap: calc(var(--fs-m) * 0.75);
         cursor: pointer;
         text-decoration: none;
@@ -23,7 +22,7 @@
         border-radius: 0.25rem;
         background-color: var(--primary-color);
         color: var(--contrast-color);
-        transition: background-color 0.3s ease;
+        transition: background-color 0.1s ease;
 
     }
 

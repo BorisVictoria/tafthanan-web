@@ -3,7 +3,8 @@
 </button>
 
 <style>
-    button{
+    
+    button {
         opacity: 0.6;
         transition: opacity 0.5s ease;
         border-style: none;

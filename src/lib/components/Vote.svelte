@@ -1,8 +1,13 @@
 <script>
     export let votes = 10;
 
-		let uStatus = ""
-		let dStatus = ""
+		const upUnclicked = "assets/up-unclicked.svg";
+		const downUnclicked = "assets/down-unclicked.svg";
+		const upClicked = "assets/up-clicked.svg";
+		const downClicked = "assets/down-clicked.svg";
+
+		export let uStatus = upUnclicked
+		export let dStatus = downUnclicked
 
 		//if upvoted, ud == 1, if downvoted ud == -1, else ud == 0 
 		let ud = 0;
@@ -15,7 +20,7 @@
 			if(ud === 1){
 				votes--;
 				ud = 0;
-				uStatus = "u"
+				uStatus = upUnclicked
 			}
 			else{
 				if(ud == -1){
@@ -23,8 +28,8 @@
 				}
 				
 				ud = 1;
-				uStatus = "u-clicked"
-				dStatus = "d"
+				uStatus = upClicked
+				dStatus = downUnclicked
 			}
 			refreshVotes();
 		}
@@ -33,23 +38,25 @@
 			if(ud === -1){
 				votes++;
 				ud = 0;
-				dStatus = "d"
+				dStatus = downUnclicked
 			} else{
 				if(ud == 1){
 					votes --;
 				}
 
 				ud = -1;
-				dStatus = "d-clicked"
-				uStatus = "u"
+				dStatus = downClicked
+				uStatus = upUnclicked
 			}
 			refreshVotes();
 		}
+
+
 	
 </script>
 
 <div class ="votes-container">
-    <button class={uStatus} on:click={uClicked}>U</button> <div class="vote-count-container"> {votes} </div> <button class={dStatus} on:click={dClicked}>D</button>
+    <button class="vote pointer" on:click={uClicked}><img src={uStatus} alt="upvote button"></button> <div class="vote-count-container"> {votes} </div> <button class="vote pointer" on:click={dClicked}> <img src={dStatus} alt="downvote"> </button>
 </div>
 
 <style>
@@ -60,17 +67,13 @@
         gap: calc(0.5 * var(--fs-m));
     }
 
+	.vote{
+		border-style: none;
+	}
+
     .vote-count-container {
         width: var(--fs-m);
         text-align: center;
-    }
-
-    .u-clicked{
-        color: orange;
-    }
-
-    .d-clicked{
-        color: blue;
     }
 
 </style>

@@ -39,6 +39,11 @@ hr {
     background-color: var(--background-color);
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+
 body {
     min-height: 100dvh;
 }

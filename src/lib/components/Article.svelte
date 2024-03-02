@@ -143,32 +143,4 @@
     opacity: 0.85;
   }
 
-  footer {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: calc(var(--fs-m) * 1.75)
-  }
-
-  article {
-    display: flex;
-    flex-direction: column;
-    gap: var(--fs-m);
-    margin-bottom: var(--fs-m);
-    padding: var(--fs-m);
-    border-radius: 0.5rem;
-    background: var(--background-color);
-    max-width: 90%;
-  }
-
-  article > header {
-    border-bottom: 1px solid lightgray;
-    padding: 0 0 var(--fs-m) 0;
-  }
-
-  article > footer {
-    border-top: 1px solid lightgray;
-    padding: var(--fs-m) 0 0 0; 
-  }
-
   </style>

@@ -1,6 +1,6 @@
-import {startMongo} from '$db/mongo'
+import {run} from '$db/mongo'
 
-startMongo().then(() => {
+run().then(() => {
     console.log("The bluetooth device is connected sucessfully")
 })
 

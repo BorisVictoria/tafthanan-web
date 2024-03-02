@@ -53,59 +53,6 @@
 
   <style>
 
-  .action-button{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc(0.3 * var(--fs-m));;
-    
-    border-style: solid;
-    border-width: 1px;
-    padding-left: calc(var(--fs-m));
-    padding-right: calc(var(--fs-m));
-    border-radius: var(--fs-l);
-    border-color: lightgray;
-
-    height: auto;
-  }
-
-  .options{
-    width: auto;
-    height: auto;
-    padding-left:  0;
-    padding-right: 0;
-
-    border-style: none;
-    align-self: right;
-    margin-left: auto;
-    overflow: auto;
-  }
-
-  .options > img{
-    height: calc(var(--fs-m) * 2);
-  }
-
-
-
-  .action-button > b{
-    background-color: inherit;
-  }
-
-  .action-button:hover{
-    border-color: var(--accent-color);
-    background-color: lightgray;
-  }
-
-  .action-button > img{
-    width: 60%;
-    background-color: inherit;
-  }
-
-  .action-button-text{
-    text-align: center;
-    background-color: inherit;
-  }
-
   .hidden {
       position: relative;
   }

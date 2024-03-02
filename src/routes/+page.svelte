@@ -5,79 +5,87 @@
     import Password from '$lib/components/Password.svelte';
     import Back from '$lib/components/Back.svelte';
 
-    import '../login.css'
-    import { onMount } from 'svelte';
-
     let width = 0;
 
-    let test = "<style> #login-form{display:block} #create-acc-form{display:none} </style>"
+    let toggled = true;
 
-    function showCreateAcc(){
-        test = "<style> #login-form{display:none} #create-acc-form{display:block} </style>"
-    }
-
-    function showLogIn(){
-        test = "<style> #login-form{display:block} #create-acc-form{display:none} </style>"
+    function toggle(){
+        toggled = !toggled
     }
 
 </script>
+
+<svelte:head>
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    </style>
+</svelte:head>
 
 <svelte:window bind:innerWidth={width}/>
 
 <div class="wrapper">
     <div class="login-container">
+
+        <!-- show poster if screen size is greater than 768px -->
         {#if width > 768}
             <div class="poster-container">
             <img src="assets/login-poster.png" alt="login poster">
             </div>
         {/if}
+
+
         <div class="input-container">
 
-            {@html test}
-
+            <!-- Tafthanan container -->
             <div class="logo-text-container">
                 <img src="../assets/logo.svg" alt="logo"><h2>tafthanan</h2>
             </div>
 
-            <form id="login-form">
-            <header>
+            <!-- Login Form -->
+            <form id="login-form" method="POST" action="?/login" 
+                style:display={toggled ? 'block' : 'none'}>
+                <header>
+                    <h1>Life is Taft.</h1>
+                    <hr>
+                    <h2>Let's make it bearable pare.</h2>
+                </header>
+                <p>Username:</p>
+                <Text name="username" placeholder="Username"/>
+                <p>Password:</p>
+                <Password name="password" placeholder="Password"/>
+                <div class="button-container">
+                    <Button name="login" type="submit" --width="100%" --display="none">
+                        Sign in
+                    </Button>
 
-                <h1>Life is Taft.</h1>
-                <hr>
-                <h2>Let's make it bearable pare.</h2>
-            </header>
-            <p>
-                Username:
-            </p>
-            <Text name="Username" placeholder="Username"/>
-            <p>
-                Password:
-            </p>
-            <Password name="Password" placeholder="Password"/>
-            <div class="button-container">
-                <Button name="login" text="Sign in" --width="100%" --display="none"/>
-
-                <div class="divider">
-                    <div class="divider-line">
-                        <hr>
+                    <div class="divider">
+                        <div class="divider-line">
+                            <hr>
+                        </div>
+                        OR
+                        <div class="divider-line">
+                            <hr>
+                        </div>
                     </div>
-                    OR
-                    <div class="divider-line">
-                        <hr>
-                    </div>
+                    <Button name="create" --width="100%" --display="none" --primary-color="var(--button-contrast-color)" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)" on:click={toggle}>
+                        Create account
+                    </Button>
                 </div>
-
-                <Button name="create" text="Create account" --width="100%" --display="none" --primary-color="var(--button-contrast-color)" --contrast-color="var(--text-contrast-color)" --accent-color="hsl(150, 5%, 73%)" on:click={showCreateAcc}/>
-                
-            </div>
-            <footer>
-                <a data-sveltekit-reload href="/home">continue without an account</a>
-            </footer>
+                <footer>
+                    <a href="/home">continue without an account</a>
+                </footer>
             </form>
 
-            <form id="create-acc-form">
+            <!-- Create Account Form -->
+            <form id="create-acc-form" method="POST" action="?/register"
+                style:display={!toggled ? 'block' : 'none'}>
                 <header>
-                    <h1><Back --width="calc(var(--fs-l) * 2)" on:click={showLogIn}/>Welcome to tafthanan</h1>
+                    <h1><Back --width="calc(var(--fs-l) * 2)" on:click={toggle}/>Welcome to tafthanan</h1>
                     <hr>
                 </header>
                 <p>
@@ -87,26 +95,37 @@
                 <p>
                     Username:
                 </p>
-                <Text name="Username" placeholder="Username"/>
+                <Text name="username" placeholder="Username"/>
                 <p>
                     Password:
                 </p>
-                <Password name="Password" placeholder="Password"/>
+                <Password name="password" placeholder="Password"/>
                 <p>
                     Confirm password:
-                <Password name="Password" placeholder="Confirm Password"/>
+                <Password name="confirmPassword" placeholder="Confirm Password"/>
                 
                 <div class="button-container">
-                    <Button name="createAcc" text="Create a new Account" --width="100%" --display="none"/>
+                    <Button name="createAcc" type="submit" --width="100%" --display="none">
+                        Create a new Account
+                    </Button>
                 </div>
-
             </form>
+
         </div>
     </div>
 </div>
 
     
 <style>
+
+    #login-form {
+        display:block
+    } 
+    
+    #create-acc-form {
+        display:none
+    }
+
     h1 {
         font-size: var(--fs-xxl);
     }
@@ -140,7 +159,7 @@
     }
 
     .poster-container{
-        max-height: 100dvh;
+        max-height: 95dvh;
         overflow: hidden;
     }
 

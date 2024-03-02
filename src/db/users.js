@@ -1,17 +1,17 @@
-import db from '$db/mongo'
+import client from '$db/mongo'
 
-export const users = db.collection('users')
+export const users = client.db('tafthanan').collection('users')
 
 export const registerUser = async(data) => {
 
-    const result = await db.insertOne(data)
+    const result = await users.insertOne(data)
     return result
 
 }
 
 export const loginUser = async(data) => {
 
-    const result = await db.findOne({username: data.username, password: data.password})
+    const result = await users.findOne({username: data.username, password: data.password})
     return result
 
 }

@@ -5,6 +5,7 @@
       //if component is hidden, show only first 150 characters of the post then add like an "ombre" or box-shadow top to the footer so that it looks transparent.
       export let hidden = true;
       export let comment_count = 10;
+      export let isEdited = false;
 
 
       let gradient = hidden;
@@ -18,7 +19,7 @@
 
       let content = "Hi! I'm an incoming engineering college freshman and during my jhs and shs days, I always consumed coffee. Especially during hell weeks or if may big event that day. Most of my coffees are usually those cheap P30 Lucky day from 7/11 or food panda orders. I don't have a particularly favorite shop I order from since it usually depends what I'm feeling, my budget, and if I think I need a bit more caffeine kick. This summer I've been experimenting and kind of trying to find coffee that works well with what I need and I've come to the conclusion that I really like iced Americano, Caramel Macchiato, and ordinary lattes. I'll be going to an expensive university and I don't want to spend a lot of money on just coffee, maybe the occasional monthly treats but definitely not a regular. I want to know if you guys have any coffee recommendations for students. I plan to make coffee at home then pack them in a different water bottle and take it to school. My family highly discourages those 2-in-1 coffee packets so maybe any recommendations that are a bit more on the healthier side but still affordable for students hehe.";
 
-      //make a media component, either one video or 1-10 pics let's go team!
+      //make a media component, one img src lang
 
       if (hidden) {
         content = content.slice(0, 450);
@@ -38,7 +39,7 @@
 
           </div>
 
-          <h1>{title}</h1> — <i>{author}</i> <small>{time}</small>
+          <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
       <span class:hidden={gradient}>
         {content}

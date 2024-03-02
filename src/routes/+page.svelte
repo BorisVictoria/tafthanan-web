@@ -5,8 +5,6 @@
     import Password from '$lib/components/Password.svelte';
     import Back from '$lib/components/Back.svelte';
 
-    import '../login.css'
-
     let width = 0;
 
     let toggled = true;
@@ -16,6 +14,17 @@
     }
 
 </script>
+
+<svelte:head>
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    </style>
+</svelte:head>
 
 <svelte:window bind:innerWidth={width}/>
 
@@ -108,6 +117,13 @@
 
     
 <style>
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
 
     #login-form {
         display:block

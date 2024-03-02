@@ -28,12 +28,11 @@ export const actions = {
 
         const result = await loginUser(user)
 
-
         if (browser && result) {
             goto('/home')
         }
 
-        return {success: result}
+        return {success: !!result}
         
     }
 }

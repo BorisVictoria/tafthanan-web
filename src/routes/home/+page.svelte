@@ -1,6 +1,7 @@
 <script>
 
     import Article from '$lib/components/Article.svelte'
+    import Filters from '$lib/components/Filters.svelte'
     
     let articles = 5;
 
@@ -11,6 +12,9 @@
         
     </div>
     <div class="middle">
+
+    <Filters/>
+    
     {#each {length: articles} as _, i}
         <Article hidden/>
     {/each}

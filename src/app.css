@@ -1,7 +1,7 @@
 /* Global Style Variables */
 
 :root {
-    --ff-base: "Noto Sans", verdana;
+    --ff-base: "Roboto", verdana;
     --fw-regular: 400;
     --fw-bold: 900;
     --primary-color: hsl(153, 56%, 31%);

@@ -4,19 +4,21 @@
 
       //if component is hidden, show only first 150 characters of the post then add like an "ombre" or box-shadow top to the footer so that it looks transparent.
       export let hidden = true;
+      export let comment_count = 10;
+      export let isEdited = false;
+
       let gradient = hidden;
       
       export let kwarto = 'k\\all';
-      let kwarto_logo = "assets/logo.svg"
+      export let kwarto_logo = "assets/logo.svg"
       export let author = 'n\\eggylord';
       export let time = '1d';
       export let title = 'baka naman pumangit if mahaba-haba yung title...';
       export let content = "Hi! I'm an incoming engineering college freshman and during my jhs and shs days, I always consumed coffee. Especially during hell weeks or if may big event that day. Most of my coffees are usually those cheap P30 Lucky day from 7/11 or food panda orders. I don't have a particularly favorite shop I order from since it usually depends what I'm feeling, my budget, and if I think I need a bit more caffeine kick. This summer I've been experimenting and kind of trying to find coffee that works well with what I need and I've come to the conclusion that I really like iced Americano, Caramel Macchiato, and ordinary lattes. I'll be going to an expensive university and I don't want to spend a lot of money on just coffee, maybe the occasional monthly treats but definitely not a regular. I want to know if you guys have any coffee recommendations for students. I plan to make coffee at home then pack them in a different water bottle and take it to school. My family highly discourages those 2-in-1 coffee packets so maybe any recommendations that are a bit more on the healthier side but still affordable for students hehe.";
 
+
       export let upvote = 15;
-      export let comment_count = 10;
-      
-      //make a media component, either one video or 1-10 pics let's go team!
+     
 
       if (hidden) {
         content = content.slice(0, 450);
@@ -38,7 +40,7 @@
 
           </div>
 
-          <h1>{title}</h1> — <i>{author}</i> <small>{time}</small>
+          <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
       <span class:hidden={gradient}>
         {content}
@@ -51,59 +53,6 @@
 
 
   <style>
-
-  .action-button{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc(0.3 * var(--fs-m));;
-    
-    border-style: solid;
-    border-width: 1px;
-    padding-left: calc(var(--fs-m));
-    padding-right: calc(var(--fs-m));
-    border-radius: var(--fs-l);
-    border-color: lightgray;
-
-    height: auto;
-  }
-
-  .options{
-    width: auto;
-    height: auto;
-    padding-left:  0;
-    padding-right: 0;
-
-    border-style: none;
-    align-self: right;
-    margin-left: auto;
-    overflow: auto;
-  }
-
-  .options > img{
-    height: calc(var(--fs-m) * 2);
-  }
-
-
-
-  .action-button > b{
-    background-color: inherit;
-  }
-
-  .action-button:hover{
-    border-color: var(--accent-color);
-    background-color: lightgray;
-  }
-
-  .action-button > img{
-    width: 60%;
-    background-color: inherit;
-  }
-
-  .action-button-text{
-    text-align: center;
-    background-color: inherit;
-  }
 
   .hidden {
       position: relative;
@@ -140,34 +89,6 @@
   small {
     font-size: calc(0.8 * var(--fs-m));
     opacity: 0.85;
-  }
-
-  footer {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: calc(var(--fs-m) * 1.75)
-  }
-
-  article {
-    display: flex;
-    flex-direction: column;
-    gap: var(--fs-m);
-    margin-bottom: var(--fs-m);
-    padding: var(--fs-m);
-    border-radius: 0.5rem;
-    background: var(--background-color);
-    max-width: 90%;
-  }
-
-  article > header {
-    border-bottom: 1px solid lightgray;
-    padding: 0 0 var(--fs-m) 0;
-  }
-
-  article > footer {
-    border-top: 1px solid lightgray;
-    padding: var(--fs-m) 0 0 0; 
   }
 
   </style>

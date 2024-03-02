@@ -20,7 +20,11 @@
         {#if width > 640}
             <Search/>
         {/if}
-        <Button name="login" text="Sign in"/>
+        <a href="/">
+            <Button name="login">
+                Sign in
+            </Button>
+        </a>
     </nav>
 </div>
 <div class="wrapper">

@@ -74,12 +74,17 @@
     <div class="content-writer">
 
     <div class="format-buttons-holder">
-        <button class="norm action-button pointer" id="bold" title="bold"><strong>B</strong></button>
-        <button class="norm action-button pointer" id="italic" title="italics"><i>I</i></button>
-        <button class="norm action-button pointer" id="underline" title="underline"><u>U</u></button>
+        <button class="norm action-button pointer" id="bold" title="Bold"><strong>B</strong></button>
+        <button class="norm action-button pointer" id="italic" title="Italics"><i>I</i></button>
+        <button class="norm action-button pointer" id="underline" title="Underline"><u>U</u></button>
         <button class="norm action-button pointer" id="strikeThrough" title="Strike">
             <strike>S</strike>
         </button>
+
+        <button class="action-button pointer" id="heading" title="Add heading">
+            <img src="assets/heading.svg">
+        </button>
+
         <button class="action-button pointer" title="Insert image">
             <img src="assets/image.svg" alt="image symbol">
         </button>

@@ -4,6 +4,7 @@
     import Button from '$lib/components/Button.svelte';
     import Password from '$lib/components/Password.svelte';
     import Back from '$lib/components/Back.svelte';
+    import {enhance} from '$app/forms'
 
     let width = 0;
 
@@ -47,7 +48,7 @@
             </div>
 
             <!-- Login Form -->
-            <form id="login-form" method="POST" action="?/login" 
+            <form id="login-form" method="POST" action="?/login" use:enhance
                 style:display={toggled ? 'block' : 'none'}>
                 <header>
                     <h1>Life is Taft.</h1>
@@ -82,7 +83,7 @@
             </form>
 
             <!-- Create Account Form -->
-            <form id="create-acc-form" method="POST" action="?/register"
+            <form id="create-acc-form" method="POST" action="?/register" use:enhance
                 style:display={!toggled ? 'block' : 'none'}>
                 <header>
                     <h1><Back --width="calc(var(--fs-l) * 2)" on:click={toggle}/>Welcome to tafthanan</h1>

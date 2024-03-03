@@ -1,6 +1,6 @@
-import {run} from '$db/mongo'
+import { Handle } from '@sveltejs/kit'
 
-run().then(() => {
-    console.log("The bluetooth device is connected sucessfully")
-})
+export const handle = async({event, resolve}) => {
+    const session = event.cookies.get('session')
 
+}

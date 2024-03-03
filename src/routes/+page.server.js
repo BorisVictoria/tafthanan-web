@@ -3,7 +3,6 @@ import {registerUser, loginUser} from '$db/users'
 
 // TODO: Add redirects for invalid form submission
 import {browser} from '$app/environment'
-import {goto} from '$app/navigation'
 import {fail, redirect} from '@sveltejs/kit'
 
 export const actions = {
@@ -30,7 +29,8 @@ export const actions = {
 
         const result = await loginUser(user)
 
-        if (!!result) {
+        // biome-ignore lint/complexity/noExtraBooleanCast: <explanation>
+        if  (!!result) {
             redirect(303, '/home')
         }
 

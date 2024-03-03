@@ -5,17 +5,50 @@
 
     import Back from '$lib/components/Back.svelte';
     import Text from '$lib/components/Text.svelte';
+    import { onMount } from 'svelte';
 
 	let dialog; // HTMLDialogElement
+    var selection;
 
 	$: if (dialog && showModal) dialog.showModal();
+
+    function toggle(button){
+        if (button.classList.contains("toggled")){
+            button.classList.remove("toggled")
+        } else {
+            button.classList.add("toggled")
+        }
+    }
+
+
+
+    onMount(()=>{
+        const normButtons = document.querySelectorAll('.norm');
+        console.log(normButtons);
+        const txtArea = document.querySelector('.text-area')
+        
+
+        normButtons.forEach(button=>{
+            
+            button.addEventListener('click', ()=> {
+                toggle(button);
+                console.log(button.id + " clicked!")
+                document.execCommand(button.id, false, null);
+
+        })
+
+    })
+
+})
+
+
+
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
-	on:click|self={() => dialog.close()}
 >
     <div class="richtext-wrapper">
         <div class="exit-submit-wrapper">
@@ -41,28 +74,33 @@
     <div class="content-writer">
 
     <div class="format-buttons-holder">
-        <div class="action-button pointer" title="bold"><strong>B</strong></div>
-        <div class="action-button pointer" title="italics"><i>I</i></div>
-        <div class="action-button pointer" title="underline"><u>U</u></div>
-        <div class="action-button pointer" title="Strike">
+        <button class="norm action-button pointer" id="bold" title="bold"><strong>B</strong></button>
+        <button class="norm action-button pointer" id="italic" title="italics"><i>I</i></button>
+        <button class="norm action-button pointer" id="underline" title="underline"><u>U</u></button>
+        <button class="norm action-button pointer" id="strikeThrough" title="Strike">
             <strike>S</strike>
-        </div>
-        <div class="action-button pointer" title="Insert image">
+        </button>
+        <button class="action-button pointer" title="Insert image">
             <img src="assets/image.svg" alt="image symbol">
-        </div>
-        <div class="action-button pointer" title="Insert video">
+        </button>
+        <button class="action-button pointer" title="Insert video">
             <img src="assets/video.svg" alt="video symbol">
-        </div>
-        <div class="action-button pointer" title="Add block quote">
+        </button>
+        <button class="action-button pointer" title="Add block quote">
             <img src="assets/quote.svg" alt="quote symbol">
-        </div>
-        <div class="action-button pointer" title="ordered list"><img src="assets/ol.svg" alt="ordered list"></div>
-        <div class="action-button pointer" title="unordered list"><img src="assets/ul.svg" alt="unoredered list"></div>
-        <div class="action-button pointer" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></div>
+        </button>
+
+        <button class="action-button pointer" title="add indentation">
+            <img src="assets/indent.svg" alt="indent symbol">
+        </button>
+
+        <button class="action-button pointer" title="ordered list"><img src="assets/ol.svg" alt="ordered list"></button>
+        <button class="action-button pointer" title="unordered list"><img src="assets/ul.svg" alt="unoredered list"></button>
+        <button class="action-button pointer" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></button>
     </div>
 
     <div class="text-area" placeholder=" Write content here..." contenteditable="true">
-       
+      
     </div>
 
     </div>
@@ -174,8 +212,5 @@
 		to {
 			opacity: 1;
 		}
-	}
-	button {
-		display: block;
 	}
 </style>

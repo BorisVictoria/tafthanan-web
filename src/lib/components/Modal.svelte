@@ -48,16 +48,17 @@
             <strike>S</strike>
         </div>
         <div class="action-button pointer" title="Insert image">
-            <img src="assets/image.svg">
+            <img src="assets/image.svg" alt="image symbol">
         </div>
         <div class="action-button pointer" title="Insert video">
-            <img src="assets/video.svg">
+            <img src="assets/video.svg" alt="video symbol">
         </div>
         <div class="action-button pointer" title="Add block quote">
-            <img src="assets/quote.svg">
+            <img src="assets/quote.svg" alt="quote symbol">
         </div>
         <div class="action-button pointer" title="ordered list"><img src="assets/ol.svg" alt="ordered list"></div>
         <div class="action-button pointer" title="unordered list"><img src="assets/ul.svg" alt="unoredered list"></div>
+        <div class="action-button pointer" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></div>
     </div>
 
     <div class="text-area" placeholder=" Write content here..." contenteditable="true">
@@ -73,6 +74,7 @@
         display:flex;
         align-items: center;
         justify-content: center;
+        padding-bottom: 2px;
         border-bottom: solid 2px lightgray;
 
     }

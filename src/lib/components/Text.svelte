@@ -14,7 +14,7 @@
         padding: var(--fs-m);
         border: 2px lightgray solid;
         border-radius: var(--fs-l);
-        overflow: hidden;
+       overflow: hidden;
 
     }
 
@@ -25,6 +25,8 @@
     input {
         border: 0;
         font-size: var(--fs-m);
+        width: 100%;
+
     }
 
     input:focus {

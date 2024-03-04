@@ -2,12 +2,20 @@
 
     import Article from '$lib/components/Article.svelte'
     import Filters from '$lib/components/Filters.svelte'
+    import Modal from '$lib/components/Modal.svelte'
     
     let articles = 5;
 
+    let showModal = false;
+
+    //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
+
 </script> 
 
+<Modal bind:showModal/>
+
 <div class="wrapper main">
+
     <div class="left">
         
     </div>

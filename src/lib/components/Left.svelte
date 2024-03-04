@@ -1,7 +1,7 @@
 <script>
     import BarButton from '$lib/components/BarButton.svelte'
 
-    export let kwartos = ['k\\manresidents', 'k\\torrelife', 'k\\scrambledegis', 'k\\whtaft']
+    export let kwartos = ['k\\manresidents', 'k\\torrelife', 'k\\scrambledegis', 'k\\whtaft', 'k\\onearchers']
     export let icons = 'assets/logo.svg'
 
 </script>
@@ -100,8 +100,8 @@
         height: 80vh;
         width: 100%;
         background-color: transparent;
-        justify-content: space-evenly;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: center;
         
     }
 
@@ -129,6 +129,7 @@
 
     .home-button-holder{
         height: auto;
+        flex-grow: 1;
     }
 
     .kwarto-holder{
@@ -136,12 +137,14 @@
         display: flex;
     
         padding-bottom: var(--fs-m);
+        flex-grow: 3;
     }
 
     .settings-holder{
         height: auto;
         display: flex;
         align-items: center;
+        flex-grow: 1
     }
 
 </style>

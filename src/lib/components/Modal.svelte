@@ -30,7 +30,8 @@
         show = 'none'
 
         if(button == 'insertImage'){
-            document.querySelectorAll('img').forEach(element => {
+            const textArea = document.querySelector('.text-area')
+            textArea.querySelectorAll('img').forEach(element => {
                 element.style = 'display: block; margin-left: auto; margin-right: auto'
             })
         }

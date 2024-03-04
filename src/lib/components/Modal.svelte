@@ -10,6 +10,8 @@
 	let dialog; // HTMLDialogElement
     var selection;
 
+    let show='none'
+
 	$: if (dialog && showModal) dialog.showModal();
 
     function toggle(button){
@@ -48,6 +50,33 @@
 
             })
         })
+
+        
+        const linkButtons = document.querySelectorAll('.link')
+        linkButtons.forEach(button => {
+
+            button.addEventListener('click', () => {
+
+                show = 'flex'
+                let url = ''
+
+                document.getElementById('submitUrl').addEventListener('click', () =>{
+                    url = document.getElementById('url-place').value
+
+                    if(/http/i.test(url)){
+                    document.execCommand(button.id, false, url)
+                    } else{
+                    url = "http://" + url;
+                    document.execCommand(button.id, false, url)
+                    }
+
+                    show = 'none'
+                })
+                
+
+            })
+        })
+        
 
     })
 
@@ -95,12 +124,10 @@
             <img src="assets/heading.svg">
         </button>
 
-        <button class="action-button pointer" title="Insert image">
+        <button class="link action-button pointer" id="insertImage" title="Insert image">
             <img src="assets/image.svg" alt="image symbol">
         </button>
-        <button class="action-button pointer" title="Insert video">
-            <img src="assets/video.svg" alt="video symbol">
-        </button>
+
         <button class="wrap action-button pointer" id="blockquote" title="Add block quote">
             <img src="assets/quote.svg" alt="quote symbol">
         </button>
@@ -115,13 +142,17 @@
 
         <button class="norm action-button pointer" id="insertUnorderedList" title="unordered list"><img src="assets/ol.svg" alt="ordered list"></button>
         <button class="norm action-button pointer" id="insertOrderedList" title="ordered list"><img src="assets/ul.svg" alt="unoredered list"></button>
-        <button class="action-button pointer" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></button>
-    </div>
+        <button class="link action-button pointer" id="createLink" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></button>
 
+    </div>
     <div class="text-area" placeholder=" Write content here..." contenteditable="true">
       
     </div>
 
+
+</div>
+<div id="url-prompt-holder" style="display:{show}">
+    <input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" id="submitUrl"> <strong> Submit </strong> </button>
     </div>
 </dialog>
 

@@ -67,6 +67,12 @@ article {
     height: auto;
   }
 
+  blockquote{
+    margin-left: 1em; 
+    padding-left: 1em;
+    border-left: solid lightgray 3px;
+  }
+
   .options{
     width: auto;
     height: auto;

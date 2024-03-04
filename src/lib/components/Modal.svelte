@@ -31,15 +31,25 @@
         normButtons.forEach(button=>{
             
             button.addEventListener('click', ()=> {
-                toggle(button);
                 console.log(button.id + " clicked!")
                 document.execCommand(button.id, false, null);
 
         })
 
-    })
+        const formButtons = document.querySelectorAll('.wrap');
+        formButtons.forEach(button => {
 
-})
+            button.addEventListener('click', () => {
+                console.log(button.id + " clicked!")
+                        
+                document.execCommand('formatBlock', false, button.id)
+
+                })
+
+            })
+        })
+
+    })
 
 
 
@@ -81,7 +91,7 @@
             <strike>S</strike>
         </button>
 
-        <button class="action-button pointer" id="heading" title="Add heading">
+        <button class="wrap action-button pointer" id="h1" title="Add heading">
             <img src="assets/heading.svg">
         </button>
 
@@ -91,16 +101,20 @@
         <button class="action-button pointer" title="Insert video">
             <img src="assets/video.svg" alt="video symbol">
         </button>
-        <button class="action-button pointer" title="Add block quote">
+        <button class="wrap action-button pointer" id="blockquote" title="Add block quote">
             <img src="assets/quote.svg" alt="quote symbol">
         </button>
 
-        <button class="action-button pointer" title="add indentation">
+        <button class="norm action-button pointer" id="indent" title="add indentation">
             <img src="assets/indent.svg" alt="indent symbol">
         </button>
 
-        <button class="action-button pointer" title="ordered list"><img src="assets/ol.svg" alt="ordered list"></button>
-        <button class="action-button pointer" title="unordered list"><img src="assets/ul.svg" alt="unoredered list"></button>
+        <button class="norm action-button pointer" id="outdent" title="decrease indentation">
+            <img src="assets/outdent.svg" alt="unindent">
+        </button>
+
+        <button class="norm action-button pointer" id="insertUnorderedList" title="unordered list"><img src="assets/ol.svg" alt="ordered list"></button>
+        <button class="norm action-button pointer" id="insertOrderedList" title="ordered list"><img src="assets/ul.svg" alt="unoredered list"></button>
         <button class="action-button pointer" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></button>
     </div>
 

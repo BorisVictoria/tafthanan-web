@@ -14,11 +14,25 @@
 
 	$: if (dialog && showModal) dialog.showModal();
 
-    function toggle(button){
-        if (button.classList.contains("toggled")){
-            button.classList.remove("toggled")
-        } else {
-            button.classList.add("toggled")
+
+    var btn = ''
+    var url = ''
+
+    function linkButton(button, url){
+
+        if(/http/i.test(url)){
+        document.execCommand(button, false, url)
+        } else{
+        url = "http://" + url;
+        document.execCommand(button, false, url)
+        }
+
+        show = 'none'
+
+        if(button == 'insertImage'){
+            document.querySelectorAll('img').forEach(element => {
+                element.style = 'display: block; margin-left: auto; margin-right: auto'
+            })
         }
     }
 
@@ -51,28 +65,18 @@
             })
         })
 
-        
+        document.getElementById('submitUrl').addEventListener('click', () =>{
+            console.log('submit clicked.')
+            linkButton(btn, url)
+        })
+
         const linkButtons = document.querySelectorAll('.link')
         linkButtons.forEach(button => {
 
             button.addEventListener('click', () => {
-
                 show = 'flex'
-                let url = ''
-
-                document.getElementById('submitUrl').addEventListener('click', () =>{
-                    url = document.getElementById('url-place').value
-
-                    if(/http/i.test(url)){
-                    document.execCommand(button.id, false, url)
-                    } else{
-                    url = "http://" + url;
-                    document.execCommand(button.id, false, url)
-                    }
-
-                    show = 'none'
-                })
-                
+                btn = button.id
+                url = document.getElementById('url-place').value
 
             })
         })

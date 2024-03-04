@@ -78,7 +78,7 @@
                     </Button>
                 </div>
                 <footer>
-                    <a href="/home">continue without an account</a>
+                    <a href="/">continue without an account</a>
                 </footer>
             </form>
 

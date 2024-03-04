@@ -83,7 +83,7 @@
 
     .icon-title-holder{
         display: flex;
-        justify-content: center;
+        justify-content: left;
         align-items: center;
         min-height: auto;
         width: 90%;
@@ -102,6 +102,7 @@
         background-color: transparent;
         justify-content: space-evenly;
         align-items: flex-start;
+        
     }
 
     .left-wrapper > * {
@@ -109,7 +110,7 @@
     }
 
     .top-border{
-        border-top: solid lightgray 2px;
+        border-top: solid lightgray 1px;
         align-items: center;
         justify-content: baseline;
         display: flex;

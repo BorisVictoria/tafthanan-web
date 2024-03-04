@@ -3,6 +3,7 @@
     import Article from '$lib/components/Article.svelte'
     import Filters from '$lib/components/Filters.svelte'
     import Modal from '$lib/components/Modal.svelte'
+    import Left from '$lib/components/Left.svelte'
     
     let articles = 5;
 
@@ -17,7 +18,7 @@
 <div class="wrapper main">
 
     <div class="left">
-        
+        <Left />
     </div>
     <div class="middle">
 

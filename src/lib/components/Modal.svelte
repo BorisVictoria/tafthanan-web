@@ -121,11 +121,11 @@
         </button>
 
         <button class="wrap action-button pointer" id="h1" title="Add heading">
-            <img src="assets/heading.svg">
+            <img src="assets/heading.svg" alt="heading symbol">
         </button>
 
         <button class="link action-button pointer" id="insertImage" title="Insert image">
-            <img src="assets/image.svg" alt="image symbol">
+            <img src="assets/image.svg" alt="symbol for adding a pic">
         </button>
 
         <button class="wrap action-button pointer" id="blockquote" title="Add block quote">

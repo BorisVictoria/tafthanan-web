@@ -1,5 +1,5 @@
 <button type="button" on:click>
-    <img alt="back-button" src="assets/back-button.svg">
+    <img alt="back-button" src="/assets/back-button.svg">
 </button>
 
 <style>

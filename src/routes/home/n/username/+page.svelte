@@ -5,6 +5,7 @@
     import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
+    import ProfileHead from '$lib/components/ProfileHead.svelte'
     
     let articles = 5;
 
@@ -22,6 +23,8 @@
         <Left />
     </div>
     <div class="middle">
+
+    <ProfileHead/>
 
     <Filters/>
     

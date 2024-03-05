@@ -126,28 +126,28 @@
         </button>
 
         <button class="wrap action-button pointer" id="h1" title="Add heading">
-            <img src="assets/heading.svg" alt="heading symbol">
+            <img src="/assets/heading.svg" alt="heading symbol">
         </button>
 
         <button class="link action-button pointer" id="insertImage" title="Insert image">
-            <img src="assets/image.svg" alt="symbol for adding a pic">
+            <img src="/assets/image.svg" alt="symbol for adding a pic">
         </button>
 
         <button class="wrap action-button pointer" id="blockquote" title="Add block quote">
-            <img src="assets/quote.svg" alt="quote symbol">
+            <img src="/assets/quote.svg" alt="quote symbol">
         </button>
 
         <button class="norm action-button pointer" id="indent" title="add indentation">
-            <img src="assets/indent.svg" alt="indent symbol">
+            <img src="/assets/indent.svg" alt="indent symbol">
         </button>
 
         <button class="norm action-button pointer" id="outdent" title="decrease indentation">
-            <img src="assets/outdent.svg" alt="unindent">
+            <img src="/assets/outdent.svg" alt="unindent">
         </button>
 
-        <button class="norm action-button pointer" id="insertUnorderedList" title="unordered list"><img src="assets/ol.svg" alt="ordered list"></button>
-        <button class="norm action-button pointer" id="insertOrderedList" title="ordered list"><img src="assets/ul.svg" alt="unoredered list"></button>
-        <button class="link action-button pointer" id="createLink" title="insert hyperlink"><img src="assets/link.svg" alt="link symbol"></button>
+        <button class="norm action-button pointer" id="insertUnorderedList" title="unordered list"><img src="/assets/ol.svg" alt="ordered list"></button>
+        <button class="norm action-button pointer" id="insertOrderedList" title="ordered list"><img src="/assets/ul.svg" alt="unoredered list"></button>
+        <button class="link action-button pointer" id="createLink" title="insert hyperlink"><img src="/assets/link.svg" alt="link symbol"></button>
 
     </div>
     <div class="text-area" placeholder=" Write content here..." contenteditable="true">

@@ -34,7 +34,7 @@
         content: "";
         width: var(--fs-m);
         height: var(--fs-m);
-        background-image: var(--url, url("assets/search.svg"));
+        background-image: var(--url, url("/assets/search.svg"));
         background-size: contain;
     } 
 

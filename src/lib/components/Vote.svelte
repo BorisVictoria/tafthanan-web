@@ -1,10 +1,10 @@
 <script>
     export let votes = 10;
 
-		const upUnclicked = "assets/up-unclicked.svg";
-		const downUnclicked = "assets/down-unclicked.svg";
-		const upClicked = "assets/up-clicked.svg";
-		const downClicked = "assets/down-clicked.svg";
+		const upUnclicked = "/assets/up-unclicked.svg";
+		const downUnclicked = "/assets/down-unclicked.svg";
+		const upClicked = "/assets/up-clicked.svg";
+		const downClicked = "/assets/down-clicked.svg";
 
 		export let uStatus = upUnclicked
 		export let dStatus = downUnclicked

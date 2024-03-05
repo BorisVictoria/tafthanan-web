@@ -2,20 +2,20 @@
     import BarButton from '$lib/components/BarButton.svelte'
 
     export let kwartos = ['k\\manresidents', 'k\\torrelife', 'k\\scrambledegis', 'k\\whtaft', 'k\\onearchers']
-    export let icons = 'assets/logo.svg'
+    export let icons = '/assets/logo.svg'
 
 </script>
 
 
 <div class="left-wrapper">
     <div class="no-border home-button-holder">
-        <BarButton tag='big' img="assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
+        <BarButton tag='big' img="/assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
     </div>
     <div class="top-border kwarto-holder">
         
         <div class="kwarto-list-holder">
             <div class="icon-title-holder">
-                <img src="assets/attr.svg" alt="apartments icon"><big>kwartos</big>
+                <img src="/assets/attr.svg" alt="apartments icon"><big>kwartos</big>
                 </div>
 
             {#each kwartos as kwarto}
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="top-border settings-holder">
-        <BarButton tag='big' img="assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Settings</BarButton>
+        <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Settings</BarButton>
     </div>
 
 </div>
@@ -97,15 +97,16 @@
     .left-wrapper{
         display: flex;
         flex-direction: column;
-        height: 80vh;
+        height: 90vh;
         width: 100%;
-        background-color: transparent;
+        background-color: var(--background-color);
         justify-content: flex-start;
         align-items: center;
         
     }
 
     .left-wrapper > * {
+        margin-top: calc(var(--fs-m) * -1);
         width: 100%;
     }
 
@@ -135,6 +136,7 @@
     .kwarto-holder{
         height: auto;
         display: flex;
+        align-items: baseline;
     
         padding-bottom: var(--fs-m);
         flex-grow: 3;
@@ -143,7 +145,7 @@
     .settings-holder{
         height: auto;
         display: flex;
-        align-items: center;
+        align-items: baseline;
         flex-grow: 1
     }
 

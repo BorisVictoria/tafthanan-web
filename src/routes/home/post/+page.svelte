@@ -26,9 +26,17 @@
             <div><h1>Post</h1></div>
         </article>
 
+        
+
         <Article hidden={false}/>
 
+        <article class="comments-label full-width">
+            <h1>Comments</h1>
+        </article>
+
         <Filters/>
+
+        
 
         <Comment/>
         <Comment/>
@@ -42,6 +50,11 @@
 
 
 <style>
+
+    .comments-label{
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+    }
 
     .back-button-holder{
         height: auto;

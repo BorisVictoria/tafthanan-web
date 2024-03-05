@@ -32,7 +32,7 @@
     {@html message}
     <footer>
         <Vote votes={votes}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> </div>
-         <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
+         <div class="action-button"> <img src="/assets/share-icon.svg"></div>
     </footer>
 
     <div class="replies-holder">

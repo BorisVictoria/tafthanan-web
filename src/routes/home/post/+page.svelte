@@ -5,6 +5,7 @@
     import Right from '$lib/components/Right.svelte'
     import Filters from '$lib/components/Filters.svelte'
     import Modal from '$lib/components/Modal.svelte'
+    import Back from '$lib/components/Back.svelte'
 
     let replies = [];
     let showModal = false;
@@ -20,7 +21,12 @@
     </div>
     <div class="middle">
 
-        <Article/>
+        <article class="back-button-holder full-width">
+            <Back --width="calc(var(--fs-xl) * 2)"/>
+            <div><h1>Post</h1></div>
+        </article>
+
+        <Article hidden={false}/>
 
         <Filters/>
 
@@ -36,6 +42,14 @@
 
 
 <style>
+
+    .back-button-holder{
+        height: auto;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
 
     @media (min-width: 0px) {

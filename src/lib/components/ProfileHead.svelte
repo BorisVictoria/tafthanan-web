@@ -27,7 +27,7 @@
         </div>
 
         <div class="follow-button-holder">
-            <Button>Follow</Button>
+            <Button --url='url(/assets/add.svg)'> Follow </Button>
         </div>
 
     </div>

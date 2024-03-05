@@ -4,6 +4,9 @@
 
     export let pfp = "/assets/login-poster.png";
     export let username = 'n\\eggylord';
+
+    export let name = 'eggylord';
+
     export let bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate veaborum.";
 
 </script>
@@ -17,7 +20,10 @@
             <div class="profile-pic-wrapper">
                 <img src={pfp} alt="{username}'s profile picture">
             </div>
-            <h1>{username}</h1>
+            <div class="name-username-wrapper">
+            <h1>{name}</h1>
+            <p>{username}</p>
+            </div>
         </div>
 
         <div class="follow-button-holder">
@@ -41,17 +47,24 @@
         display: flex;
     }
 
+
+    
+    .name-username-wrapper p{
+        color: var(--text-contrast-color);
+        line-height: 1;
+    }
+
     .pfp-username-follow{
         display: flex;
-        gap: calc(var(--fs-m) * 8);
+        
         align-items: center;    
         justify-content: space-between;
         
     }
 
     .follow-button-holder{
-        flex-grow: 1;
         display: flex;
+        padding-right: calc(var(--fs-m) * 6)
         
     }
 

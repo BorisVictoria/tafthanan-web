@@ -1,5 +1,4 @@
-import {registerUser, loginUser, setToken} from '$db/users'
-import {EJSON} from 'bson'
+import {registerUser, getUser, setToken} from '$db/users'
 import bcrypt from 'bcrypt'
 
 // TODO: Add redirects for invalid form submission
@@ -40,7 +39,7 @@ export const actions = {
             password: login.get('password')
         }
 
-        const data = await loginUser(user)
+        const data = await getUser(user.username)
 
         if (data === null) {
             redirect(303, '/login')

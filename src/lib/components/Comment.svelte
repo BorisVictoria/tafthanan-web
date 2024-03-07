@@ -50,7 +50,7 @@
     }
 
     .replies-holder{
-        border-left: solid lightgray;
+        border-left: solid lightgray 2px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -58,8 +58,8 @@
 
 
     .pfp-name-time img{
-        height: calc(var(--fs-l) * 2);
-        width: calc(var(--fs-l) * 2);
+        height: calc(var(--fs-l) * 1.5);
+        width: calc(var(--fs-l) * 1.5);
         object-fit: cover;
         
         border-radius: 3em;

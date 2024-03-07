@@ -38,13 +38,20 @@
     </div>
     <div class="right">
         <button class="action-button pointer post-button full-width"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
-        <Right/>
+            <Right/>
     </div>
 </div>
 
 
 <style>
 
+    .right{
+        height: 80vh;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        top: 0;
+    }
     
     .post-button img{
             height: var(--fs-l);
@@ -100,9 +107,12 @@
 
         .left {
             display: flex;
+            height: 100vh;
             flex-direction: column;
             align-items: center;
             background-color: var(--background-color);
+            position: sticky;
+            top: 0;
         }
         
     }

@@ -71,9 +71,14 @@
         linkButtons.forEach(button => {
 
             button.addEventListener('click', () => {
-                show = 'flex'
-                btn = button.id
-                url = document.getElementById('url-place').value
+
+                if(show == 'none'){
+                    show = 'flex'
+                    btn = button.id
+                    url = document.getElementById('url-place').value
+                } else {
+                    show = 'none'
+                }
 
             })
         })

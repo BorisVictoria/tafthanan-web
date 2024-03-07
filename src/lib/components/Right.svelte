@@ -11,6 +11,10 @@ export let neighbors = [{username: "n\\eggylord", pfp: "/assets/default-pfp.png"
         </div>
 
     <div class="neighbor-list">
+        {#if neighbors.length == 0}
+        <div><u>Follow people as neighbors.</u></div>
+        {/if}
+
         {#each  neighbors as neighbor}
         <span class="pointer"> <img src={neighbor.pfp}> <p><a> <u> {neighbor.username} </u> </a> </p> </span>
         {/each}

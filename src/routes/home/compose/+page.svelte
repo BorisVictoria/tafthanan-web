@@ -20,6 +20,10 @@
     <div class="middle">
 
         <article class="full-width">
+            <h1>Create A Post</h1>
+        </article>
+
+        <article class="full-width">
         <TextEditor/>
         </article>
 

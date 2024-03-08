@@ -1,55 +1,55 @@
 <script>
     export let votes = 10;
 
-		const upUnclicked = "/assets/up-unclicked.svg";
-		const downUnclicked = "/assets/down-unclicked.svg";
-		const upClicked = "/assets/up-clicked.svg";
-		const downClicked = "/assets/down-clicked.svg";
+	const upUnclicked = "/assets/up-unclicked.svg";
+	const downUnclicked = "/assets/down-unclicked.svg";
+	const upClicked = "/assets/up-clicked.svg";
+	const downClicked = "/assets/down-clicked.svg";
 
-		export let uStatus = upUnclicked
-		export let dStatus = downUnclicked
+	export let uStatus = upUnclicked
+	export let dStatus = downUnclicked
 
-		//if upvoted, ud == 1, if downvoted ud == -1, else ud == 0 
-		let ud = 0;
+	//if upvoted, ud == 1, if downvoted ud == -1, else ud == 0 
+	let ud = 0;
 
-		function refreshVotes(){
-			votes += ud;
+	function refreshVotes(){
+		votes += ud;
+	}
+
+	function uClicked(){
+		if(ud === 1){
+			votes--;
+			ud = 0;
+			uStatus = upUnclicked
 		}
-
-		function uClicked(){
-			if(ud === 1){
-				votes--;
-				ud = 0;
-				uStatus = upUnclicked
-			}
-			else{
-				if(ud == -1){
-					votes++;
-				}
-				
-				ud = 1;
-				uStatus = upClicked
-				dStatus = downUnclicked
-			}
-			refreshVotes();
-		}
-
-		function dClicked(){
-			if(ud === -1){
+		else{
+			if(ud == -1){
 				votes++;
-				ud = 0;
-				dStatus = downUnclicked
-			} else{
-				if(ud == 1){
-					votes --;
-				}
-
-				ud = -1;
-				dStatus = downClicked
-				uStatus = upUnclicked
 			}
-			refreshVotes();
+			
+			ud = 1;
+			uStatus = upClicked
+			dStatus = downUnclicked
 		}
+		refreshVotes();
+	}
+
+	function dClicked(){
+		if(ud === -1){
+			votes++;
+			ud = 0;
+			dStatus = downUnclicked
+		} else{
+			if(ud == 1){
+				votes --;
+			}
+
+			ud = -1;
+			dStatus = downClicked
+			uStatus = upUnclicked
+		}
+		refreshVotes();
+	}
 
 
 	

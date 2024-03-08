@@ -1,4 +1,6 @@
-import {posts} from '$db/posts'
+import { getAllPosts } from '$db/posts.js'
+import {EJSON} from 'bson'
+import { json } from '@sveltejs/kit'
 
 export const actions = {
 
@@ -48,4 +50,15 @@ export const actions = {
         // delete using _id of comment
     }
     */
+}
+
+export const load = async() => {
+
+    const result = await getAllPosts()
+    const data = {}
+    data.posts = result
+
+    return EJSON.serialize(data)
+
+
 }

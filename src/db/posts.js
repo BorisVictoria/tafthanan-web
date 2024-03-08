@@ -15,6 +15,19 @@ export const getPost = async(id) => {
 
 }
 
+export const getAllPosts = async() => {
+
+    let result = await posts.find({})
+    result = result.toArray()
+
+    if (result.length === 0) {
+        return null
+    }
+
+    return result
+
+}
+
 export const createPost = async(data) => {
     
     const result = await posts.insertOne({title: data.title, content: data.content, tags: null, username: data.username, kwarto: data.kwarto, voteCount: 0, datePosted: Date.now()}) 

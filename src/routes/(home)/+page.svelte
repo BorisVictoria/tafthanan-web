@@ -5,12 +5,17 @@
     import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
+    import {EJSON} from 'bson'
     
     let articles = 5;
 
     let showModal = false;
     let width = 0;
 
+    export let data
+    data = EJSON.deserialize(data)
+    const {posts} = data
+    console.log(posts)
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 
@@ -32,8 +37,8 @@
     <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
     {/if}
     
-    {#each {length: articles} as _, i}
-        <Article hidden/>
+    {#each posts as post}
+        <Article data={post} {hidden}/>
     {/each}
     </div>
     <div class="right">

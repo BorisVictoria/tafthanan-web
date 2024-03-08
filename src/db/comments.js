@@ -1,4 +1,5 @@
 import client from '$db/mongo'
+import { getCommentVote, createCommentVote, updateCommentVote } from '$db/commentVotes'
 import { ObjectId } from 'mongodb'
 
 const users = client.db('tafthanan').collection('users')
@@ -48,7 +49,7 @@ export const createComment = async(data) => {
     if (data.parentComment === null) {
         const kwartoID = new ObjectId(data.kwartoID)
         const postID = new ObjectId(data.postID)
-        result = await comments.insertOne({kwartoID: kwartoID, postID: postID, content: data.content, voteCount: 0, isEdited: false})
+        result = await comments.insertOne({kwartoID: kwartoID, postID: postID, content: data.content, voteCount: 0, datePosted: Date.now(), isEdited: false})
     } else {
         const kwartoID = new ObjectId(data.kwartoID)
         const postID = new ObjectId(data.postID)
@@ -73,16 +74,75 @@ export const editComment = async(data) => {
 
     return null
 }
-
 export const upvoteComment = async(data) => {
-    const objID = new ObjectId(data._id)
+    const objID = new ObjectId(data.commentID)
+    let result = await getCommentVote(data)
+    if (result) {
+        if (result.votes === true) {
+            result = await comments.updateOne({_id: objID}, {$inc: {votes: -1}})
+            result = await updateCommentVote(data)
+        }
+        else if (result.votes === false) {
+            result = await comments.updateOne({_id: objID}, {$inc: {votes: 2}})
+            result = await updateCommentVote(data)
+        }
+        else {
+            result = await comments.updateOne({_id: objID}, {$inc: {votes: 1}})
+            result = await updateCommentVote(data)
+        }
+
+    } else {
+        result = await createCommentVote(data)
+        if (result) {
+            result = await comments.updateOne({_id: objID}, {$inc: {votes: 1}})
+            result = await createCommentVote(data)
+        } else {
+            return null
+        }
+    }
+
+    if (result) {
+        return result
+    }
+
+    return null
+
+
+
 }
 
 export const downvoteComment = async(data) => {
-    const objID = new ObjectId(data._id)
+    const objID = new ObjectId(data.commentID)
+    let result = await getCommentVote(data)
+    if (result) {
+        if (result.votes === true) {
+            result = await comments.updateOne({_id: objID}, {$inc: {vote: -2}})
+            result = await updateCommentVote(data)
+        } else if (result.votes === false) {
+            result = await comments.updateOne({_id: objID}, {$inc: {vote: 1}})
+            result = await updateCommentVote(data)
+        } else {
+            result = await comments.updateOne({_id: objID}, {$inc: {vote: -1}})
+            result = await updateCommentVote(data)
+        }
+    } else {
+        result = await createCommentVote(data)
+        if (result) {
+            result = await comments.update({_id: objID}, {$inc: {votes: -1}})
+            result = await createCommentVote(data)
+        } else {
+            return null
+        }
+    }
+
+    if (result) {
+        return result
+    }
+
+    return null
 }
 
 export const deleteComment = async(id) => {
     const objID = new ObjectId(id)
-    const result = await comments.findOne({_id: objID})
+    const result = await comments.updateOne({_id: objID}, {$set: {deleted: true}})
 }

@@ -2,19 +2,42 @@ import {posts} from '$db/posts'
 
 export const actions = {
 
-    editPost: async(event) => {
-        // edit using _id of post
-    }
+    // createPost: async(event) => {
+    //     const registration = await event.request.formData()
+    //     const user = {
+    //         email: registration.get('email'),
+    //         username: registration.get('username'),
+    //         password: registration.get('password'),
+    //         passwordHash: await bcrypt.hash(registration.get('password'), 10),
+    //         token: crypto.randomUUID(),
+    //         tokenExpiry: new Date(Date.now() + 1000 * 60 * 60 * 24 * 21), 
+    //     }
 
-    deletePost: async(event) => {
-        // delete using _id of post
-    }
+    //     const data = await registerUser(user)
 
-    editComment: async(event) => {
-        // edit using _id of comment
-    }
+    //     return {
+    //         success: !!data
+    //     }
 
-    deleteComment: async(event) => {
-        // delete using _id of comment
-    }
+    // }
+
+    // editPost: async(event) => {
+    //     // edit using _id of post
+    // }
+
+    // deletePost: async(event) => {
+    //     // delete using _id of post
+    // }
+
+    // createComment: async(event) => {
+
+    // }
+
+    // editComment: async(event) => {
+    //     // edit using _id of comment
+    // }
+
+    // deleteComment: async(event) => {
+    //     // delete using _id of comment
+    // }
 }

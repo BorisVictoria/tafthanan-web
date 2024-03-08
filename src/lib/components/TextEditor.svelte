@@ -1,17 +1,13 @@
 <script>
-     import { onMount } from 'svelte';
-     import Text from '$lib/components/Text.svelte'
-     import Back from '$lib/components/Back.svelte'
+    import { onMount } from 'svelte';
+    import Text from '$lib/components/Text.svelte'
+    import Back from '$lib/components/Back.svelte'
 
+    export let backFunction;
+    export let kwarto = "k\\all";
+    export let replyTo;
+    let show='none'
 
-     export let backFunction;
-     export let kwarto = "k\\all";
-     export let replyTo;
-     let show='none'
-
-
-
-    
     var btn = ''
     var url = ''
 
@@ -34,7 +30,7 @@
         }
     }
 
-
+    let innerHTML
 
     onMount(()=>{
         const normButtons = document.querySelectorAll('.norm');
@@ -86,7 +82,7 @@
 
     })
 </script>
-
+<form method=POST action="?/submit">
 <div class="richtext-wrapper">
     <div class="exit-submit-wrapper">
         <Back --width="calc(var(--fs-l) * 1.5)" on:click={backFunction}/>
@@ -100,61 +96,64 @@
         </span>
 
         <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <button class="action-button pointer" on:click={backFunction}>
+        <button class="action-button pointer">
             <strong>Post</strong>
         </button>
     </div>
 
     {#if kwarto}
-    <Text placeholder="Write a title..."/>
+    <Text name="title" placeholder="Write a title..."/>
     {/if}
 
 <div class="content-writer">
 
 <div class="format-buttons-holder">
-    <button class="norm action-button pointer" id="bold" title="Bold"><strong>B</strong></button>
-    <button class="norm action-button pointer" id="italic" title="Italics"><i>I</i></button>
-    <button class="norm action-button pointer" id="underline" title="Underline"><u>U</u></button>
-    <button class="norm action-button pointer" id="strikeThrough" title="Strike">
+    <button type="button" class="norm action-button pointer" id="bold" title="Bold"><strong>B</strong></button>
+    <button type="button" class="norm action-button pointer" id="italic" title="Italics"><i>I</i></button>
+    <button type="button" class="norm action-button pointer" id="underline" title="Underline"><u>U</u></button>
+    <button type="button" class="norm action-button pointer" id="strikeThrough" title="Strike">
         <strike>S</strike>
     </button>
 
-    <button class="wrap action-button pointer" id="h1" title="Add heading">
+    <button type="button" class="wrap action-button pointer" id="h1" title="Add heading">
         <img src="/assets/heading.svg" alt="heading symbol">
     </button>
 
-    <button class="link action-button pointer" id="insertImage" title="Insert image">
+    <button type="button" class="link action-button pointer" id="insertImage" title="Insert image">
         <img src="/assets/image.svg" alt="symbol for adding a pic">
     </button>
 
-    <button class="wrap action-button pointer" id="blockquote" title="Add block quote">
+    <button type="button" class="wrap action-button pointer" id="blockquote" title="Add block quote">
         <img src="/assets/quote.svg" alt="quote symbol">
     </button>
 
-    <button class="norm action-button pointer" id="indent" title="add indentation">
+    <button type="button" class="norm action-button pointer" id="indent" title="add indentation">
         <img src="/assets/indent.svg" alt="indent symbol">
     </button>
 
-    <button class="norm action-button pointer" id="outdent" title="decrease indentation">
+    <button type="button" class="norm action-button pointer" id="outdent" title="decrease indentation">
         <img src="/assets/outdent.svg" alt="unindent">
     </button>
 
-    <button class="norm action-button pointer" id="insertUnorderedList" title="unordered list"><img src="/assets/ol.svg" alt="ordered list"></button>
-    <button class="norm action-button pointer" id="insertOrderedList" title="ordered list"><img src="/assets/ul.svg" alt="unoredered list"></button>
-    <button class="link action-button pointer" id="createLink" title="insert hyperlink"><img src="/assets/link.svg" alt="link symbol"></button>
+    <button type="button" class="norm action-button pointer" id="insertUnorderedList" title="unordered list"><img src="/assets/ol.svg" alt="ordered list"></button>
+    <button type="button" class="norm action-button pointer" id="insertOrderedList" title="ordered list"><img src="/assets/ul.svg" alt="unoredered list"></button>
+    <button type="button" class="link action-button pointer" id="createLink" title="insert hyperlink"><img src="/assets/link.svg" alt="link symbol"></button>
 
 </div>
-<div class="text-area" placeholder=" Write content here..." contenteditable="true">
+<div bind:innerHTML class="text-area" placeholder=" Write content here..." contenteditable="true">
   
 </div>
+
+<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none"/>
 
 
 </div>
 <div id="url-prompt-holder" style="display:{show}">
-<input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" id="submitUrl"> <strong> Submit </strong> </button>
+    <input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" id="submitUrl"> <strong> Submit </strong> </button>
 </div>
 
 </div>
+</form>
 
 
 <style>

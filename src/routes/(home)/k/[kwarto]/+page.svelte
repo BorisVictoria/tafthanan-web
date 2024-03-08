@@ -9,6 +9,8 @@
     export let data
     data = EJSON.deserialize(data)
     const {kwarto, posts} = data
+
+    export let neighborlist = EJSON.deserialize(data.neighborlist)
     
     let articles = 5;
 
@@ -48,7 +50,7 @@
     </div>
     <div class="right">
         <button class="action-button pointer post-button full-width"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
-            <Right/>
+            <Right neighbors={neighborlist}/>
     </div>
 </div>
 

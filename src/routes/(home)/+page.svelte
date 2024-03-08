@@ -16,6 +16,8 @@
     data = EJSON.deserialize(data)
     const {posts} = data
     console.log(posts)
+
+    export let neighborlist = EJSON.deserialize(data.neighborlist)
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 
@@ -43,7 +45,7 @@
     </div>
     <div class="right">
         <button class="action-button pointer post-button full-width"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
-            <Right/>
+            <Right neighbors={neighborlist}/>
     </div>
 </div>
 

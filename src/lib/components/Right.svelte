@@ -1,6 +1,8 @@
 <script>
 
-export let neighbors = [{username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}, {username: "n\\eggylord", pfp: "/assets/default-pfp.png"}]
+    export let neighbors;
+
+    let pfp = "/assets/default-pfp.png"
 
 </script>
 
@@ -11,18 +13,19 @@ export let neighbors = [{username: "n\\eggylord", pfp: "/assets/default-pfp.png"
         </div>
 
     <div class="neighbor-list">
-        {#if neighbors.length == 0}
-        <div><u>Follow people as neighbors.</u></div>
-        {/if}
-
         {#each  neighbors as neighbor}
-        <span class="pointer"> <img src={neighbor.pfp}> <p><a> <u> {neighbor.username} </u> </a> </p> </span>
+        <a data-sveltekit-reload href={'/n/'+neighbor.username} ><span class="pointer"> <img src={pfp}> <p>{neighbor.username} </p> </span></a>
         {/each}
     </div>
 
 </div>
 
 <style>
+
+    a{
+        color: black;
+        text-decoration: none;
+    }
 
     big{
         font-size: var(--fs-l);

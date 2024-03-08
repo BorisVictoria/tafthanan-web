@@ -16,6 +16,8 @@
     data = EJSON.deserialize(data)
     const {post} = data
 
+    export let neighborlist = EJSON.deserialize(data.neighborlist)
+
 </script>
 
 <Modal bind:showModal/>
@@ -40,7 +42,7 @@
 </div>
 
 <div class="right">
-    <Right/>
+    <Right neighbors={neighborlist}/>
 </div>
 
 </div>

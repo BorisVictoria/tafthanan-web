@@ -4,6 +4,7 @@
 
 
     export let comment;
+    console.log(comment)
 
     const fetchChildrenComments = async(id) => {
 
@@ -91,9 +92,11 @@
     {#await fetchChildrenComments(comment._id)}
     {:then children}
     <div class="replies-holder">
+    {#if children !== null}
     {#each children as child}
         <svelte:self comment={child}/>
     {/each}
+    {/if}
     </div>
     {/await}
    

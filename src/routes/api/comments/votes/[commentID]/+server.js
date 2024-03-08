@@ -16,8 +16,7 @@ export const GET = async({params, locals}) => {
 }
 
 export const POST = async({request, locals}) => {
-    const body = await request.json()
-    const {data} = body
+    const data = await request.json()
 
     // data.voteCount
     // data.isPost

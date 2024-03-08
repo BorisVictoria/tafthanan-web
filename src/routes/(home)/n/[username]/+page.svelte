@@ -9,7 +9,7 @@
     import {EJSON} from 'bson'
     export let data;
     data = EJSON.deserialize(data)
-    const {user} = data
+    const {user, posts} = data
 
     let articles = 5;
 
@@ -28,8 +28,8 @@
 
     <Filters/>
     
-    {#each {length: articles} as _, i}
-        <Article hidden/>
+    {#each posts as post}
+        <Article data={post} hidden/>
     {/each}
     </div>
     <div class="right">

@@ -4,8 +4,6 @@
 
       export let data;
 
-      console.log(data)
-
       //if component is hidden, show only first 150 characters of the post then add like an "ombre" or box-shadow top to the footer so that it looks transparent.
       export let hidden = true;
       let isEdited = data.isEdited;
@@ -20,6 +18,14 @@
       let title = data.title;
       let content = data.content;
 
+      const vote = {
+        isPost: true,
+        postID: data._id,
+        voteCount: data.voteCount
+      }
+
+
+    // TODO: export this function to its separate .js file
   function timeAgo(datetime) {
   const now = new Date();
   const diff = now - datetime;
@@ -92,7 +98,7 @@
         {@html content}
       </span>
       <footer>
-        <Vote votes={upvote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
+        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>

@@ -1,5 +1,6 @@
 import client from '$db/mongo'
 import { ObjectId } from 'mongodb'
+import { getPostVote, createPostVote, updatePostVote } from '$db/postVotes'
 
 export const posts = client.db('tafthanan').collection('posts')
 
@@ -78,24 +79,27 @@ export const upvotePost = async(data) => {
     const objID = new ObjectId(data.postID)
     let result = await getPostVote(data)
     if (result) {
-        if (result.votes === true) {
-            result = await posts.updateOne({_id: objID}, {$inc: {votes: -1}})
+        if (result.vote === true) {
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: -1}})
+            data.vote = null
             result = await updatePostVote(data)
         }
-        else if (result.votes === false) {
-            result = await posts.updateOne({_id: objID}, {$inc: {votes: 2}})
+        else if (result.vote === false) {
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: 2}})
+            data.vote = true
             result = await updatePostVote(data)
         }
         else {
-            result = await posts.updateOne({_id: objID}, {$inc: {votes: 1}})
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: 1}})
+            data.vote = true
             result = await updatePostVote(data)
         }
 
     } else {
+        data.vote = true
         result = await createPostVote(data)
         if (result) {
-            result = await posts.updateOne({_id: objID}, {$inc: {votes: 1}})
-            result = await createPostVote(data)
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: 1}})
         } else {
             return null
         }
@@ -115,21 +119,24 @@ export const downvotePost = async(data) => {
     const objID = new ObjectId(data.postID)
     let result = await getPostVote(data)
     if (result) {
-        if (result.votes === true) {
-            result = await posts.updateOne({_id: objID}, {$inc: {vote: -2}})
+        if (result.vote === true) {
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: -2}})
+            data.vote = false
             result = await updatePostVote(data)
-        } else if (result.votes === false) {
-            result = await posts.updateOne({_id: objID}, {$inc: {vote: 1}})
+        } else if (result.vote === false) {
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: 1}})
+            data.vote = null
             result = await updatePostVote(data)
         } else {
-            result = await posts.updateOne({_id: objID}, {$inc: {vote: -1}})
+            result = await posts.updateOne({_id: objID}, {$inc: {voteCount: -1}})
+            data.vote = false
             result = await updatePostVote(data)
         }
     } else {
+        data.vote = false
         result = await createPostVote(data)
         if (result) {
-            result = await posts.update({_id: objID}, {$inc: {votes: -1}})
-            result = await createPostVote(data)
+            result = await posts.update({_id: objID}, {$inc: {voteCount: -1}})
         } else {
             return null
         }

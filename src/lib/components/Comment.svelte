@@ -21,14 +21,20 @@
     let isEdited = comment.isEdited;
     let time = timeAgo(comment.timePosted);
 
+    const vote = {
+      isPost: false,
+      commentID: data._id,
+      voteCount: data.voteCount
+    }
+
 
     function timeAgo(datetime) {
   const now = new Date();
   const diff = now - datetime;
 
-  console.log(datetime)
-  console.log(now)
-  console.log(diff)
+  // console.log(datetime)
+  // console.log(now)
+  // console.log(diff)
 
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
@@ -79,7 +85,7 @@
 
     {@html message}
     <footer>
-        <Vote votes={votes}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> </div>
+        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"></div>
     </footer>
 

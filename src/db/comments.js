@@ -12,7 +12,6 @@ export const getParentComments = async(id) => {
     result = await result.toArray()
 
     if(result.length === 0) {
-        console.log("No parent comments found!")
         return null
     }
     
@@ -78,24 +77,27 @@ export const upvoteComment = async(data) => {
     const objID = new ObjectId(data.commentID)
     let result = await getCommentVote(data)
     if (result) {
-        if (result.votes === true) {
-            result = await comments.updateOne({_id: objID}, {$inc: {votes: -1}})
+        if (result.vote === true) {
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: -1}})
+            data.vote = null
             result = await updateCommentVote(data)
         }
-        else if (result.votes === false) {
-            result = await comments.updateOne({_id: objID}, {$inc: {votes: 2}})
+        else if (result.vote === false) {
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: 2}})
+            data.vote = true
             result = await updateCommentVote(data)
         }
         else {
-            result = await comments.updateOne({_id: objID}, {$inc: {votes: 1}})
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: 1}})
+            data.vote = true
             result = await updateCommentVote(data)
         }
 
     } else {
+        data.vote = true
         result = await createCommentVote(data)
         if (result) {
-            result = await comments.updateOne({_id: objID}, {$inc: {votes: 1}})
-            result = await createCommentVote(data)
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: 1}})
         } else {
             return null
         }
@@ -115,21 +117,25 @@ export const downvoteComment = async(data) => {
     const objID = new ObjectId(data.commentID)
     let result = await getCommentVote(data)
     if (result) {
-        if (result.votes === true) {
-            result = await comments.updateOne({_id: objID}, {$inc: {vote: -2}})
+        if (result.vote === true) {
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: -2}})
+            data.vote = false
             result = await updateCommentVote(data)
-        } else if (result.votes === false) {
-            result = await comments.updateOne({_id: objID}, {$inc: {vote: 1}})
+        } else if (result.vote === false) {
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: 1}})
+            data.vote = null
             result = await updateCommentVote(data)
         } else {
-            result = await comments.updateOne({_id: objID}, {$inc: {vote: -1}})
+            result = await comments.updateOne({_id: objID}, {$inc: {voteCount: -1}})
+            data.vote = false
             result = await updateCommentVote(data)
         }
     } else {
+        data.vote = false
         result = await createCommentVote(data)
         if (result) {
-            result = await comments.update({_id: objID}, {$inc: {votes: -1}})
-            result = await createCommentVote(data)
+            result = await comments.update({_id: objID}, {$inc: {voteCount: -1}})
+
         } else {
             return null
         }

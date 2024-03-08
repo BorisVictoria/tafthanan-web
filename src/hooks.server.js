@@ -13,6 +13,7 @@ export const handle = async({event, resolve}) => {
     if (user) {
         event.locals.user = {
             username: user.username,
+            userID: user._id.toString(),
             token: user.token,
         }
     }

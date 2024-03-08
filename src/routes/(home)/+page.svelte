@@ -15,7 +15,7 @@
     export let data
     data = EJSON.deserialize(data)
     const {posts} = data
-    console.log(posts)
+    // console.log(posts)
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 

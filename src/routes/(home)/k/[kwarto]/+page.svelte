@@ -27,11 +27,19 @@
     </div>
     <div class="middle">
 
-    <KwartoHead/>
+    <KwartoHead data={kwarto}/>
 
-    <Filters/>
     {#if width < 768}
     <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
+    {/if}
+
+    {#if posts.length === 0}
+        <article class="full-width">
+            <h1>Kwarto is empty, be the first to contribute!</h1>
+        </article>
+
+        {:else}
+            <Filters/>
     {/if}
 
     {#each posts as post}

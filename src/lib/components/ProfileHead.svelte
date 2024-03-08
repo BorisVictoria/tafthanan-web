@@ -2,12 +2,14 @@
 
     import Button from '$lib/components/Button.svelte'
 
+    export let data;
+
     export let pfp = "/assets/login-poster.png";
-    export let username = 'n\\eggylord';
+    let username = "n\\" + data.username;
 
-    export let name = 'eggylord';
+    export let name = data.username;
 
-    export let bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate veaborum.";
+    export let bio = data.bio;
 
 </script>
 
@@ -34,7 +36,7 @@
 
 
     <div class="bio-holder">
-        {bio}
+        {@html bio}
     </div>
 </article>
 

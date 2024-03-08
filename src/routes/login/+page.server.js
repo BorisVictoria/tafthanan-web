@@ -22,6 +22,7 @@ export const actions = {
             passwordHash: await bcrypt.hash(registration.get('password'), 10),
             token: crypto.randomUUID(),
             tokenExpiry: new Date(Date.now() + 1000 * 60 * 60 * 24 * 21), 
+            bio: "<i>New to tafthanan!</i>"
         }
 
         const data = await registerUser(user)

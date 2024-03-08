@@ -65,17 +65,10 @@
 
 
       export let upvote = data.voteCount;
-     
-
-      if (hidden) {
-        content = content.slice(0, 450);
-        content += "  ...";
-      }
 
   </script>
 
   {#if hidden}
-  <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
   <article class="full-width pointer" 
     on:mouseenter={() => {
       if (hidden) gradient = false}} 
@@ -91,18 +84,18 @@
 
           <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
+      <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
       <span class:hidden={gradient}>
         {@html content}
       </span>
+      </a>
       <footer>
         <Vote votes={upvote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
-  </a>
 
   {:else}
-  <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
     <article class="full-width pointer" 
       on:mouseenter={() => {
         if (hidden) gradient = false}} 
@@ -126,8 +119,6 @@
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>
-    </a>
-  
 
   {/if}
 
@@ -150,6 +141,8 @@
 
   .hidden {
       position: relative;
+      max-height: calc(var(--fs-m) * 5);
+      overflow: hidden;
   }
 
   .circle{

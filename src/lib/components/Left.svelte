@@ -1,8 +1,11 @@
 <script>
     import BarButton from '$lib/components/BarButton.svelte'
 
-    export let kwartos = ['k\\manresidents', 'k\\torrelife', 'k\\scrambledegis', 'k\\whtaft', 'k\\onearchers']
+    export let kwartos
     export let icons = '/assets/logo.svg'
+
+    console.log('kwartos')
+    console.log(kwartos)
 
 </script>
 
@@ -19,7 +22,7 @@
                 </div>
 
             {#each kwartos as kwarto}
-             <span> <img src={icons}> <p><a> <u> {kwarto} </u> </a> </p> </span>
+             <span> <img src={icons}> <p><a data-sveltekit-reload href={"/k/"+kwarto.name}> <u> {kwarto.name} </u> </a> </p> </span>
             {/each}
 
         </div>
@@ -31,6 +34,12 @@
 </div>
 
 <style>
+
+    a{
+        text-decoration: none;
+        color: var(--text-color);
+    }
+
     big{
         font-size: var(--fs-l);
     }

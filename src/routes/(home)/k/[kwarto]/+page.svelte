@@ -11,8 +11,7 @@
     const {kwarto, posts} = data
 
     export let neighborlist = EJSON.deserialize(data.neighborlist)
-    
-    let articles = 5;
+    export let kwartolist = EJSON.deserialize(data.kwartolist)
 
     let width = 0;
 
@@ -25,7 +24,7 @@
 <div class="wrapper main">
 
     <div class="left">
-        <Left />
+        <Left kwartos={kwartolist}/>
     </div>
     <div class="middle">
 

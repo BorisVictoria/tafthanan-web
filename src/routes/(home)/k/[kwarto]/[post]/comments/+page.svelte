@@ -17,6 +17,7 @@
     const {post} = data
 
     export let neighborlist = EJSON.deserialize(data.neighborlist)
+    export let kwartolist = EJSON.deserialize(data.kwartolist)
 
 </script>
 
@@ -25,7 +26,7 @@
 <div class="wrapper main">
 
     <div class="left">
-        <Left/>
+        <Left kwartos={kwartolist}/>
     </div>
 
 <div class="middle">

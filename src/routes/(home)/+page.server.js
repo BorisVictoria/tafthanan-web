@@ -58,6 +58,8 @@ export const load = async() => {
     const data = {}
     data.posts = result
 
+    
+
     return EJSON.serialize(data)
 
 

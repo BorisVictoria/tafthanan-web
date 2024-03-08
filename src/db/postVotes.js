@@ -1,6 +1,6 @@
 import client from '$db/mongo'
 import { ObjectId } from 'mongodb'
-const postVotes = client.db('tafthanan').collections('postVotes')
+const postVotes = client.db('tafthanan').collection('postVotes')
 
 export const getPostVote = async(data) => {
     const postID = new ObjectId(data.postID)

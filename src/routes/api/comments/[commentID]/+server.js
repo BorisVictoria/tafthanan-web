@@ -1,7 +1,7 @@
 import {getChildrenComments} from "$db/comments"
 import {json} from "@sveltejs/kit"
 
-export async function GET({params}) {
+export const GET = async({params}) => {
 
     const result = await getChildrenComments(params.commentID)
     

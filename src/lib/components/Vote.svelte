@@ -1,63 +1,126 @@
 <script>
-    export let votes = 10;
+    export let data;
+
+	let votes = data.voteCount
+	// console.log(data)
 
 	const upUnclicked = "/assets/up-unclicked.svg";
 	const downUnclicked = "/assets/down-unclicked.svg";
 	const upClicked = "/assets/up-clicked.svg";
 	const downClicked = "/assets/down-clicked.svg";
 
-	export let uStatus = upUnclicked
-	export let dStatus = downUnclicked
+	let uStatus = upUnclicked
+	let dStatus = downUnclicked
 
 	//if upvoted, ud == 1, if downvoted ud == -1, else ud == 0 
 	let ud = 0;
 
-	function refreshVotes(){
-		votes += ud;
-	}
+	const uClicked = async() => { 
 
-	function uClicked(){
-		if(ud === 1){
-			votes--;
-			ud = 0;
+		if (ud === 1){
+			votes--
+			ud = 0
 			uStatus = upUnclicked
 		}
-		else{
-			if(ud == -1){
-				votes++;
-			}
+		else if (ud === 0) {
+			votes++
+			ud = 1
+			uStatus = upClicked
 			
-			ud = 1;
+		} else {
+			votes += 2
+			ud = 1
 			uStatus = upClicked
 			dStatus = downUnclicked
 		}
-		refreshVotes();
+		data.vote = "upvote"
+		await doVote()
 	}
 
-	function dClicked(){
-		if(ud === -1){
-			votes++;
-			ud = 0;
-			dStatus = downUnclicked
-		} else{
-			if(ud == 1){
-				votes --;
-			}
-
-			ud = -1;
-			dStatus = downClicked
+	const dClicked = async() => {
+		if (ud === 1){
+			votes -= 2
+			ud = -1
 			uStatus = upUnclicked
+			dStatus = downClicked
+		} else if (ud === 0) {
+			votes--
+			ud = -1
+			dStatus = downClicked
+		} else {
+			votes++
+			ud = 0
+			dStatus = downUnclicked
 		}
-		refreshVotes();
+		data.vote = "downvote";
+		await doVote()
+	}
+
+	let vote
+	let success
+
+	const doVote = async() => {
+		if (data.isPost) {
+			const stringify = data.postID.toString()
+			success = await fetch(`/api/posts/votes/${stringify}`, {
+				method: "POST",
+				body: JSON.stringify(data)
+			})
+		} else {
+			const stringify = data.commentID.toString()
+			success = await fetch(`/api/comments/votes/${stringify}`, {
+				method: "POST",
+				body: JSON.stringify(data)
+			})
+		}
+	}
+
+	const fetchVote = async() => {
+		if (data.isPost) {
+			const stringify = data.postID.toString()
+			const response = await fetch(`/api/posts/votes/${stringify}`)
+			vote = await response.json()
+			
+		} else {
+			const stringify = data.commentID.toString()
+			const response = await fetch(`/api/comments/votes/${stringify}`)
+			vote = await response.json()
+		}
+
+		if (vote === null) {
+			ud = 0
+		} else {
+			if (vote.vote === null) {
+				ud = 0
+			} else if (vote.vote === true) {
+				ud = 1
+			} else {
+				ud = -1
+			}
+		}
+
 	}
 
 
 	
 </script>
 
+
+{#await fetchVote()}
+
+{:then vote}
 <div class ="votes-container">
-    <button class="vote pointer" on:click={uClicked}><img src={uStatus} alt="upvote button"></button> <div class="vote-count-container"> {votes} </div> <button class="vote pointer" on:click={dClicked}> <img src={dStatus} alt="downvote"> </button>
+    <button class="vote pointer" on:click={uClicked}>
+		<img src={uStatus} alt="upvote button">
+	</button> 
+	<div class="vote-count-container"> 
+		{votes} 
+	</div> 
+	<button class="vote pointer" on:click={dClicked}> 
+		<img src={dStatus} alt="downvote"> 
+	</button>
 </div>
+{/await}
 
 <style>
     .votes-container {

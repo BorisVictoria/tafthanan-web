@@ -12,9 +12,57 @@
       export let kwarto = 'k\\all';
       export let kwarto_logo = "/assets/logo.svg"
       export let author = 'n\\eggylord';
-      export let time = '1d';
+      
+      export let timePosted;
+      let time = timeAgo(timePosted);
       export let title = 'baka naman pumangit if mahaba-haba yung title...';
       export let content = "Hi! I'm an incoming engineering college freshman and during my jhs and shs days, I always consumed coffee. Especially during hell weeks or if may big event that day. Most of my coffees are usually those cheap P30 Lucky day from 7/11 or food panda orders. I don't have a particularly favorite shop I order from since it usually depends what I'm feeling, my budget, and if I think I need a bit more caffeine kick. This summer I've been experimenting and kind of trying to find coffee that works well with what I need and I've come to the conclusion that I really like iced Americano, Caramel Macchiato, and ordinary lattes. I'll be going to an expensive university and I don't want to spend a lot of money on just coffee, maybe the occasional monthly treats but definitely not a regular. I want to know if you guys have any coffee recommendations for students. I plan to make coffee at home then pack them in a different water bottle and take it to school. My family highly discourages those 2-in-1 coffee packets so maybe any recommendations that are a bit more on the healthier side but still affordable for students hehe.";
+
+  function timeAgo(datetime) {
+  const now = new Date();
+  const diff = now - datetime;
+
+  console.log(datetime)
+  console.log(now)
+  console.log(diff)
+
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
+
+  if (seconds < 60) {
+    return 'just now';
+  } else if (minutes === 1) {
+    return '1m';
+  } else if (minutes < 60) {
+    return `${minutes}m`;
+  } else if (hours === 1) {
+    return '1h';
+  } else if (hours < 24) {
+    return `${hours}h`;
+  } else if (days === 1) {
+    return '1d';
+  } else if (days < 7) {
+    return `${days}d`;
+  } else if (weeks === 1) {
+    return '1w';
+  } else if (weeks < 4) {
+    return `${weeks}w`;
+  } else if (months === 1) {
+    return '1mo';
+  } else if (months < 12) {
+    return `${months}mo`;
+  } else if (years === 1) {
+    return '1y';
+  } else {
+    return `${years}y`;
+  }
+}
+
 
 
       export let upvote = 15;

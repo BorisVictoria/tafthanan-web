@@ -24,7 +24,6 @@ export const getChildrenComments = async(id) => {
     result = await result.toArray()
 
     if(result.length === 0) {
-        console.log("No children comments found!")
         return null
     }
     

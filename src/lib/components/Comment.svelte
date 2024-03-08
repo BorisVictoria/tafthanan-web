@@ -7,7 +7,6 @@
     const fetchChildrenComments = async(id) => {
 
         const stringify = id.toString()
-        console.log(stringify)
         const response = await fetch(`/api/comments/${stringify}`)
         const children = await response.json()
         return children

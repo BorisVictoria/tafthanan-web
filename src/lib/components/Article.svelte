@@ -74,6 +74,8 @@
 
   </script>
 
+  {#if hidden}
+  <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
   <article class="full-width pointer" 
     on:mouseenter={() => {
       if (hidden) gradient = false}} 
@@ -97,9 +99,54 @@
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
+  </a>
 
+  {:else}
+  <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
+    <article class="full-width pointer" 
+      on:mouseenter={() => {
+        if (hidden) gradient = false}} 
+      on:mouseleave={() => {
+        if (hidden) gradient = hidden}}>
+        <header>
+            <div class="logo-kwarto-holder">
+            <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
+  
+            <div class="options"> <Dropdown/> </div>
+  
+            </div>
+  
+            <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
+        </header>
+        <span class:hidden={gradient}>
+          {@html content}
+        </span>
+        <footer>
+          <Vote votes={upvote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
+           <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
+        </footer>
+    </article>
+    </a>
+  
+
+  {/if}
+
+
+ 
 
   <style>
+
+    .action-button-text b{
+      background-color: transparent;
+    }
+
+    a{
+      text-decoration: none;
+      color: var(--text-color);
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+    }
 
   .hidden {
       position: relative;

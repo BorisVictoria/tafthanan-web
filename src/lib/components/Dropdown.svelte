@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Dropdown</title>
+<script>
+    let showDropdown = false;    
+</script>
+    
+    
+    
     <style>
         .dropdown {
             display: inline-block;
@@ -11,17 +12,11 @@
         }
 
         .dropdown-content {
-            display: none;
             position: absolute;
-            width: 100%;
+            width: 5rem;
             overflow: auto;
-            box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+            border-radius: 0.5em;
         }
-
-        .dropdown.open .dropdown-content {
-            display: block;
-        }
-
         .dropdown-content a {
             display: block;
             color: #000000;
@@ -31,27 +26,17 @@
 
         .dropdown-content a:hover {
             color: #FFFFFF;
-            background-color: #00A4BD;
+            background-color: var(--accent-color);
         }
     </style>
-</head>
 
-<body>
-    <div class="dropdown" onclick="toggleDropdown()">
-        <button>...</button>
-        <div class="dropdown-content">
+    
+        <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
+        {#if showDropdown}
+        <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
             <a href="#">Edit</a>
             <a href="#">Delete</a>
             <a href="#">Hide</a>
         </div>
-    </div>
+        {/if}
 
-    <script>
-        function toggleDropdown() {
-            var dropdown = document.querySelector('.dropdown');
-            dropdown.classList.toggle('open');
-        }
-    </script>
-</body>
-
-</html>

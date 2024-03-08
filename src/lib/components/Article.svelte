@@ -1,6 +1,7 @@
   <script>
 
       import Vote from '$lib/components/Vote.svelte';
+      import Dropdown from '$lib/components/Dropdown.svelte';
 
       export let data;
 
@@ -82,7 +83,7 @@
           <div class="logo-kwarto-holder">
           <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
 
-          <div class="action-button options"> <img src="/assets/more-vert.svg"> </div>
+          <div class="options"> <Dropdown/> </div>
 
           </div>
 

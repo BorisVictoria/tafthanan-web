@@ -24,9 +24,17 @@
     </div>
     <div class="middle">
 
-    <ProfileHead/>
+    <ProfileHead data={user}/>
 
-    <Filters/>
+    
+    {#if posts.length === 0}
+    <article class="full-width">
+        User has not posted any content.
+    </article>
+    
+    {:else}
+        <Filters/>
+    {/if}
     
     {#each posts as post}
         <Article data={post} hidden/>

@@ -2,15 +2,12 @@
 
     import Button from '$lib/components/Button.svelte'
 
+    export let data;
+
     export let pfp = "/assets/login-poster.png";
-    export let kwartoname = 'k\\whtaft';
+    let kwartoname = 'k\\' + data.name;
 
-    export let name = 'eggylord';
-
-    export let bio = "Kwarto for residents of k\\whtaft est. 2024 <br> Please be respectful. Bullying, doxxing, and disrespectful behavior will not be tolerated."
-
-    export let followerCount = 11;
-    export let latestPost = "02/13/2004"
+    export let bio = data.bio
 
 </script>
 
@@ -38,18 +35,6 @@
 
     <div class="bio-holder">
         {@html bio}
-    </div>
-
-
-    <div class="follower-latest-post">
-        <div class="follower-holder">
-            <h1>{followerCount}</h1>
-            <small>residents</small>
-        </div>
-        <div class="follower-holder">
-            <h1>{latestPost}</h1>
-            <small>Latest Post</small>
-        </div>
     </div>
 
 </article>

@@ -1,6 +1,7 @@
   <script>
 
       import Vote from '$lib/components/Vote.svelte';
+      import Dropdown from '$lib/components/Dropdown.svelte';
 
       export let data;
 
@@ -70,15 +71,10 @@
 
 
       export let upvote = data.voteCount;
-     
-
-      if (hidden) {
-        content = content.slice(0, 450);
-        content += "  ...";
-      }
 
   </script>
 
+  {#if hidden}
   <article class="full-width pointer" 
     on:mouseenter={() => {
       if (hidden) gradient = false}} 
@@ -88,26 +84,71 @@
           <div class="logo-kwarto-holder">
           <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
 
-          <div class="action-button options"> <img src="/assets/more-vert.svg"> </div>
+          <div class="options"> <Dropdown/> </div>
 
           </div>
 
           <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
+      <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
       <span class:hidden={gradient}>
         {@html content}
       </span>
+      </a>
       <footer>
         <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
 
+  {:else}
+    <article class="full-width pointer" 
+      on:mouseenter={() => {
+        if (hidden) gradient = false}} 
+      on:mouseleave={() => {
+        if (hidden) gradient = hidden}}>
+        <header>
+            <div class="logo-kwarto-holder">
+            <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
+  
+            <div class="options"> <Dropdown/> </div>
+  
+            </div>
+  
+            <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
+        </header>
+        <span class:hidden={gradient}>
+          {@html content}
+        </span>
+        <footer>
+          <Vote votes={upvote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
+           <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
+        </footer>
+    </article>
+
+  {/if}
+
+
+ 
 
   <style>
 
+    .action-button-text b{
+      background-color: transparent;
+    }
+
+    a{
+      text-decoration: none;
+      color: var(--text-color);
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+    }
+
   .hidden {
       position: relative;
+      max-height: calc(var(--fs-m) * 5);
+      overflow: hidden;
   }
 
   .circle{

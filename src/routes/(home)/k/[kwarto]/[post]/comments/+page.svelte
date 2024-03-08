@@ -16,6 +16,8 @@
     data = EJSON.deserialize(data)
     const {post} = data
 
+    export let neighborlist = EJSON.deserialize(data.neighborlist)
+
 </script>
 
 <Modal bind:showModal/>
@@ -30,17 +32,27 @@
 
     <Article data={post} hidden={false}/>
 
-    {#each post.parentComments as parentComment}
-    <article class="comments-label full-width">
-    <Comment comment={parentComment}/>
+    {#if post.parentComments == undefined}
+
+    <article class="full-width">
+    <h1>    No comments yet, be the first to comment! </h1>
     </article>
-{/each}
+
+
+    {:else}
+        <Filters/>
+        {#each post.parentComments as parentComment}
+        <article class="comments-label full-width">
+        <Comment comment={parentComment}/>
+        </article>
+    {/each}
+    {/if}
 
 
 </div>
 
 <div class="right">
-    <Right/>
+    <Right neighbors={neighborlist}/>
 </div>
 
 </div>

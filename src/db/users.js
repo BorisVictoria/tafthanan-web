@@ -1,6 +1,7 @@
 import client from '$db/mongo'
 import { ObjectId } from 'mongodb'
 
+
 export const users = client.db('tafthanan').collection('users')
 
 export const registerUser = async(data) => {
@@ -12,6 +13,17 @@ export const registerUser = async(data) => {
     
     return null
 
+}
+
+export const getAllUsers = async() => {
+    let result = await users.find({})
+    result = result.toArray()
+
+    if (result.length === 0) {
+        return null
+    }
+
+    return result
 }
 
 export const getUser = async(username) => {

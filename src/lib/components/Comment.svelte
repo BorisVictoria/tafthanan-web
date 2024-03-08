@@ -1,5 +1,6 @@
 <script>
     import Vote from '$lib/components/Vote.svelte'
+    import Dropdown from '$lib/components/Dropdown.svelte';
 
 
     export let comment;
@@ -80,7 +81,7 @@
         <div class="pfp-name-time">
            <img src={pfp}> <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small> 
         </div>
-           <div class="action-button pointer"> <img src="/assets/more-vert.svg"> </div>
+           <div class="options"> <Dropdown/> </div>
       </header>
 
     {@html message}

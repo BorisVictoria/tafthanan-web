@@ -12,6 +12,7 @@
     const {user, posts} = data
 
     let articles = 5;
+    export let neighborlist = EJSON.deserialize(data.neighborlist)
 
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
@@ -24,16 +25,24 @@
     </div>
     <div class="middle">
 
-    <ProfileHead/>
+    <ProfileHead data={user}/>
 
-    <Filters/>
+    
+    {#if posts.length === 0}
+    <article class="full-width">
+        User has not posted any content.
+    </article>
+
+    {:else}
+        <Filters/>
+    {/if}
     
     {#each posts as post}
         <Article data={post} hidden/>
     {/each}
     </div>
     <div class="right">
-        <Right/>
+        <Right neighbors={neighborlist}/>
     </div>
 </div>
 

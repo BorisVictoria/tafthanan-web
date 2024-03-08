@@ -35,10 +35,11 @@
         </form>
         {/if}
     </nav>
+    <div class="wrapper">
+        <hr class="hr-no-bottom-margin">
+    </div>
 </div>
-<div class="wrapper">
-    <hr class="hr-no-bottom-margin">
-</div>
+
 
 <slot>
 
@@ -52,18 +53,30 @@
         color: var(--primary-color);
     }
 
+    .sticky {
+        position: sticky;
+        top: 0;
+    }
+
+    slot {
+        padding-top: 100rem;
+    }
+
     .hr-no-bottom-margin{
         margin-bottom: 0;
+        margin-top: 0;
     }
 
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: var(--fs-m);
+        background-color: var(--background-color);
     }
 
     .navigation {
-        margin-top: var(--fs-m);
+        margin-top: 0;
     }
 
     .logo-container {

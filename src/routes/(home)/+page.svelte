@@ -18,6 +18,7 @@
     console.log(posts)
 
     export let neighborlist = EJSON.deserialize(data.neighborlist)
+    export let kwartolist = EJSON.deserialize(data.kwartolist)
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 
@@ -29,7 +30,7 @@
 <div class="wrapper main">
 
     <div class="left">
-        <Left />
+        <Left kwartos={kwartolist}/>
     </div>
     <div class="middle">
 

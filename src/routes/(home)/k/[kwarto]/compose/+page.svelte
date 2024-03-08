@@ -3,10 +3,13 @@
     import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import TextEditor from '$lib/components/TextEditor.svelte';
+    import {EJSON} from 'bson'
     
     let articles = 5;
 
     let showModal = false;
+
+    export let kwartolist = EJSON.deserialize(kwartolist)
 
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
@@ -15,7 +18,7 @@
 <div class="wrapper main">
 
     <div class="left">
-        <Left />
+        <Left kwartos={kwartolist}/>
     </div>
     <div class="middle">
 

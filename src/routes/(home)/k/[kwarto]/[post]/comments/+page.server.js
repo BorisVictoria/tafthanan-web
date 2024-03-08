@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { getPost } from "$db/posts";
 import { getParentComments } from "$db/comments"
 import { EJSON } from "bson";
-
+import { redirect } from "@sveltejs/kit";
 
 export const load = async({params}) => {
 
@@ -23,6 +23,6 @@ export const load = async({params}) => {
         data.post.parentComments = parentComments
     } 
 
-    return await EJSON.serialize(data)
+    return EJSON.serialize(data)
 
 }

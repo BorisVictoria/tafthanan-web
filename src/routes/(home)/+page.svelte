@@ -57,6 +57,13 @@
         position: sticky;
         top: 0;
     }
+
+    .fixed {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+    }
     
     .post-button img{
             height: var(--fs-l);

@@ -1,5 +1,7 @@
-export const load = async({locals}) => {
+export const load = async(event) => {
 
-    console.log(locals)
+    return {
+        user: event.locals.user
+    }
 
 }

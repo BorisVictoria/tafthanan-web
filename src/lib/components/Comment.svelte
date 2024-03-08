@@ -5,8 +5,6 @@
 
     export let comment;
 
-    
-
     const fetchChildrenComments = async(id) => {
 
         const stringify = id.toString()
@@ -24,10 +22,9 @@
 
     const vote = {
       isPost: false,
-      commentID: data._id,
-      voteCount: data.voteCount
+      commentID: comment._id,
+      voteCount: comment.voteCount
     }
-
 
     function timeAgo(datetime) {
   const now = new Date();

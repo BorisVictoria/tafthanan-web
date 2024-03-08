@@ -25,6 +25,7 @@
         voteCount: data.voteCount
       }
 
+      console.log(vote)
 
     // TODO: export this function to its separate .js file
   function timeAgo(datetime) {
@@ -121,7 +122,7 @@
           {@html content}
         </span>
         <footer>
-          <Vote votes={upvote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
+          <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>

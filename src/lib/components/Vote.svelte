@@ -1,8 +1,9 @@
 <script>
     export let data;
 
+	console.log(data)
 	let votes = data.voteCount
-	// console.log(data)
+	
 
 	const upUnclicked = "/assets/up-unclicked.svg";
 	const downUnclicked = "/assets/down-unclicked.svg";

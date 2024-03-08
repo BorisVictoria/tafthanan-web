@@ -28,7 +28,7 @@
 
 <div class="middle">
 
-    <Article hidden={false} comment_count={10} kwarto={"k\\all"} content={post.content}, upvote={post.voteCount} title={post.title} timePosted={post.datePosted}/>
+    <Article data={post} hidden={false}/>
 
     {#each post.parentComments as parentComment}
     <article class="comments-label full-width">

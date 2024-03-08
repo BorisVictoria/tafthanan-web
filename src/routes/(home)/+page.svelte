@@ -38,7 +38,7 @@
     {/if}
     
     {#each posts as post}
-        <Article data={post} {hidden}/>
+        <Article data={post} hidden/>
     {/each}
     </div>
     <div class="right">

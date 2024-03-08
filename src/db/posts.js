@@ -28,9 +28,33 @@ export const getAllPosts = async() => {
 
 }
 
+export const getPostsByKwarto = async(kwarto) => {
+
+    let result = await posts.find({kwarto: kwarto })
+    result = result.toArray()
+
+    if (result.length === 0) {
+        return null
+    }
+
+    return result
+}
+
+export const getPostsByUser = async(username) => {
+
+    let result = await posts.find({username: username})
+    result = result.toArray()
+
+    if (result.length === 0) {
+        return null
+    }
+
+    return result
+}
+ 
 export const createPost = async(data) => {
     
-    const result = await posts.insertOne({title: data.title, content: data.content, tags: null, username: data.username, kwarto: data.kwarto, voteCount: 0, datePosted: Date.now()}) 
+    const result = await posts.insertOne({title: data.title, content: data.content, tags: null, username: data.username, kwarto: data.kwarto, voteCount: 0, datePosted: Date.now(), isEdited: false}) 
 
     if (result) {
         return result

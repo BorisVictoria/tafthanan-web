@@ -5,6 +5,10 @@
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
     import KwartoHead from '$lib/components/KwartoHead.svelte'
+    import {EJSON} from 'bson'
+    export let data
+    data = EJSON.deserialize(data)
+    const {kwarto, posts} = data
     
     let articles = 5;
 
@@ -30,8 +34,8 @@
     <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
     {/if}
 
-    {#each {length: articles} as _, i}
-        <Article hidden/>
+    {#each posts as post}
+        <Article data={post} hidden/>
     {/each}
     </div>
     <div class="right">

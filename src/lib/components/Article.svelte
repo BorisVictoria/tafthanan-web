@@ -89,7 +89,7 @@
           <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
       <span class:hidden={gradient}>
-        {content}
+        {@html content}
       </span>
       <footer>
         <Vote votes={upvote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>

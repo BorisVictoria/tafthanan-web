@@ -1,24 +1,24 @@
 <script>
-
     import Vote from '$lib/components/Vote.svelte'
 
-    export let isEdited = false;
+
+    export let comment;
+
+    const fetchChildrenComments = async(id) => {
+
+        const stringify = id.toString()
+        console.log(stringify)
+        const response = await fetch(`/api/comments/${stringify}`)
+        const children = await response.json()
+        return children
+    }
 
     export let pfp = '/assets/login-poster.png';
     export let author = "n\\eggylord"
     export let time = '1d'
-    export let message = 'Ang galing galing mo!'
-    export let replies = [
-                        {author : 'n\\eggylord', time: '1d', message: 'Ang galing galing mo nga!', replies: [
-                            {author : 'n\\eggylord', time: '1d', message: 'NESTED!!!', replies: [
-                                {author : 'n\\eggylord', time: '1d', message: 'Can\'t believe it!!!', replies: [], votes: 15},
-                                {author : 'n\\eggylord', time: '1d', message: 'Okay na muna \'to', replies: [], votes: 15}
-
-                            ], votes: 15}
-                        ], votes: 15},
-                        {author : 'n\\eggylord', time: '1d', message: 'Ang galing galing mo nga!', replies: [], votes: 15},
-                    ]
-    export let votes = 15
+    let message = comment.content;
+    let votes = comment.voteCount;
+    let isEdited = comment.isEdited;
 </script>
 
 <article class="full-width reply-container">
@@ -35,11 +35,15 @@
          <div class="action-button"> <img src="/assets/share-icon.svg"></div>
     </footer>
 
+
+    {#await fetchChildrenComments(comment._id)}
+    {:then children}
     <div class="replies-holder">
-    {#each replies as reply}
-        <svelte:self author={reply.author} time={reply.time} replies={reply.replies} message={reply.message} votes={reply.votes}/>
+    {#each children as child}
+        <svelte:self comment={child}/>
     {/each}
     </div>
+    {/await}
    
 </article>
 

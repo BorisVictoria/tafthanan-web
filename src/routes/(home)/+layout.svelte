@@ -3,6 +3,8 @@
     import Search from '$lib/components/Search.svelte'
     import Button from '$lib/components/Button.svelte'
 
+    import {page} from '$app/stores'
+
     let width = 0;
 
 </script>
@@ -20,11 +22,18 @@
         {#if width > 640}
             <Search/>
         {/if}
-        <a href="/">
+
+        {#if !$page.data.user}
+        <a href="/login">
             <Button name="login">
                 Sign in
             </Button>
         </a>
+        {:else}
+        <form action="/logout" method="POST">
+            <Button name="logout" type="submit">Sign out</Button>
+        </form>
+        {/if}
     </nav>
 </div>
 <div class="wrapper">

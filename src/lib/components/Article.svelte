@@ -27,7 +27,7 @@
 
   </script>
 
-  <article class="pointer" 
+  <article class="full-width pointer" 
     on:mouseenter={() => {
       if (hidden) gradient = false}} 
     on:mouseleave={() => {

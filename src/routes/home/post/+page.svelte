@@ -1,23 +1,18 @@
 <script>
-
+    import Comment from '$lib/components/Comment.svelte'
     import Article from '$lib/components/Article.svelte'
-    import Filters from '$lib/components/Filters.svelte'
-    import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
-    
-    let articles = 5;
+    import Filters from '$lib/components/Filters.svelte'
+    import Modal from '$lib/components/Modal.svelte'
+    import Back from '$lib/components/Back.svelte'
 
+    let replies = [];
     let showModal = false;
-    let width = 0;
+</script>
 
-    //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
-
-</script> 
 
 <Modal bind:showModal/>
-
-<svelte:window bind:innerWidth={width}/>
 
 <div class="wrapper main">
 
@@ -26,43 +21,48 @@
     </div>
     <div class="middle">
 
-    <Filters/>
+        <article class="back-button-holder full-width">
+            <Back --width="calc(var(--fs-xl) * 2)"/>
+            <div><h1>Post</h1></div>
+        </article>
 
-    {#if width < 768}
-    <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
-    {/if}
-    
-    {#each {length: articles} as _, i}
-        <Article hidden/>
-    {/each}
+        
+
+        <Article hidden={false}/>
+
+        <article class="comments-label full-width">
+            <h1>Comments</h1>
+        </article>
+
+        <Filters/>
+
+        
+
+        <Comment/>
+        <Comment/>
+
     </div>
     <div class="right">
-        <button class="action-button pointer post-button full-width"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
-            <Right/>
+        <Right/>
     </div>
 </div>
 
 
+
 <style>
 
-    .right{
-        height: 80vh;
-        justify-content: center;
+    .comments-label{
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+    }
+
+    .back-button-holder{
+        height: auto;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
         align-items: center;
-        position: sticky;
-        top: 0;
     }
-    
-    .post-button img{
-            height: var(--fs-l);
-            width: var(--fs-l);
-        }
-
-    .post-button{
-            font-size: var(--fs-m);
-            margin-bottom: var(--fs-m);
-    }
-
 
 
     @media (min-width: 0px) {
@@ -107,12 +107,9 @@
 
         .left {
             display: flex;
-            height: 100vh;
             flex-direction: column;
             align-items: center;
             background-color: var(--background-color);
-            position: sticky;
-            top: 0;
         }
         
     }

@@ -2,20 +2,17 @@
 
     import Article from '$lib/components/Article.svelte'
     import Filters from '$lib/components/Filters.svelte'
-    import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
+    import KwartoHead from '$lib/components/KwartoHead.svelte'
     
     let articles = 5;
 
-    let showModal = false;
     let width = 0;
 
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 
-
-<Modal bind:showModal/>
 
 <svelte:window bind:innerWidth={width}/>
 
@@ -26,12 +23,13 @@
     </div>
     <div class="middle">
 
-    <Filters/>
+    <KwartoHead/>
 
+    <Filters/>
     {#if width < 768}
     <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
     {/if}
-    
+
     {#each {length: articles} as _, i}
         <Article hidden/>
     {/each}
@@ -45,24 +43,19 @@
 
 <style>
 
-    .right{
-        height: 80vh;
-        justify-content: center;
-        align-items: center;
-        position: sticky;
-        top: 0;
-    }
-    
-    .post-button img{
-            height: var(--fs-l);
-            width: var(--fs-l);
-        }
-
     .post-button{
-            font-size: var(--fs-m);
-            margin-bottom: var(--fs-m);
+        font-size: var(--fs-m);
+        margin-bottom: var(--fs-m);
     }
 
+    .right{
+        padding-top: calc(var(--fs-xxl) * 1.75);
+    }
+
+    .post-button img{
+        height: var(--fs-l);
+        width: var(--fs-l);
+    }
 
 
     @media (min-width: 0px) {
@@ -107,12 +100,9 @@
 
         .left {
             display: flex;
-            height: 100vh;
             flex-direction: column;
             align-items: center;
             background-color: var(--background-color);
-            position: sticky;
-            top: 0;
         }
         
     }

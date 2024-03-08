@@ -62,7 +62,15 @@ article {
     border-radius: var(--fs-l);
     border-color: lightgray;
 
+    user-select: none;
+
     height: auto;
+  }
+
+  blockquote{
+    margin-left: 1em; 
+    padding-left: 1em;
+    border-left: solid lightgray 3px;
   }
 
   .options{
@@ -81,7 +89,7 @@ article {
     height: calc(var(--fs-m) * 2);
   }
 
-  .action-button > b{
+  .action-button > *{
     background-color: inherit;
   }
 

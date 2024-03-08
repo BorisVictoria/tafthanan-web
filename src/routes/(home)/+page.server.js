@@ -24,6 +24,10 @@ export const actions = {
     // editPost: async(event) => {
     //     // edit using _id of post
     // }
+    /*
+    editPost: async(event) => {
+        // edit using _id of post
+    }
 
     // deletePost: async(event) => {
     //     // delete using _id of post
@@ -40,4 +44,8 @@ export const actions = {
     // deleteComment: async(event) => {
     //     // delete using _id of comment
     // }
+    deleteComment: async(event) => {
+        // delete using _id of comment
+    }
+    */
 }

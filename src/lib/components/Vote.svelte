@@ -1,8 +1,10 @@
 <script>
+    import { goto } from "$app/navigation";
     export let data;
 
 	// console.log(data)
 	let votes = data.voteCount
+
 	
 
 	const upUnclicked = "/assets/up-unclicked.svg";
@@ -58,28 +60,30 @@
 	}
 
 	let vote
-	let success
 
 	const doVote = async() => {
-
 		if (data.isPost) {
 			const stringify = data.postID.toString()
-			success = await fetch(`/api/posts/votes/${stringify}`, {
+			const response = await fetch(`/api/posts/votes/${stringify}`, {
 				method: "POST",
 				body: JSON.stringify(data)
 			})
-			if (success === null) {
-				redirect(303, "/login")
+			const success = await response.json()
+			if (success == null) {
+				goto("/login")
 			}
+
 		} else {
 			const stringify = data.commentID.toString()
-			success = await fetch(`/api/comments/votes/${stringify}`, {
+			const response = await fetch(`/api/comments/votes/${stringify}`, {
 				method: "POST",
 				body: JSON.stringify(data)
 			})
-			if (success === null) {
-				redirect(303, "/login")
+			const success = await response.json()
+			if (success == null) {
+				goto("/login")
 			}
+
 		}
 	}
 

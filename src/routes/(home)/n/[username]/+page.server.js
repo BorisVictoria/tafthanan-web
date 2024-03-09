@@ -12,7 +12,7 @@ export const load = async({params}) => {
 
     const data = {}
 
-    data.user = user
+    data.userProfile = user
     data.posts = await getPostsByUser(user.username)
 
     return EJSON.serialize(data)

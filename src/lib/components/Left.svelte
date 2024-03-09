@@ -4,6 +4,8 @@
     export let kwartos
     export let icons = '/assets/logo.svg'
 
+    import {page} from '$app/stores'
+
     // console.log('kwartos')
     // console.log(kwartos)
 
@@ -24,14 +26,18 @@
                 </div>
 
             {#each kwartos as kwarto}
-             <span> <img src={icons}> <p><a data-sveltekit-reload href={"/k/"+kwarto.name}> <u> {kwarto.name} </u> </a> </p> </span>
+            <span> <img src={icons} alt="kwarto icon"> <p><a data-sveltekit-reload href={"/k/"+kwarto.name}> <u> {kwarto.name} </u> </a> </p> </span>
             {/each}
 
         </div>
     </div>
-    <div class="top-border settings-holder">
-        <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Settings</BarButton>
-    </div>
+    {#if $page.data.user}
+        <a href={"/n/"+$page.data.user.username+"/settings"} data-sveltekit-reload>
+            <div class="top-border settings-holder">
+                <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Settings</BarButton>
+            </div>
+        </a>
+    {/if}
 </div>
 
 <style>
@@ -73,9 +79,9 @@
         height: calc(var(--fs-m) * 2);
     }
 
-    .kwarto-list-holder > p{
+    /* .kwarto-list-holder > p{
         line-height: 2.3;
-    }
+    } */
 
     .kwarto-list-holder a{
         transition: background-color 0.3s ease;

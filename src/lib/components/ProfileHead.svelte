@@ -4,8 +4,9 @@
 
     export let data;
 
-    export let pfp = "/assets/login-poster.png";
     let username = "n\\" + data.username;
+
+    export let pfp = data.pfp;
 
     export let name = data.username;
 

@@ -9,7 +9,7 @@
     import {EJSON} from 'bson'
     export let data;
     data = EJSON.deserialize(data)
-    const {user, posts} = data
+    const {userProfile, posts} = data
 
     let articles = 5;
     export let neighborlist = EJSON.deserialize(data.neighborlist)
@@ -26,7 +26,7 @@
     </div>
     <div class="middle">
 
-    <ProfileHead data={user}/>
+    <ProfileHead data={userProfile}/>
 
     
     {#if posts.length === 0}

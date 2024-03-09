@@ -4,8 +4,8 @@
     export let kwartos
     export let icons = '/assets/logo.svg'
 
-    console.log('kwartos')
-    console.log(kwartos)
+    // console.log('kwartos')
+    // console.log(kwartos)
 
 </script>
 

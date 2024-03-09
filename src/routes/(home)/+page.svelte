@@ -15,7 +15,7 @@
     export let data
     data = EJSON.deserialize(data)
     const {posts} = data
-    console.log(posts)
+    //console.log(posts)
 
     export let neighborlist = EJSON.deserialize(data.neighborlist)
     export let kwartolist = EJSON.deserialize(data.kwartolist)

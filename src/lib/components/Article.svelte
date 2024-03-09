@@ -25,7 +25,7 @@
         voteCount: data.voteCount
       }
 
-      console.log(vote)
+      // console.log(vote)
 
     // TODO: export this function to its separate .js file
   function timeAgo(datetime) {

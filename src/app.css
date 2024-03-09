@@ -16,8 +16,16 @@
     --fs-l: 1rem;
     --fs-m: 0.75rem;
 
-}
+    /* 
+        // TODO: UI REDESIGN
+    
+        --primary-color:
+        --secondary-color
+        --accent-color
+        --neutral-color
 
+    */
+}
 
 /*make element take up width of whole parent div*/
 .full-width{
@@ -33,23 +41,23 @@ article {
     border-radius: 0.5rem;
     background: var(--background-color);
     max-width: 90%;
-  }
+}
 
-  article > header {
+article > header {
     border-bottom: 1px solid lightgray;
     padding: 0 0 var(--fs-m) 0;
-  }
+}
 
-  article > footer {
+article > footer {
     border-top: 1px solid lightgray;
     padding: var(--fs-m) 0 0 0; 
     display: flex;
     justify-content: left;
     align-items: center;
     gap: calc(var(--fs-m) * 1.75);
-  }
+}
 
-  .action-button{
+.action-button { 
     display:flex;
     justify-content: center;
     align-items: center;
@@ -65,15 +73,15 @@ article {
     user-select: none;
 
     height: auto;
-  }
+}
 
-  blockquote{
+blockquote {
     margin-left: 1em; 
     padding-left: 1em;
     border-left: solid lightgray 3px;
-  }
+}
 
-  .options{
+.options {
     width: auto;
     height: auto;
     padding-left:  0;
@@ -83,30 +91,30 @@ article {
     align-self: right;
     margin-left: auto;
     overflow: auto;
-  }
+}
 
-  .options > img{
+.options > img {
     height: calc(var(--fs-m) * 2);
-  }
+}
 
-  .action-button > *{
+.action-button > * {
     background-color: inherit;
-  }
+}
 
-  .action-button:hover{
+.action-button:hover {
     border-color: var(--accent-color);
     background-color: lightgray;
-  }
+}
 
-  .action-button > img{
+.action-button > img {
     width: 60%;
     background-color: inherit;
-  }
+}
 
-  .action-button-text{
+.action-button-text {
     text-align: center;
     background-color: inherit;
-  }
+}
 
 hr {
     margin-top: var(--fs-m);
@@ -145,6 +153,7 @@ button {
 h1 {
     font-size: var(--fs-xl);
 }
+
 /* Responsive Breakpoints */
 
 .wrapper {

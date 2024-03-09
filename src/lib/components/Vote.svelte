@@ -1,7 +1,7 @@
 <script>
     export let data;
 
-	console.log(data)
+	// console.log(data)
 	let votes = data.voteCount
 	
 
@@ -61,18 +61,25 @@
 	let success
 
 	const doVote = async() => {
+
 		if (data.isPost) {
 			const stringify = data.postID.toString()
 			success = await fetch(`/api/posts/votes/${stringify}`, {
 				method: "POST",
 				body: JSON.stringify(data)
 			})
+			if (success === null) {
+				redirect(303, "/login")
+			}
 		} else {
 			const stringify = data.commentID.toString()
 			success = await fetch(`/api/comments/votes/${stringify}`, {
 				method: "POST",
 				body: JSON.stringify(data)
 			})
+			if (success === null) {
+				redirect(303, "/login")
+			}
 		}
 	}
 

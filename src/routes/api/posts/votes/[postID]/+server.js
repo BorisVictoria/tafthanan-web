@@ -3,6 +3,13 @@ import { getPostVote } from "$db/postVotes"
 import {json} from "@sveltejs/kit"
 
 export const GET = async({params, locals}) => {
+
+    if (locals.user == null) {
+        return json(null)
+    }
+
+    console.log(locals.user)
+
     const data = {
         userID: locals.user.userID,
         postID: params.postID,
@@ -17,6 +24,11 @@ export const GET = async({params, locals}) => {
 }
 
 export const POST = async({request, locals}) => {
+
+    if (locals.user == null) {
+        return json(null)
+    }
+    
     const data = await request.json()
     data.userID = locals.user.userID
     // data.voteCount

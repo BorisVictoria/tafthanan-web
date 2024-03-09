@@ -11,9 +11,11 @@
 
 
 <div class="left-wrapper">
-    <div class="no-border home-button-holder">
-        <BarButton tag='big' img="/assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
-    </div>
+    <a href="/" data-sveltekit-reload>
+        <div class="no-border home-button-holder">
+            <BarButton tag='big' img="/assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
+        </div>
+    </a>
     <div class="top-border kwarto-holder">
         
         <div class="kwarto-list-holder">
@@ -30,7 +32,6 @@
     <div class="top-border settings-holder">
         <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Settings</BarButton>
     </div>
-
 </div>
 
 <style>
@@ -129,12 +130,12 @@
     }
 
     .no-border{
-        
         align-items: center;
         justify-content: baseline;
         display: flex;
         padding-left: var(--fs-l);
         padding-top: var(--fs-l);
+        padding-bottom: var(--fs-l);
     }
 
     .home-button-holder{

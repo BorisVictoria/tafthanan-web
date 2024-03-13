@@ -4,7 +4,7 @@
 
     export let data;
 
-    export let pfp = "/assets/login-poster.png";
+    export let pfp = data.pfp;
     let kwartoname = 'k\\' + data.name;
 
     export let bio = data.bio

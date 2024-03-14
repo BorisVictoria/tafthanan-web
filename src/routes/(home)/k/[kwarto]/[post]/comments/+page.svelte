@@ -12,16 +12,20 @@
     let replies = [];
     let showModal = false;
 
+
     export let data
     data = EJSON.deserialize(data)
     const {post} = data
+
+    export let postID = post._id
+    export let replyingTo = null
 
     export let neighborlist = EJSON.deserialize(data.neighborlist)
     export let kwartolist = EJSON.deserialize(data.kwartolist)
 
 </script>
 
-<Modal bind:showModal/>
+<Modal bind:showModal replyingTo={replyingTo} postID={postID}/>
 
 <div class="wrapper main">
 
@@ -44,7 +48,7 @@
         <Filters/>
         {#each post.parentComments as parentComment}
         <article class="comments-label full-width">
-        <Comment comment={parentComment}/>
+        <Comment comment={parentComment} bind:showModal bind:parentComment bind:replyingTo/>
         </article>
     {/each}
     {/if}

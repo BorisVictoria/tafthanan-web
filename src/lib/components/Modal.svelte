@@ -5,6 +5,10 @@
 
     let dialog;
 
+	export let postID
+	export let comment = true;
+
+	export let replyingTo
    
 
 	$: if (dialog && showModal) dialog.showModal();
@@ -18,7 +22,7 @@
 	on:close={() => (showModal = false)}
 >
 
-    <TextEditor backFunction={() => dialog.close()}/>
+    <TextEditor backFunction={() => dialog.close()} postID={postID} replyingTo={replyingTo} comment={comment}/>
 
 
 </dialog>

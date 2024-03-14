@@ -2,9 +2,13 @@
     import Vote from '$lib/components/Vote.svelte'
     import Dropdown from '$lib/components/Dropdown.svelte';
 
-
+    export let replyingTo
     export let comment;
     console.log(comment)
+
+    function reply(){
+      replyingTo = comment._id
+    }
 
     const fetchChildrenComments = async(id) => {
 
@@ -26,7 +30,7 @@
     let message = comment.content;
     let votes = comment.voteCount;
     let isEdited = comment.isEdited;
-    let time = timeAgo(comment.timePosted);
+    let time = timeAgo(comment.datePosted);
 
     const vote = {
       isPost: false,
@@ -95,7 +99,7 @@
 
     {@html message}
     <footer>
-        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> </div>
+        <Vote data={vote}/> <div class="action-button" on:click={reply}> <img src="/assets/comment-icon.svg" alt="reply button"> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"></div>
     </footer>
 

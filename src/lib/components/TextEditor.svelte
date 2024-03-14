@@ -5,7 +5,11 @@
 
     export let backFunction;
     export let kwarto;
-    export let replyTo;
+    export let replyingTo;
+    export let postID;
+
+    export let comment = false;
+
     let show='none'
 
     var btn = ''
@@ -83,6 +87,12 @@
     })
 </script>
 <form method=POST action="?/submit">
+
+    {#if comment}
+    <textarea disabled name="replyingTo" >{replyingTo}</textarea>
+    <textarea diabled name="postID">{postID}</textarea>
+    {/if}
+
 <div class="richtext-wrapper">
     <div class="exit-submit-wrapper">
         {#if kwarto}
@@ -91,9 +101,6 @@
         <span>
             {#if kwarto}
             <strong> Write a post to {"k\\"+kwarto} </strong>
-            {/if}
-            {#if replyTo}
-            <strong> Reply to {replyTo}</strong>
             {/if}
         </span>
 

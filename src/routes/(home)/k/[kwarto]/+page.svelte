@@ -15,6 +15,12 @@
 
     let width = 0;
 
+    let postlink = '/login'
+    let isLoggedin = !!(data.user)
+    if(isLoggedin){
+        postlink = '/k/'+kwarto.name+ '/compose'
+    }
+
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 
@@ -31,7 +37,7 @@
     <KwartoHead data={kwarto}/>
 
     {#if width < 768}
-    <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
+    <a class="action-button pointer post-button" data-sveltekit-reload><img src="/assets/add-black.svg"><h1>Create Post</h1></a>
     {/if}
 
     {#if posts.length === 0}
@@ -48,13 +54,18 @@
     {/each}
     </div>
     <div class="right">
-        <button class="action-button pointer post-button full-width"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
+        <a class="action-button pointer post-button full-width" href={postlink}><img alt="add icon" src="/assets/add-black.svg"><h1>Create Post</h1></a>
             <Right neighbors={neighborlist}/>
     </div>
 </div>
 
 
 <style>
+
+    a{
+        text-decoration: none;
+        color: var(--font-color)
+    }
 
     .post-button{
         font-size: var(--fs-m);

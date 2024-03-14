@@ -4,7 +4,7 @@
     import Back from '$lib/components/Back.svelte'
 
     export let backFunction;
-    export let kwarto = "k\\all";
+    export let kwarto;
     export let replyTo;
     let show='none'
 
@@ -85,10 +85,12 @@
 <form method=POST action="?/submit">
 <div class="richtext-wrapper">
     <div class="exit-submit-wrapper">
-        <Back --width="calc(var(--fs-l) * 1.5)" on:click={backFunction}/>
+        {#if kwarto}
+        <a href={"/k/"+kwarto}><Back --width="calc(var(--fs-l) * 1.5)"/></a>
+        {/if}
         <span>
             {#if kwarto}
-            <strong> Write a post to {kwarto} </strong>
+            <strong> Write a post to {"k\\"+kwarto} </strong>
             {/if}
             {#if replyTo}
             <strong> Reply to {replyTo}</strong>
@@ -149,7 +151,7 @@
 
 </div>
 <div id="url-prompt-holder" style="display:{show}">
-    <input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" id="submitUrl"> <strong> Submit </strong> </button>
+    <input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" type="button" id="submitUrl"> <strong> Submit </strong> </button>
 </div>
 
 </div>

@@ -4,14 +4,12 @@
     import Left from '$lib/components/Left.svelte'
     import TextEditor from '$lib/components/TextEditor.svelte';
     import {EJSON} from 'bson'
-    
-    let articles = 5;
 
-    let showModal = false;
+    export let data
 
-    export let kwartolist = EJSON.deserialize(kwartolist)
 
-    //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
+    export let kwartolist = EJSON.deserialize(data.kwartolist)
+    export let kwartoName = data.kwarto.name
 
 </script> 
 
@@ -27,7 +25,7 @@
         </article>
 
         <article class="full-width">
-        <TextEditor/>
+        <TextEditor kwarto={kwartoName}/>
         </article>
 
     </div>

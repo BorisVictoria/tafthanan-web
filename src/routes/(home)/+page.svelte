@@ -21,6 +21,7 @@
     export let kwartolist = EJSON.deserialize(data.kwartolist)
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
+
 </script> 
 
 <Modal bind:showModal/>

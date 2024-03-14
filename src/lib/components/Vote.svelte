@@ -106,8 +106,10 @@
 				ud = 0
 			} else if (vote.vote === true) {
 				ud = 1
+				uStatus = upClicked
 			} else {
 				ud = -1
+				dStatus = downClicked
 			}
 		}
 

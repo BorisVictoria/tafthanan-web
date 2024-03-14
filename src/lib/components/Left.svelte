@@ -4,7 +4,11 @@
     export let kwartos
     export let icons = '/assets/logo.svg'
 
-    export let username = "n\\"+$page.data.user.username
+    export let username
+    
+    if($page.data.user){
+        username = "n\\"+$page.data.user.username
+    }
 
     import {page} from '$app/stores'
 

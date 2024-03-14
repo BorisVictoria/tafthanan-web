@@ -146,6 +146,10 @@
 
   <style>
 
+    header > a{
+      display: inline
+    }
+
 
     .action-button-text b{
       background-color: transparent;

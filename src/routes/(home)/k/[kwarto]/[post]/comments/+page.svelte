@@ -37,7 +37,7 @@
 
     <article class="full-width heading">
 
-       <a href={"/k/"+post.kwarto}><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
+       <a href={"/k/"+post.kwarto} data-sveltekit-reload><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
 
     </article>
 

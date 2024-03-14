@@ -86,9 +86,9 @@
       <header>
         {#await fetchUserPfp(author)}
         {:then pfp}
-        <div class="pfp-name-time">
+        <a class="pfp-name-time" href={"/n/"+author}>
            <img src={pfp.pfp}> <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small> 
-        </div>
+        </a>
            <div class="options"> <Dropdown/> </div>
         {/await}
       </header>
@@ -115,6 +115,12 @@
 </article>
 
 <style>
+
+    .pfp-name-time {
+      text-decoration: none;
+      color: black;
+      display: inline;
+    }
 
     article{
         gap: calc(var(--fs-m) * 0.8);

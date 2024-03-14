@@ -50,7 +50,8 @@ export const getUserByID = async(id) => {
 export const getToken = async(token) => {
     
     const result = await users.findOne({token: token})
-    if (result.tokenExpiry > Date.now()) {
+
+    if (result?.tokenExpiry > Date.now()) {
         return result
     }
 

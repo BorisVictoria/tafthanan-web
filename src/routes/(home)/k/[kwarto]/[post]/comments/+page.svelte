@@ -35,6 +35,12 @@
 
 <div class="middle">
 
+    <article class="full-width heading">
+
+       <a href={"/k/"+post.kwarto}><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
+
+    </article>
+
     <Article data={post} hidden={false} bind:showModal/>
 
     {#if post.parentComments == undefined}
@@ -64,6 +70,13 @@
 
 
 <style>
+
+.heading{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
 
 .comments-label{
         padding-top: 0.2em;

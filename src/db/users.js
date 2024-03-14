@@ -36,6 +36,16 @@ export const getUser = async(username) => {
     return null
 }
 
+export const getPfpByUsername = async(username) => {
+    let result = await users.findOne({username: username})
+    result = {pfp : result.pfp}
+    if (result) {
+        return result
+    }
+
+    return null
+}
+
 export const getUserByID = async(id) => {
 
     const objID = new ObjectId(id)

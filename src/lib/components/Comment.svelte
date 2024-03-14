@@ -14,8 +14,15 @@
         return children
     }
 
-    export let pfp = '/assets/login-poster.png';
-    export let author = "n\\eggylord"
+    const fetchUserPfp = async(author) => {
+      const response = await fetch(`/api/comments/pfp/${author}`)
+      const pfp = await response.json()
+      return pfp
+    }
+
+    export let showModal
+
+    export let author = comment.author
     let message = comment.content;
     let votes = comment.voteCount;
     let isEdited = comment.isEdited;
@@ -72,14 +79,18 @@
   }
 }
 
-</script>
 
+
+</script>
 <article class="full-width reply-container">
       <header>
+        {#await fetchUserPfp(author)}
+        {:then pfp}
         <div class="pfp-name-time">
-           <img src={pfp}> <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small> 
+           <img src={pfp.pfp}> <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small> 
         </div>
            <div class="options"> <Dropdown/> </div>
+        {/await}
       </header>
 
     {@html message}
@@ -91,13 +102,14 @@
 
     {#await fetchChildrenComments(comment._id)}
     {:then children}
-    <div class="replies-holder">
+    
     {#if children !== null}
+    <div class="replies-holder">
     {#each children as child}
         <svelte:self comment={child}/>
     {/each}
-    {/if}
     </div>
+    {/if}
     {/await}
    
 </article>

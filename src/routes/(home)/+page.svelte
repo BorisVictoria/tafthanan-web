@@ -46,13 +46,18 @@
     {/each}
     </div>
     <div class="right">
-        <button class="action-button pointer post-button full-width"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
+        <a class="action-button pointer post-button full-width" href="k/tafthanan/compose"><img src="/assets/add-black.svg"><h1>Create Post</h1></a>
             <Right neighbors={neighborlist}/>
     </div>
 </div>
 
 
 <style>
+
+    a{
+        text-decoration: none;
+        color: var(--font-color)
+    }
 
     .right{
         height: 80vh;

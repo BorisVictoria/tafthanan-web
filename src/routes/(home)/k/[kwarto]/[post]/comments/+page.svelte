@@ -31,7 +31,7 @@
 
 <div class="middle">
 
-    <Article data={post} hidden={false}/>
+    <Article data={post} hidden={false} bind:showModal/>
 
     {#if post.parentComments == undefined}
 

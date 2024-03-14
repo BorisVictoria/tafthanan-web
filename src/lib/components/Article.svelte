@@ -19,6 +19,8 @@
       let title = data.title;
       let content = data.content;
 
+      export let showModal
+
       const vote = {
         isPost: true,
         postID: data._id,
@@ -132,7 +134,7 @@
           {@html content}
         </span>
         <footer>
-          <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
+          <Vote data={vote}/> <div class="action-button" on:click={() => {showModal=true}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>

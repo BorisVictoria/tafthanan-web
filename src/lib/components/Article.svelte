@@ -144,6 +144,7 @@
 
   <style>
 
+
     .action-button-text b{
       background-color: transparent;
     }
@@ -153,7 +154,6 @@
       color: var(--text-color);
       background-color: transparent;
       display: flex;
-      display: inline;
     }
 
   .hidden {
@@ -186,6 +186,7 @@
     top: 50%;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75) 30%);
     pointer-events: none;
+    overflow: hidden;
     z-index: 1;
   }
 

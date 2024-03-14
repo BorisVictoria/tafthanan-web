@@ -83,13 +83,17 @@
       if (hidden) gradient = hidden}}>
       <header>
           <div class="logo-kwarto-holder">
-          <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
+          <a href={"/k/"+kwarto} class="logo-kwarto-holder">
+            <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
+          </a>
 
           <div class="options"> <Dropdown/> </div>
 
           </div>
 
-          <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
+          <a href={'/k/'+kwarto+'/'+data._id+'/comments'}><h1>{title}</h1></a><a href={"/n/"+author}><i>— {"n\\"+author}</i></a>
+            
+            <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
       <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
       <span class:hidden={gradient}>
@@ -97,7 +101,7 @@
       </span>
       </a>
       <footer>
-        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
+        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
@@ -109,20 +113,26 @@
       on:mouseleave={() => {
         if (hidden) gradient = hidden}}>
         <header>
+
             <div class="logo-kwarto-holder">
-            <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
-  
+            
+            
+            <a href={"/k/"+kwarto} class="logo-kwarto-holder">
+              <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
+            </a>
             <div class="options"> <Dropdown/> </div>
   
             </div>
   
-            <h1>{title}</h1> — <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small>
+            <a href={'/k/'+kwarto+'/'+data._id+'/comments'}><h1>{title}</h1></a><a href={"/n/"+author}><i>— {"n\\"+author}</i></a>
+            
+            <small>{time} {#if isEdited} (edited) {/if}</small>
         </header>
         <span class:hidden={gradient}>
           {@html content}
         </span>
         <footer>
-          <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <div class="action-button-text"> <b>Comment</b> </div> </div>
+          <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>
@@ -143,7 +153,7 @@
       color: var(--text-color);
       background-color: transparent;
       display: flex;
-      justify-content: center;
+      display: inline;
     }
 
   .hidden {

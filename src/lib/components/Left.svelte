@@ -4,6 +4,8 @@
     export let kwartos
     export let icons = '/assets/logo.svg'
 
+    export let username = "n\\"+$page.data.user.username
+
     import {page} from '$app/stores'
 
     // console.log('kwartos')
@@ -34,7 +36,7 @@
     {#if $page.data.user}
         <a href={"/n/"+$page.data.user.username+"/settings"} data-sveltekit-reload>
             <div class="top-border settings-holder">
-                <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Settings</BarButton>
+                <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">{username}</BarButton>
             </div>
         </a>
     {/if}

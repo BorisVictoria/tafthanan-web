@@ -19,8 +19,6 @@ export const load = async(event) => {
 
     }
 
-    console.log(kwarto)
-
     const posts = await getPostsByKwarto(event.params.kwarto)
     const data = {}
 

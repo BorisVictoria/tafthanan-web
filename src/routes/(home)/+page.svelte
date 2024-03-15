@@ -7,18 +7,15 @@
     import Right from '$lib/components/Right.svelte'
     import {EJSON} from 'bson'
     
-    let articles = 5;
-
     let showModal = false;
     let width = 0;
 
     export let data
-    data = EJSON.deserialize(data)
-    const {posts} = data
-    //console.log(posts)
+    $: data = EJSON.deserialize(data)
+    $: ({posts} = data)
 
-    export let neighborlist = EJSON.deserialize(data.neighborlist)
-    export let kwartolist = EJSON.deserialize(data.kwartolist)
+    $: neighborlist = data.neighborlist
+    $: kwartolist = data.kwartolist
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 
@@ -30,24 +27,33 @@
 
 <div class="wrapper main">
 
+    <!-- Left -->
     <div class="left">
-        <Left kwartos={kwartolist}/>
+        {#key kwartolist}
+            <Left kwartos={kwartolist}/>
+        {/key}
     </div>
+
+    <!-- Middle -->
     <div class="middle">
+        <Filters/>
+        {#if width < 768}
+            <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
+        {/if}
 
-    <Filters/>
-
-    {#if width < 768}
-    <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
-    {/if}
-    
-    {#each posts as post}
-        <Article data={post} hidden/>
-    {/each}
+        {#each posts as post (post.datePosted)}
+            <Article data={post} hidden/>
+        {/each}
     </div>
+
+    <!-- Right -->
     <div class="right">
-        <a class="action-button pointer post-button full-width" href="k/tafthanan/compose"><img src="/assets/add-black.svg"><h1>Create Post</h1></a>
+        <a class="action-button pointer post-button full-width" href="k/tafthanan/compose">
+            <img src="/assets/add-black.svg"><h1>Create Post</h1>
+        </a>
+        {#key neighborlist}
             <Right neighbors={neighborlist}/>
+        {/key}
     </div>
 </div>
 

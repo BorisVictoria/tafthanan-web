@@ -1,20 +1,15 @@
 <script>
 
     import Button from '$lib/components/Button.svelte'
-
+    
     export let data;
 
     let username = "n\\" + data.username;
-
-    export let pfp = data.pfp;
-
-    export let name = data.username;
-
-    export let bio = data.bio;
+    let pfp = data.pfp;
+    let name = data.username;
+    let bio = data.bio;
 
 </script>
-
-
 
 <article class="full-width profile-header-wrapper">
 
@@ -28,20 +23,16 @@
             <p>{username}</p>
             </div>
         </div>
-
         <div class="follow-button-holder">
             <Button --url='url(/assets/add.svg)'> Follow </Button>
         </div>
-
     </div>
-
 
     <div class="bio-holder">
         {@html bio}
     </div>
+
 </article>
-
-
 
 <style>
     .profile-header-wrapper{
@@ -49,8 +40,6 @@
         flex-direction: column;
         display: flex;
     }
-
-
     
     .name-username-wrapper p{
         color: var(--text-contrast-color);

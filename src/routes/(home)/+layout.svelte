@@ -13,13 +13,13 @@
 
 <div class="wrapper navigation">
     <nav>
-        <a href="/" data-sveltekit-reload>
-        <div class="logo-container"> 
-            <img src="/assets/logo.svg" alt="tafthanan logo">
-            {#if width > 475}
-                <h1>tafthanan</h1>
-            {/if}
-        </div>
+        <a href="/">
+            <div class="logo-container"> 
+                <img src="/assets/logo.svg" alt="tafthanan logo">
+                {#if width > 475}
+                    <h1>tafthanan</h1>
+                {/if}
+            </div>
         </a>
         {#if width > 640}
             <Search/>
@@ -41,7 +41,6 @@
         <hr class="hr-no-bottom-margin">
     </div>
 </div>
-
 
 <slot>
 

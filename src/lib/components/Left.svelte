@@ -19,7 +19,7 @@
 
 
 <div class="left-wrapper">
-    <a href="/" data-sveltekit-reload>
+    <a href="/">
         <div class="no-border home-button-holder">
             <BarButton tag='big' img="/assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
         </div>
@@ -28,17 +28,25 @@
         
         <div class="kwarto-list-holder">
             <div class="icon-title-holder">
-                <img src="/assets/attr.svg" alt="apartments icon"><big>kwartos</big>
-                </div>
+                <img src="/assets/attr.svg" alt="apartments icon">
+                <big>kwartos</big>
+            </div>
 
-            {#each kwartos as kwarto}
-            <span> <img src={icons} alt="kwarto icon"> <p><a data-sveltekit-reload href={"/k/"+kwarto.name}> <u> {kwarto.name} </u> </a> </p> </span>
+            {#each kwartos as kwarto (kwarto.name)}
+            <span> 
+                <img src={icons} alt="kwarto icon"> 
+                <p>
+                    <a href={"/k/"+kwarto.name}> 
+                        <u> {kwarto.name} </u> 
+                    </a> 
+                </p> 
+            </span>
             {/each}
 
         </div>
     </div>
     {#if $page.data.user}
-        <a href={"/n/"+$page.data.user.username+"/settings"} data-sveltekit-reload>
+        <a href={"/n/"+$page.data.user.username+"/settings"}>
             <div class="top-border settings-holder">
                 <BarButton tag='big' img="/assets/settings.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">{username}</BarButton>
             </div>
@@ -48,12 +56,12 @@
 
 <style>
 
-    a{
+    a {
         text-decoration: none;
         color: var(--text-color);
     }
 
-    big{
+    big {
         font-size: var(--fs-l);
     }
 
@@ -61,7 +69,7 @@
         background-color: inherit;
     }
 
-    .kwarto-list-holder{
+    .kwarto-list-holder {
         background-color: var(--background-color);
         width: auto;
         padding: var(--fs-m);
@@ -73,7 +81,7 @@
         text-align: left;
     }
 
-    span{
+    span {
         display: flex;
         align-items: center;
         justify-content: left;
@@ -81,7 +89,7 @@
         gap: var(--fs-l);
     }
 
-    span img{
+    span img {
         height: calc(var(--fs-m) * 2);
     }
 
@@ -89,21 +97,21 @@
         line-height: 2.3;
     } */
 
-    .kwarto-list-holder a{
+    .kwarto-list-holder a {
         transition: background-color 0.3s ease;
     }
 
-    .kwarto-list-holder a:hover{
+    .kwarto-list-holder a:hover {
         background-color: var(--button-contrast-color);
     }
 
-    .icon-title-holder img{
+    .icon-title-holder img {
         width: calc(var(--fs-l) * 1.5);
         padding-bottom: calc(var(--fs-m) * 0.5);
 
     }
 
-    .icon-title-holder{
+    .icon-title-holder {
         display: flex;
         justify-content: left;
         align-items: center;
@@ -116,7 +124,7 @@
         gap: calc(0.9 * var(--fs-m));
     }
 
-    .left-wrapper{
+    .left-wrapper {
         display: flex;
         flex-direction: column;
         height: 90vh;
@@ -132,7 +140,7 @@
         width: 100%;
     }
 
-    .top-border{
+    .top-border {
         border-top: solid lightgray 1px;
         align-items: center;
         justify-content: baseline;
@@ -141,7 +149,7 @@
         padding-top: var(--fs-l);
     }
 
-    .no-border{
+    .no-border {
         align-items: center;
         justify-content: baseline;
         display: flex;
@@ -150,12 +158,12 @@
         padding-bottom: var(--fs-l);
     }
 
-    .home-button-holder{
+    .home-button-holder {
         height: auto;
         flex-grow: 1;
     }
 
-    .kwarto-holder{
+    .kwarto-holder {
         height: auto;
         display: flex;
         align-items: baseline;
@@ -164,7 +172,7 @@
         flex-grow: 3;
     }
 
-    .settings-holder{
+    .settings-holder {
         height: auto;
         display: flex;
         align-items: baseline;

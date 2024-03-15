@@ -1,6 +1,6 @@
 import client from '$db/mongo'
 import { ObjectId } from 'mongodb'
-
+import bcrypt from 'bcrypt'
 
 export const users = client.db('tafthanan').collection('users')
 
@@ -36,10 +36,45 @@ export const getUser = async(username) => {
     return null
 }
 
+export const changePassword = async(data) => {
+    
+    const hash = await bcrypt.hash(data.password, 10)
+    const result = await users.updateOne({username: data.username}, {$set: {password: data.password, passwordHash: hash, token: crypto.randomUUID, tokenExpiry: Date.now()}})
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
+export const changePfp = async(data) => {
+    
+    const result = await users.updateOne({username: data.username}, {$set: {pfp: data.pfp}})
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
+export const changeBio = async(data) => {
+    
+    const result = await users.updateOne({username: data.username}, {$set: {bio: data.bio}})
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
 export const getPfpByUsername = async(username) => {
     let result = await users.findOne({username: username})
-    result = {pfp : result.pfp}
+    
     if (result) {
+        result = {pfp : result.pfp}
         return result
     }
 

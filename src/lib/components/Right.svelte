@@ -13,8 +13,8 @@
         </div>
 
     <div class="neighbor-list">
-        {#each  neighbors as neighbor}
-        <a data-sveltekit-reload href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
+        {#each neighbors as neighbor}
+        <a href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
         {/each}
     </div>
 

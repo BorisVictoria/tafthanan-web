@@ -7,7 +7,6 @@
     export let kwarto;
     export let replyingTo;
     export let postID;
-
     export let comment = false;
 
     let show='none'
@@ -111,7 +110,7 @@
     </div>
 
     {#if kwarto}
-    <Text name="title" placeholder="Write a title..."/>
+        <Text name="title" placeholder="Write a title..."/>
     {/if}
 
 <div class="content-writer">
@@ -155,7 +154,6 @@
 
 <input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none"/>
 
-
 </div>
 <div id="url-prompt-holder" style="display:{show}">
     <input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" type="button" id="submitUrl"> <strong> Submit </strong> </button>
@@ -163,7 +161,6 @@
 
 </div>
 </form>
-
 
 <style>
     
@@ -173,7 +170,6 @@
         justify-content: center;
         padding-bottom: 2px;
         border-bottom: solid 2px lightgray;
-
     }
 
     .format-buttons-holder .action-button{
@@ -181,9 +177,7 @@
     }
 
     .text-area{
-
         min-height:90%;
-
     }
 
     .text-area:focus-within{
@@ -195,14 +189,12 @@
         border-color: inherit;
     }
 
-
     [contenteditable=true]:empty:before{
-    content: attr(placeholder);
-    color: var(--text-contrast-color);
-    pointer-events: none;
-    display: block;
+        content: attr(placeholder);
+        color: var(--text-contrast-color);
+        pointer-events: none;
+        display: block;
     }
-
 
     .exit-submit-wrapper .action-button{
         background-color: var(--accent-color);

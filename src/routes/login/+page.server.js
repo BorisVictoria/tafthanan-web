@@ -2,8 +2,7 @@ import {registerUser, getUser, setToken} from '$db/users'
 import bcrypt from 'bcrypt'
 
 // TODO: Add redirects for invalid form submission
-import {browser} from '$app/environment'
-import {fail, redirect} from '@sveltejs/kit'
+import {redirect} from '@sveltejs/kit'
 
 export const load = async(event) => {
     if (event.locals.user) {

@@ -2,7 +2,6 @@
     //BUTTON THAT TAKES UP A WHOLE DIV
     export let img = false;
     export let alt = false;
-
     export let tag = false;
 
 </script>

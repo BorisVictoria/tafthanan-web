@@ -6,7 +6,7 @@ export const GET = async({params, locals}) => {
 
     const result = await getPfpByUsername(params.author)
 
-    console.log(result)
+    // console.log(result)
     
     if (result === null) {
         return json(null)

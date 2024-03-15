@@ -5,15 +5,14 @@
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
     import ProfileHead from '$lib/components/ProfileHead.svelte'
-
     import {EJSON} from 'bson'
-    export let data;
-    data = EJSON.deserialize(data)
-    const {userProfile, posts} = data
 
-    let articles = 5;
-    export let neighborlist = EJSON.deserialize(data.neighborlist)
-    export let kwartolist = EJSON.deserialize(data.kwartolist)
+    export let data;
+    $: data = EJSON.deserialize(data)
+    $: ({userProfile, posts} = data)
+
+    $: neighborlist = data.neighborlist
+    $: kwartolist = data.kwartolist
 
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
@@ -21,35 +20,43 @@
 
 <div class="wrapper main">
 
+    <!-- Left -->
     <div class="left">
-        <Left kwartos={kwartolist}/>
+        {#key kwartolist}
+            <Left kwartos={kwartolist}/>
+        {/key}
     </div>
     <div class="middle">
-
-    <ProfileHead data={userProfile}/>
-
     
-    {#if posts.length === 0}
-    <article class="full-width">
-        User has not posted any content.
-    </article>
+    <!-- Middle -->
+    {#key userProfile}
+        <ProfileHead data={userProfile}/>
+    {/key}
 
+    {#if posts.length === 0}
+        <article class="full-width">
+            User has not posted any content.
+        </article>
     {:else}
         <Filters/>
     {/if}
     
-    {#each posts as post}
+    {#each posts as post (post.datePosted)}
         <Article data={post} hidden/>
     {/each}
+
     </div>
+
+    <!-- Right -->
     <div class="right">
-        <Right neighbors={neighborlist}/>
+        {#key neighborlist}
+            <Right neighbors={neighborlist}/>
+        {/key}
     </div>
+
 </div>
 
-
 <style>
-
 
     @media (min-width: 0px) {
 

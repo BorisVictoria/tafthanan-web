@@ -9,16 +9,18 @@ import { createComment } from "$db/comments"
 export const actions = {
     submit: async(event) => {
         const data = await event.request.formData()
-        // console.log(data.get('replyingTo'))
-        // console.log(data.get('postID'))
+        console.log(data.get('replyingTo'))
+        console.log(data.get('postID'))
 
         const post = {
             parentComment : data.get('replyingTo'),
-            postID: data.get('postID'),
+            postID: event.params.post,
             content: data.get('content'),                
             author: event.locals.user.username,
             votes: 0,
         }
+
+        console.log(post)
 
         const result = createComment(post)
 

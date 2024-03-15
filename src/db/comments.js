@@ -51,7 +51,6 @@ export const createComment = async(data) => {
         const postID = new ObjectId(data.postID)
         result = await comments.insertOne({postID: postID, content: data.content, voteCount: 0, datePosted: Date.now(), isEdited: false, author: data.author})
     } else {
-        const kwartoID = new ObjectId(data.kwartoID)
         const postID = new ObjectId(data.postID)
         const parentComment = new ObjectId(data.parentComment)
         result = await comments.insertOne({postID: data.postID, parentComment: data.parentComment, content: data.content, voteCount: 0, isEdited: false, author: data.author, datePosted: Date.now()})

@@ -8,6 +8,7 @@
     import Filters from '$lib/components/Filters.svelte'
     import Modal from '$lib/components/Modal.svelte'
     import Back from '$lib/components/Back.svelte'
+    import { onMount } from 'svelte';
 
     let replies = [];
     let showModal = false;

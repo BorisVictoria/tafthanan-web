@@ -12,16 +12,15 @@
     let replies = [];
     let showModal = false;
 
-
     export let data
-    data = EJSON.deserialize(data)
-    const {post} = data
+    $: data = EJSON.deserialize(data)
+    $: ({post} = data)
 
-    export let postID = post._id
-    export let replyingTo = null
+    $: postID = post._id
+    $: replyingTo = null
 
-    export let neighborlist = EJSON.deserialize(data.neighborlist)
-    export let kwartolist = EJSON.deserialize(data.kwartolist)
+    $: neighborlist = EJSON.deserialize(data.neighborlist)
+    $: kwartolist = EJSON.deserialize(data.kwartolist)
 
 </script>
 
@@ -29,16 +28,17 @@
 
 <div class="wrapper main">
 
-    <div class="left">
+<!-- Left -->
+<div class="left">
+    {#key kwartolist}
         <Left kwartos={kwartolist}/>
-    </div>
+    {/key}
+</div>
 
+<!-- Middle -->
 <div class="middle">
-
     <article class="full-width heading">
-
-       <a href={"/k/"+post.kwarto} data-sveltekit-reload><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
-
+        <a href={"/k/"+post.kwarto} data-sveltekit-reload><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
     </article>
 
     <Article data={post} hidden={false} bind:showModal/>
@@ -49,7 +49,6 @@
     <h1>    No comments yet, be the first to comment! </h1>
     </article>
 
-
     {:else}
         <Filters/>
         {#each post.parentComments as parentComment}
@@ -59,11 +58,13 @@
     {/each}
     {/if}
 
-
 </div>
 
+<!-- Right -->
 <div class="right">
-    <Right neighbors={neighborlist}/>
+    {#key neighborlist}
+        <Right neighbors={neighborlist}/>
+    {/key}
 </div>
 
 </div>
@@ -79,66 +80,66 @@
 }
 
 .comments-label{
-        padding-top: 0.2em;
-        padding-bottom: 0.2em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.back-button-holder{
+    height: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+@media (min-width: 0px) {
+
+    .main {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
-    .back-button-holder{
-        height: auto;
-        padding: 0;
+    .left, .right{
+        display: none;
+    }
+
+    .middle {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
+    }
+}   
+
+@media (min-width: 768px) {
+
+    .main {
+        grid-template-columns: 3fr 1fr;
+        grid-template-areas: "middle right";
+    }
+
+    .right{
+        display: flex;
+        flex-direction: column;
         align-items: center;
     }
 
+}
 
-    @media (min-width: 0px) {
+@media (min-width: 1280px) {
 
-        .main {
-            display: grid;
-            grid-template-columns: 1fr;
-        }
-
-        .left, .right{
-            display: none;
-        }
-
-        .middle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    }   
-
-    @media (min-width: 768px) {
-
-        .main {
-            grid-template-columns: 3fr 1fr;
-            grid-template-areas: "middle right";
-        }
-
-        .right{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+    .main {
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-areas: "left middle right";
     }
 
-    @media (min-width: 1280px) {
-
-        .main {
-            grid-template-columns: 1fr 3fr 1fr;
-            grid-template-areas: "left middle right";
-        }
-
-        .left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: var(--background-color);
-        }
-        
+    .left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--background-color);
     }
+    
+}
 
 </style>

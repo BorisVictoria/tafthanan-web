@@ -1,35 +1,35 @@
-  <script>
+<script>
 
-      import Vote from '$lib/components/Vote.svelte';
-      import Dropdown from '$lib/components/Dropdown.svelte';
+    import Vote from '$lib/components/Vote.svelte';
+    import Dropdown from '$lib/components/Dropdown.svelte';
 
-      export let data;
+    export let data;
 
-      //if component is hidden, show only first 150 characters of the post then add like an "ombre" or box-shadow top to the footer so that it looks transparent.
-      export let hidden = true;
-      let isEdited = data.isEdited;
+    //if component is hidden, show only first 150 characters of the post then add like an "ombre" or box-shadow top to the footer so that it looks transparent.
+    export let hidden = true;
+    let isEdited = data.isEdited;
 
-      let gradient = hidden;
-      
-      let kwarto = data.kwarto;
-      let kwarto_logo = "/assets/logo.svg"
-      let author = data.username;
-      let timePosted = data.datePosted;
-      let time = timeAgo(timePosted);
-      let title = data.title;
-      let content = data.content;
+    let gradient = hidden;
+    
+    let kwarto = data.kwarto;
+    let kwarto_logo = "/assets/logo.svg"
+    let author = data.username;
+    let timePosted = data.datePosted;
+    let time = timeAgo(timePosted);
+    let title = data.title;
+    let content = data.content;
 
-      export let showModal
+    export let showModal
 
-      const vote = {
-        isPost: true,
-        postID: data._id,
-        voteCount: data.voteCount
-      }
+    const vote = {
+      isPost: true,
+      postID: data._id,
+      voteCount: data.voteCount
+    }
 
-      // console.log(vote)
+    // console.log(vote)
 
-    // TODO: export this function to its separate .js file
+  // TODO: export this function to its separate .js file
   function timeAgo(datetime) {
   const now = new Date();
   const diff = now - datetime;
@@ -71,96 +71,92 @@
   }
 }
 
+  export let upvote = data.voteCount;
 
+</script>
 
-      export let upvote = data.voteCount;
+{#if hidden}
+<article class="full-width pointer" 
+  on:mouseenter={() => {
+    if (hidden) gradient = false}} 
+  on:mouseleave={() => {
+    if (hidden) gradient = hidden}}>
+    <header>
+        <div class="logo-kwarto-holder">
+        <a href={"/k/"+kwarto} class="logo-kwarto-holder">
+          <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
+        </a>
 
-  </script>
+        <div class="options"> <Dropdown/> </div>
 
-  {#if hidden}
+        </div>
+
+        <a href={'/k/'+kwarto+'/'+data._id+'/comments'}><h1>{title}</h1></a><a href={"/n/"+author}><i>— {"n\\"+author}</i></a>
+          
+          <small>{time} {#if isEdited} (edited) {/if}</small>
+    </header>
+    <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
+    <span class:hidden={gradient}>
+      {@html content}
+    </span>
+    </a>
+    <footer>
+      <Vote data={vote}/> 
+      <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button">  
+        <b>Comment</b> 
+      </div>
+        <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
+    </footer>
+</article>
+
+{:else}
   <article class="full-width pointer" 
     on:mouseenter={() => {
       if (hidden) gradient = false}} 
     on:mouseleave={() => {
       if (hidden) gradient = hidden}}>
       <header>
+
           <div class="logo-kwarto-holder">
+          
           <a href={"/k/"+kwarto} class="logo-kwarto-holder">
             <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
           </a>
-
           <div class="options"> <Dropdown/> </div>
 
           </div>
 
           <a href={'/k/'+kwarto+'/'+data._id+'/comments'}><h1>{title}</h1></a><a href={"/n/"+author}><i>— {"n\\"+author}</i></a>
-            
-            <small>{time} {#if isEdited} (edited) {/if}</small>
+          
+          <small>{time} {#if isEdited} (edited) {/if}</small>
       </header>
-      <a href={'/k/'+kwarto+'/'+data._id+'/comments'}>
       <span class:hidden={gradient}>
         {@html content}
       </span>
-      </a>
       <footer>
-        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
-         <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
+        <Vote data={vote}/> <div class="action-button" on:click={() => {showModal=true}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
+          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
 
-  {:else}
-    <article class="full-width pointer" 
-      on:mouseenter={() => {
-        if (hidden) gradient = false}} 
-      on:mouseleave={() => {
-        if (hidden) gradient = hidden}}>
-        <header>
+{/if}
 
-            <div class="logo-kwarto-holder">
-            
-            
-            <a href={"/k/"+kwarto} class="logo-kwarto-holder">
-              <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
-            </a>
-            <div class="options"> <Dropdown/> </div>
-  
-            </div>
-  
-            <a href={'/k/'+kwarto+'/'+data._id+'/comments'}><h1>{title}</h1></a><a href={"/n/"+author}><i>— {"n\\"+author}</i></a>
-            
-            <small>{time} {#if isEdited} (edited) {/if}</small>
-        </header>
-        <span class:hidden={gradient}>
-          {@html content}
-        </span>
-        <footer>
-          <Vote data={vote}/> <div class="action-button" on:click={() => {showModal=true}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
-           <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
-        </footer>
-    </article>
+<style>
 
-  {/if}
+  header > a {
+    display: inline
+  }
 
+  .action-button-text b {
+    background-color: transparent;
+  }
 
- 
-
-  <style>
-
-    header > a{
-      display: inline
-    }
-
-
-    .action-button-text b{
-      background-color: transparent;
-    }
-
-    a{
-      text-decoration: none;
-      color: var(--text-color);
-      background-color: transparent;
-      display: flex;
-    }
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: transparent;
+    display: flex;
+  }
 
   .hidden {
       position: relative;
@@ -168,11 +164,11 @@
       overflow: hidden;
   }
 
-  .circle{
+  .circle {
     height : calc(var(--fs-m) * 0.5)
   }
 
-  .class-logo{
+  .class-logo {
     height : calc(var(--fs-m) * 1.3);
   }
 
@@ -196,10 +192,9 @@
     z-index: 1;
   }
 
-
   small {
     font-size: calc(0.8 * var(--fs-m));
     opacity: 0.85;
   }
 
-  </style>
+</style>

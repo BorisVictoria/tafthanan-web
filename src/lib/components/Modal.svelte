@@ -1,30 +1,20 @@
 <script>
-	export let showModal; // boolean
-
     import TextEditor from '$lib/components/TextEditor.svelte';
-
-    let dialog;
-
+    
+	export let showModal; // boolean
 	export let postID
 	export let comment = true;
-
 	export let replyingTo
+	let dialog;
    
-
 	$: if (dialog && showModal) dialog.showModal();
-
+	
 
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:close={() => (showModal = false)}
->
-
+<dialog bind:this={dialog} on:close={() => (showModal = false)}>
     <TextEditor backFunction={() => dialog.close()} postID={postID} replyingTo={replyingTo} comment={comment}/>
-
-
 </dialog>
 
 <style>

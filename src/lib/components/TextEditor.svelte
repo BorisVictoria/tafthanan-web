@@ -88,8 +88,8 @@
 <form method=POST action="?/submit">
 
     {#if comment}
-    <textarea disabled name="replyingTo" >{replyingTo}</textarea>
-    <textarea diabled name="postID">{postID}</textarea>
+        <textarea disabled name="replyingTo" style:display="none">{replyingTo}</textarea>
+        <textarea disabled name="postID" style:display="none">{postID}</textarea>
     {/if}
 
 <div class="richtext-wrapper">

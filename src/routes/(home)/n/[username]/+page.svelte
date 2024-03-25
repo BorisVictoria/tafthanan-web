@@ -14,6 +14,8 @@
     $: neighborlist = data.neighborlist
     $: kwartolist = data.kwartolist
 
+    console.log(data)
+
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 </script> 
@@ -41,7 +43,7 @@
         <Filters/>
     {/if}
     
-    {#each posts as post (post.datePosted)}
+    {#each posts as post}
         <Article data={post} hidden/>
     {/each}
 

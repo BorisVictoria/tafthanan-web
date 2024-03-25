@@ -16,7 +16,7 @@ export const registerUser = async(data) => {
 }
 
 export const getAllUsers = async() => {
-    let result = await users.find({})
+    let result = await users.find({}).project({password : false, passwordHash : false, token: false, tokenExpiry: false})
     result = result.toArray()
 
     if (result.length === 0) {
@@ -28,7 +28,9 @@ export const getAllUsers = async() => {
 
 export const getUser = async(username) => {
 
-    const result = await users.findOne({username: username})
+    const result = await users.findOne({username: username}, {projection : {password : false, passwordHash : false, token: false, tokenExpiry: false}})
+    console.log('this is result')
+    console.log(result)
     if (result) {
         return result
     }

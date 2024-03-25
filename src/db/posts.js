@@ -16,17 +16,25 @@ export const getPost = async(id) => {
 
 }
 
-export const getAllPosts = async() => {
+export const getAllPosts = async(sortBy) => {
 
     let result = await posts.find({})
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
     result = result.toArray()
 
-    if (result.length === 0) {
+    console.log(result)
+
+    if(result.length === 0){
         return null
     }
 
     return result
-
 }
 
 export const getPostsByKwarto = async(kwarto) => {

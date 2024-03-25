@@ -5,6 +5,7 @@
     import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
+    import { onMount } from 'svelte'
     import {EJSON} from 'bson'
     
     let showModal = false;
@@ -17,6 +18,9 @@
     $: neighborlist = data.neighborlist
     $: kwartolist = data.kwartolist
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
+
+    $: console.log(posts)
+
 
 
 </script> 
@@ -41,9 +45,11 @@
             <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
         {/if}
 
-        {#each posts as post (post.datePosted)}
-            <Article data={post} hidden/>
-        {/each}
+        {#key posts}
+            {#each posts as post}
+                <Article data={post} hidden/>
+            {/each}
+        {/key}
     </div>
 
     <!-- Right -->

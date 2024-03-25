@@ -4,15 +4,18 @@
     import Back from '$lib/components/Back.svelte'
 
     export let backFunction;
-    export let kwarto;
-    export let replyingTo;
-    export let postID;
+    export let kwarto = null;
+    export let replyingTo = null;
+    export let postID = null;
     export let comment = false;
 
     let show='none'
 
     var btn = ''
     var url = ''
+
+    $: console.log("replying to " + replyingTo)
+
 
     function linkButton(button, url){
 
@@ -87,9 +90,9 @@
 </script>
 <form method=POST action="?/submit">
 
-    {#if comment}
-        <textarea disabled name="replyingTo" style:display="none">{replyingTo}</textarea>
-        <textarea disabled name="postID" style:display="none">{postID}</textarea>
+    <!--Sometimes the dumbest solution is the best huhu-->
+    {#if replyingTo}
+    <input style="display: none" name="replyingTo" value={replyingTo}>
     {/if}
 
 <div class="richtext-wrapper">

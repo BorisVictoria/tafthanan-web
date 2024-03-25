@@ -8,6 +8,7 @@
     import Filters from '$lib/components/Filters.svelte'
     import Modal from '$lib/components/Modal.svelte'
     import Back from '$lib/components/Back.svelte'
+    import TextEditor from '$lib/components/TextEditor.svelte'
     import { onMount } from 'svelte';
 
     let replies = [];
@@ -18,14 +19,20 @@
     $: ({post} = data)
 
     $: postID = post._id
-    $: replyingTo = null
+    export let replyingTo = null
+
+    $: console.log(replyingTo)
 
     $: neighborlist = EJSON.deserialize(data.neighborlist)
     $: kwartolist = EJSON.deserialize(data.kwartolist)
 
+    $: comment = true
+
 </script>
 
-<Modal bind:showModal replyingTo={replyingTo} postID={postID}/>
+<Modal bind:showModal replyingTo={replyingTo} postID={postID}>
+    <TextEditor backFunction={() => dialog.close()} bind:postID bind:replyingTo comment={comment}/>
+</Modal>
 
 <div class="wrapper main">
 
@@ -42,7 +49,7 @@
         <a href={"/k/"+post.kwarto} data-sveltekit-reload><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
     </article>
 
-    <Article data={post} hidden={false} bind:showModal/>
+    <Article data={post} hidden={false} bind:replyingTo bind:showModal/>
 
     {#if post.parentComments == undefined}
 
@@ -50,12 +57,13 @@
     <h1>    No comments yet, be the first to comment! </h1>
     </article>
 
+    <!--IDK BAKIT SIYA NULL IF comment={parentComment lang} pero if may kasamang commentID kahit di naman ginagamit nagttrue siya that's wild-->
     {:else}
         <Filters/>
         {#each post.parentComments as parentComment}
-        <article class="comments-label full-width">
-        <Comment comment={parentComment} bind:showModal bind:parentComment bind:replyingTo/>
-        </article>
+        
+        <Comment isReply={false} comment={parentComment} bind:showModal bind:replyingTo commentID={parentComment._id.toString()}/>
+
     {/each}
     {/if}
 

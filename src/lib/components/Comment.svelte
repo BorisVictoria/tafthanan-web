@@ -3,11 +3,15 @@
   import Dropdown from '$lib/components/Dropdown.svelte';
   export let replyingTo
   export let comment;
-
-  console.log(comment)
+  export let showModal
+  export let commentID;
+  export let isReply = false;
 
   function reply() {
+    console.log('hello guys')
+    console.log(commentID)
     replyingTo = comment._id
+    showModal = true
   }
 
   const fetchChildrenComments = async(id) => {
@@ -22,9 +26,6 @@
     const pfp = await response.json()
     return pfp
   }
-
-  export let showModal
-
   let author = comment.author
   let message = comment.content;
   let votes = comment.voteCount;
@@ -83,7 +84,9 @@
   }
 
 </script>
-<article class="full-width reply-container">
+
+
+<article class={isReply ? 'is-reply' : 'full-width'}>
     <header>
         {#await fetchUserPfp(author)}
         {:then pfp}
@@ -108,9 +111,9 @@
     {#await fetchChildrenComments(comment._id)}
     {:then children}
     {#if children !== null}
-      <div class="replies-holder">
+      <div class="replies-holder full-width">
       {#each children as child}
-          <svelte:self comment={child}/>
+          <svelte:self comment={child} commentID={child._id.toString()} bind:replyingTo bind:showModal isReply={true}/>
       {/each}
       </div>
     {/if}
@@ -120,15 +123,17 @@
 
 <style>
 
+    .is-reply{
+      min-width : 100%;
+    }
+
     .pfp-name-time {
       text-decoration: none;
       color: black;
       display: inline;
     }
 
-    article{
-        gap: calc(var(--fs-m) * 0.8);
-    }
+
 
     .replies-holder{
         border-left: solid lightgray 2px;

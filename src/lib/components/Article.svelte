@@ -2,6 +2,7 @@
 
       import Vote from '$lib/components/Vote.svelte';
       import Dropdown from '$lib/components/Dropdown.svelte';
+      import { goto } from '$app/navigation';
 
       export let data;
 
@@ -19,8 +20,8 @@
       let title = data.title;
       let content = data.content;
 
-      export let showModal
-      export let replyingTo
+      export let showModal = false
+      export let replyingTo = null
 
       const vote = {
         isPost: true,
@@ -29,6 +30,22 @@
       }
 
       // console.log(vote)
+
+  function comment(){
+
+    if(hidden){
+      console.log('i was called')
+      showModal = true
+      goto('/k/'+kwarto+'/'+data._id+'/comments?showModal=true')
+
+      
+    }else{
+      console.log('i was called')
+      showModal = true
+      replyingTo = null
+    }
+  
+  }
 
     // TODO: export this function to its separate .js file
   function timeAgo(datetime) {
@@ -104,7 +121,7 @@
       </span>
       </a>
       <footer>
-        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
+        <Vote data={vote}/> <div class="action-button" on:click={() => {comment()} }> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
@@ -135,7 +152,7 @@
           {@html content}
         </span>
         <footer>
-          <Vote data={vote}/> <div class="action-button" on:click={() => {showModal=true; replyingTo=null}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
+          <Vote data={vote}/> <div class="action-button" on:click={() => {comment()}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>

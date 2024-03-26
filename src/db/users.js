@@ -38,6 +38,19 @@ export const getUser = async(username) => {
     return null
 }
 
+export const getUserAuth = async(username) => {
+
+    const result = await users.findOne({username: username})
+    console.log('this is result')
+    console.log(result)
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
 export const changePassword = async(data) => {
     
     const hash = await bcrypt.hash(data.password, 10)

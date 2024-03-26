@@ -58,9 +58,16 @@ export const getPostsByKwarto = async(kwarto, sortBy = 'top') => {
     return result
 }
 
-export const getPostsByUser = async(username) => {
+export const getPostsByUser = async(username, sortBy='top') => {
 
     let result = await posts.find({username: username})
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else {
+        result.sort({datePosted : -1})
+    }
+
     result = result.toArray()
 
     if (result.length === 0) {

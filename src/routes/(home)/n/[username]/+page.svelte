@@ -43,9 +43,11 @@
         <Filters/>
     {/if}
     
-    {#each posts as post}
-        <Article data={post} hidden/>
-    {/each}
+    {#key posts}
+        {#each posts as post}
+            <Article data={post} hidden/>
+        {/each}
+    {/key}
 
     </div>
 

@@ -3,9 +3,9 @@ import {getUser} from '$db/users'
 import {redirect} from '@sveltejs/kit'
 import { getPostsByUser } from '$db/posts.js'
 
-export const load = async({params}) => {
+export const load = async(event) => {
 
-    const user = await getUser(params.username)
+    const user = await getUser(event.params.username)
     if (!user) {
         redirect (303, "/")
     }
@@ -13,7 +13,15 @@ export const load = async({params}) => {
     const data = {}
 
     data.userProfile = user
-    data.posts = await getPostsByUser(user.username)
+
+    
+    if(event.url.searchParams.has('sortBy')){
+        data.posts = await getPostsByUser(user.username, event.url.searchParams.get('sortBy'))
+    }
+    else{
+        data.posts = await getPostsByUser(user.username)
+    }
+    
 
     return EJSON.serialize(data)
 }

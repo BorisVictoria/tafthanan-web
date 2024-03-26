@@ -27,9 +27,9 @@ export const load = async(event) => {
         console.log(query)
         posts = await getPostsByKwarto(event.params.kwarto, query)
     } else {
-        posts = await getPostsByKwarto(event.paarams.kwarto, )
+        posts = await getPostsByKwarto(event.params.kwarto)
 
-    }
+    } 
 
 
   

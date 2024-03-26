@@ -6,6 +6,8 @@ export const users = client.db('tafthanan').collection('users')
 
 export const registerUser = async(data) => {
 
+
+    data.pfp = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/510px-Default_pfp.svg.png"
     const result = await users.insertOne(data)
     if (result) {
         return result

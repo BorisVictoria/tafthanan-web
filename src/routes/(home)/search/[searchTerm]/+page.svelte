@@ -40,16 +40,28 @@
 
     <!-- Middle -->
     <div class="middle">
-        <Filters/>
         {#if width < 768}
             <button class="action-button pointer post-button"><img src="/assets/add-black.svg"><h1>Create Post</h1></button>
         {/if}
 
-        {#key posts}
-            {#each posts as post}
-                <Article data={post} hidden/>
-            {/each}
-        {/key}
+        {#if posts.length == 0}
+            <article class="full-width">
+                <h1>No posts found for '{data.query}' try broadening your search.</h1>
+            </article>
+        {:else}
+            <article class="full-width">
+                <h2>{posts.length} result{#if posts.length > 1}s{/if} found for '{data.query}'</h2>
+            </article>
+
+            <Filters/>
+
+            {#key posts}
+                {#each posts as post}
+                    <Article data={post} hidden/>
+                {/each}
+            {/key}
+
+        {/if}
     </div>
 
     <!-- Right -->

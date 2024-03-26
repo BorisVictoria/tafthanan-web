@@ -14,6 +14,7 @@ export const load = async({params, url}) => {
         const result = await getPostfromSearchQuery(sortBy, searchTerm)
         const data = {}
         data.posts = result
+        data.query = searchTerm
 
         return EJSON.serialize(data)
 
@@ -23,6 +24,7 @@ export const load = async({params, url}) => {
         const result = await getPostfromSearchQuery('top', searchTerm)
         const data = {}
         data.posts = result
+        data.query = searchTerm
 
         console.log(data)
     

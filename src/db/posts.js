@@ -26,10 +26,7 @@ export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
             index : "default",
             text : {
                 query : searchTerm,
-                path : ["title", "content", "username"],
-                fuzzy : {
-                    maxEdits : 1
-                }
+                path : ["title", "content", "username"]
             }
         }
     }])

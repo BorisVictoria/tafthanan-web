@@ -1,6 +1,8 @@
 <script>
   import Vote from '$lib/components/Vote.svelte'
   import Dropdown from '$lib/components/Dropdown.svelte';
+  import { page } from '$app/stores'
+
   export let replyingTo
   export let comment;
   export let showModal
@@ -14,9 +16,15 @@
     showModal = true
   }
 
+  let sortBy = 'top'
+
+  if($page.url.searchParams.has('sortBy')){
+    sortBy = $page.url.searchParams.get('sortBy')
+  }
+
   const fetchChildrenComments = async(id) => {
       const stringify = id.toString()
-      const response = await fetch(`/api/comments/${stringify}`)
+      const response = await fetch(`/api/comments/${stringify}?sortBy=${sortBy}`)
       const children = await response.json()
       return children
   }
@@ -82,6 +90,8 @@
       return `${years}y`;
     }
   }
+
+
 
 </script>
 

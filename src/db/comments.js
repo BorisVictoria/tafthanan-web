@@ -6,9 +6,15 @@ const users = client.db('tafthanan').collection('users')
 const posts = client.db('tafthanan').collection('posts')
 const comments = client.db('tafthanan').collection('comments')
 
-export const getParentComments = async(id) => {
+export const getParentComments = async(id, sortBy='top') => {
     const objID = new ObjectId(id)
     let result = await comments.find({postID: objID, parentComment: null})
+    result.sort({voteCount : -1})
+
+    if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
     result = await result.toArray()
 
     if(result.length === 0) {
@@ -18,9 +24,16 @@ export const getParentComments = async(id) => {
     return result
 }
 
-export const getChildrenComments = async(id) => {
+export const getChildrenComments = async(id, sortBy = 'top') => {
     const objID = new ObjectId(id)
     let result = await comments.find({parentComment: objID})
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    }else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
     result = await result.toArray()
 
     if(result.length === 0) {

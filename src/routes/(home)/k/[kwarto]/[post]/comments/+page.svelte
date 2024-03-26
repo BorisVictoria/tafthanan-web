@@ -66,11 +66,13 @@
     <!--IDK BAKIT SIYA NULL IF comment={parentComment lang} pero if may kasamang commentID kahit di naman ginagamit nagttrue siya that's wild-->
     {:else}
         <Filters/>
-        {#each post.parentComments as parentComment}
+        {#key post.parentComments}
+            {#each post.parentComments as parentComment}
         
-        <Comment isReply={false} comment={parentComment} bind:showModal bind:replyingTo commentID={parentComment._id.toString()}/>
+                <Comment isReply={false} comment={parentComment} bind:showModal bind:replyingTo commentID={parentComment._id.toString()}/>
 
-    {/each}
+            {/each}
+        {/key}
     {/if}
 
 </div>

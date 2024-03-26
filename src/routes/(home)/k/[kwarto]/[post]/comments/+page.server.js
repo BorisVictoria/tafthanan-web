@@ -30,15 +30,15 @@ export const actions = {
     }
 }
 
-export const load = async({params}) => {
+export const load = async(event) => {
 
-    const kwarto = await getKwarto(params.kwarto)
+    const kwarto = await getKwarto(event.params.kwarto)
     if (!kwarto) {
         redirect(303, "/")
     }
 
     const data = {}
-    const postID = new ObjectId(params.post)
+    const postID = new ObjectId(event.params.post)
 
     const post = await getPost(postID)
 
@@ -48,7 +48,12 @@ export const load = async({params}) => {
 
     data.post = post
 
-    const parentComments = await getParentComments(postID)
+    let parentComments;
+    if(!event.url.searchParams.has('sortBy')){
+        parentComments = await getParentComments(postID)
+    } else {
+        parentComments = await getParentComments(postID, event.url.searchParams.get('sortBy'))
+    }
 
     if (parentComments) {
         data.post.parentComments = parentComments

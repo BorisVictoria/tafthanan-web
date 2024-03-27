@@ -8,7 +8,6 @@
     import { onMount } from 'svelte'
     import {EJSON} from 'bson'
     
-    let showModal = false;
     let width = 0;
 
     export let data
@@ -18,8 +17,6 @@
     $: neighborlist = data.neighborlist
     $: kwartolist = data.kwartolist
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
-
-    $: console.log(posts)
 
 
 
@@ -38,14 +35,13 @@
 
     <!-- Middle -->
     <div class="middle">
-
         {#if posts.length == 0}
             <article class="full-width">
-                <h1>No posts found for '{data.query}' try broadening your search.</h1>
+                <h1>No posts found for '{data.query}' in {data.kwarto}  try broadening your search or searching another kwarto.</h1>
             </article>
         {:else}
             <article class="full-width">
-                <h2>{posts.length} result{#if posts.length > 1}s{/if} found for '{data.query}'</h2>
+                <h2>{posts.length} result{#if posts.length > 1}s{/if} found for '{data.query}' in {data.kwarto}</h2>
             </article>
 
             <Filters/>

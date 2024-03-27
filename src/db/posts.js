@@ -50,6 +50,43 @@ export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
     
 }
 
+export const getPostfromSearchQueryandKwarto = async(sortBy = 'top', searchTerm, kwarto) => {
+
+    console.log("search query: " + searchTerm)
+
+    let result = await posts.aggregate([{
+        $search : {
+            index : "default",
+            text : {
+                query : searchTerm,
+                path : ["title", "content", "username"]
+            }
+        },},
+        {$match : {
+            kwarto : kwarto
+        }}
+    ])
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
+    console.log(result)
+    result = result.toArray()
+
+    if(result.length === 0){
+        return null
+    }
+ 
+
+    return result;
+
+    
+}
+
+
 export const getAllPosts = async(sortBy) => {
 
     let result = await posts.find({})

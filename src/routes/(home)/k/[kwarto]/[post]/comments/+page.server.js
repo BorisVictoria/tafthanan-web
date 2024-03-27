@@ -8,6 +8,11 @@ import { createComment } from "$db/comments"
 
 export const actions = {
     submit: async(event) => {
+
+        if(event.locals.user == null){
+            redirect(303, '/login')
+        }
+
         const data = await event.request.formData()
 
         const post = {

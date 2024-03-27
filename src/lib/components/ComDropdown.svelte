@@ -1,5 +1,6 @@
 <script>
     import { page } from  '$app/stores'
+    import { goto } from '$app/navigation'
     import Modal from '$lib/components/Modal.svelte'
     export let comment = null;
    
@@ -16,7 +17,8 @@
         console.log(comment._id.toString())
         const response = await fetch (`/api/comments/delete/${comment._id.toString()}`)
         console.log('successfully deleted')
-        location.reload()
+        goto($page.url.pathname)
+
         showModal = false
     }
 

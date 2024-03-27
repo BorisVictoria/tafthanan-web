@@ -107,7 +107,7 @@
         {/await}
     </header>
 
-    {#key comment.content}
+    {#key message}
     {@html message}
     {/key}
 

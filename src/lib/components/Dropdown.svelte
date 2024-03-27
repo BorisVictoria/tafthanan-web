@@ -1,6 +1,7 @@
 <script>
     import { page } from  '$app/stores'
     import Modal from '$lib/components/Modal.svelte'
+    import { goto } from '$app/navigation'
     export let post = null;
     console.log(post)
 
@@ -10,7 +11,7 @@
 
     const handleDelete = async(post) => {
         const response = await fetch (`/api/posts/delete/${post._id.toString()}`)
-        location.reload()
+        goto($page.url.pathname)
         showModal = false
     }
 

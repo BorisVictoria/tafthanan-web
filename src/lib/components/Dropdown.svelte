@@ -4,8 +4,6 @@
 
     let showDropdown = false;    
 
-    console.log($page.data.user.username) 
-    console.log(post.username)
 
 </script>
 

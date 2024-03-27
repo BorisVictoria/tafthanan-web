@@ -11,6 +11,7 @@
     const handleDelete = async(post) => {
         const response = await fetch (`/api/posts/delete/${post._id.toString()}`)
         console.log('successfully deleted')
+        showModal = false
     }
 
 

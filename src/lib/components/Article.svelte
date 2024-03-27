@@ -14,11 +14,13 @@
       
       let kwarto = data.kwarto;
       let kwarto_logo = "/assets/logo.svg"
-      let author = data.username;
+      let author = data.deleted ? "[deleted]" : data.username;
       let timePosted = data.datePosted;
       let time = timeAgo(timePosted);
-      let title = data.title;
-      let content = data.content;
+      let title = data.deleted ? "[deleted]" : data.title;
+      let content = data.deleted ? "[deleted]" : data.content;
+
+      console.log(data.deleted)
 
       export let showModal = false
       export let replyingTo = null
@@ -148,9 +150,11 @@
             
             <small>{time} {#if isEdited} (edited) {/if}</small>
         </header>
-        <span class:hidden={gradient}>
-          {@html content}
-        </span>
+        {#key content}
+          <span class:hidden={gradient}>
+            {@html content}
+          </span>
+        {/key}
         <footer>
           <Vote data={vote}/> <div class="action-button" on:click={() => {comment()}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>

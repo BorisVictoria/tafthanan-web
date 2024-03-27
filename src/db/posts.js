@@ -29,6 +29,12 @@ export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
                 path : ["title", "content", "username"]
             }
         }
+    }, 
+    {
+        $match : {
+            deleted : {$ne : true}
+        }
+
     }])
 
     if(sortBy == 'top'){
@@ -63,7 +69,8 @@ export const getPostfromSearchQueryandKwarto = async(sortBy = 'top', searchTerm,
             }
         },},
         {$match : {
-            kwarto : kwarto
+            kwarto : kwarto,
+            deleted : {$ne : true}
         }}
     ])
 
@@ -89,7 +96,7 @@ export const getPostfromSearchQueryandKwarto = async(sortBy = 'top', searchTerm,
 
 export const getAllPosts = async(sortBy) => {
 
-    let result = await posts.find({})
+    let result = await posts.find({deleted : {$ne: true}})
 
     if(sortBy == 'top'){
         result.sort({voteCount : -1})
@@ -110,7 +117,7 @@ export const getAllPosts = async(sortBy) => {
 
 export const getPostsByKwarto = async(kwarto, sortBy = 'top') => {
 
-    let result = await posts.find({kwarto: kwarto})
+    let result = await posts.find({kwarto: kwarto, deleted : {$ne: true}})
     
 
     if(sortBy === 'top'){
@@ -131,7 +138,7 @@ export const getPostsByKwarto = async(kwarto, sortBy = 'top') => {
 
 export const getPostsByUser = async(username, sortBy='top') => {
 
-    let result = await posts.find({username: username})
+    let result = await posts.find({username: username, deleted : {$ne: true}})
 
     if(sortBy == 'top'){
         result.sort({voteCount : -1})

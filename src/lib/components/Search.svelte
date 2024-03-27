@@ -37,11 +37,10 @@
         if(pattern.test(urlPath)){
             goto(replacesearchTerm(urlPath, searchTerm))
         } else {
-            if(urlPath == '/'){
+            if(urlPath == '/' || urlPath.includes('/n/')){
+                console.log('true')
                 goto(`/search/${searchTerm}`)
-            }
-
-            if(urlPath.includes('/comments')){
+            } else if(urlPath.includes('/comments')){
                 const urlParts = urlPath.split('/')
                 urlParts[urlParts.length-1] = searchTerm
                 urlParts[urlParts.length-2] = 'search'
@@ -59,6 +58,8 @@
     $: if($page.url.pathname.includes("/k/")){
         const parts = $page.url.pathname.split('/')
         placeHolder = "Search " + "k\\"+parts[2]
+    }  else{
+        placeHolder = "Search"
     }
     
 </script>

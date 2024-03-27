@@ -40,7 +40,17 @@
             if(urlPath == '/'){
                 goto(`/search/${searchTerm}`)
             }
-            goto(urlPath+`/search/${searchTerm}`)
+
+            if(urlPath.includes('/comments')){
+                const urlParts = urlPath.split('/')
+                urlParts[urlParts.length-1] = searchTerm
+                urlParts[urlParts.length-2] = 'search'
+                const newUrl = urlParts.join('/')
+                console.log(newUrl)
+                goto(newUrl)
+            } else {
+                goto(urlPath+`/search/${searchTerm}`)
+            }
         }
 
         searchTerm = ""

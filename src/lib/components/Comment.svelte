@@ -1,6 +1,6 @@
 <script>
   import Vote from '$lib/components/Vote.svelte'
-  import Dropdown from '$lib/components/Dropdown.svelte';
+  import ComDropdown from '$lib/components/ComDropdown.svelte'
   import { page } from '$app/stores'
 
   export let replyingTo
@@ -35,7 +35,7 @@
     return pfp
   }
   let author = comment.author
-  let message = comment.content;
+  let message = comment.deleted ? "[deleted]" : comment.content;
   let votes = comment.voteCount;
   let isEdited = comment.isEdited;
   let time = timeAgo(comment.datePosted);
@@ -103,11 +103,14 @@
         <a class="pfp-name-time" href={"/n/"+author}>
            <img src={pfp.pfp}> <i>{author}</i> <small>{time} {#if isEdited} (edited) {/if}</small> 
         </a>
-           <div class="options"> <Dropdown/> </div>
+           <div class="options"> <ComDropdown comment={comment}/> </div>
         {/await}
     </header>
 
+    {#key comment.content}
     {@html message}
+    {/key}
+
     <footer>
         <Vote data={vote}/> 
         <div class="action-button" on:click={reply}> 
@@ -117,6 +120,7 @@
             <img src="/assets/share-icon.svg">
         </div>
     </footer>
+
 
     {#await fetchChildrenComments(comment._id)}
     {:then children}

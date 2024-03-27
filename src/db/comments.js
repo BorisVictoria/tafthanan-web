@@ -162,5 +162,7 @@ export const downvoteComment = async(data) => {
 
 export const deleteComment = async(id) => {
     const objID = new ObjectId(id)
+    console.log(objID)
     const result = await comments.updateOne({_id: objID}, {$set: {deleted: true}})
+    console.log(result)
 }

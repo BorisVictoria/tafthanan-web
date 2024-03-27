@@ -1,20 +1,26 @@
 <script>
     import { page } from  '$app/stores'
     import Modal from '$lib/components/Modal.svelte'
-    export let post = null;
-    console.log(post)
+    export let comment = null;
+   
+    console.log("comment id: " + comment._id)
+    console.log("comment content: " + comment.content)
+
+    console.log($page.data)
 
     let showDropdown = false;    
 
     let showModal = false;
 
-    const handleDelete = async(post) => {
-        const response = await fetch (`/api/posts/delete/${post._id.toString()}`)
+    const handleDelete = async(comment) => {
+        console.log(comment._id.toString())
+        const response = await fetch (`/api/comments/delete/${comment._id.toString()}`)
+        console.log('successfully deleted')
         location.reload()
         showModal = false
     }
 
-    const handleEdit = async(post) => {
+    const handleEdit = async(comment) => {
 
     }
 
@@ -23,8 +29,8 @@
 
 <Modal bind:showModal>
     <article class="full-width">
-    <h1>Are you sure you want to delete your post?</h1>
-    <button on:click={handleDelete(post)} class="action-button full-width"> Yes </button>
+    <h1>Are you sure you want to delete your comment?</h1>
+    <button on:click={handleDelete(comment)} class="action-button full-width"> Yes </button>
     <button on:click={() => {showModal = false}} class="action-button full-width"> No </button>
     </article>
 </Modal>
@@ -32,7 +38,7 @@
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
 {#if showDropdown}
     <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
-        {#if $page.data.user && $page.data.user.username === post.username}
+        {#if $page.data.user && $page.data.user.username === comment.author}
         <button>Edit</button>
         <button on:click={() => {showModal = true}}>Delete</button>
         {/if}

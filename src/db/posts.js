@@ -255,4 +255,5 @@ export const deletePost = async(id) => {
     const objID = new ObjectId(id)
     console.log(objID)
     const result = await posts.updateOne({_id: objID}, {$set: {deleted: true}})
+    console.log(result)
 }

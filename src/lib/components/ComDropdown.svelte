@@ -17,7 +17,7 @@
         console.log(comment._id.toString())
         const response = await fetch (`/api/comments/delete/${comment._id.toString()}`)
         console.log('successfully deleted')
-        goto($page.url.pathname)
+        location.reload()
 
         showModal = false
     }

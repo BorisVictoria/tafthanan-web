@@ -35,7 +35,7 @@
     return pfp
   }
   let author = comment.author
-  let message = comment.deleted ? "[deleted]" : comment.content;
+  $:  message = comment.deleted ? "[deleted]" : comment.content;
   let votes = comment.voteCount;
   let isEdited = comment.isEdited;
   let time = timeAgo(comment.datePosted);

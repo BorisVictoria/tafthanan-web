@@ -11,7 +11,7 @@
 
     const handleDelete = async(post) => {
         const response = await fetch (`/api/posts/delete/${post._id.toString()}`)
-        goto($page.url.pathname)
+        location.reload()
         showModal = false
     }
 

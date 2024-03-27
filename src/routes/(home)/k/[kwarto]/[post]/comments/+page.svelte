@@ -55,7 +55,9 @@
         <a href={"/k/"+post.kwarto} data-sveltekit-reload><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
     </article>
 
-    <Article data={post} hidden={false} bind:replyingTo bind:showModal/>
+    {#key post}
+        <Article data={post} hidden={false} bind:replyingTo bind:showModal/>
+    {/key}
 
     {#if post.parentComments == undefined}
 
@@ -66,7 +68,7 @@
     <!--IDK BAKIT SIYA NULL IF comment={parentComment lang} pero if may kasamang commentID kahit di naman ginagamit nagttrue siya that's wild-->
     {:else}
         <Filters/>
-        {#key post.parentComments}
+        {#key post}
             {#each post.parentComments as parentComment}
         
                 <Comment isReply={false} comment={parentComment} bind:showModal bind:replyingTo commentID={parentComment._id.toString()}/>

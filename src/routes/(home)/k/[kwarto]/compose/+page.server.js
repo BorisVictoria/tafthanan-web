@@ -30,7 +30,7 @@ export const load = async(event) => {
 
     if (event.locals.user === undefined) {
         console.log(event.locals.user)
-        redirect(303, "/login")
+        redirect(303, "/login?plsLogIn")
     }
 
     const kwarto = await getKwarto(event.params.kwarto)

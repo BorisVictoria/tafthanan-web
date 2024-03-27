@@ -11,7 +11,7 @@ export const load = async(event) => {
     if (!kwarto) {
 
         if(event.locals.user === undefined)
-            redirect(303, '/login')
+            redirect(303, '/login?plsLogIn')
 
         console.log('may male')
         console.log(event.params.kwarto)

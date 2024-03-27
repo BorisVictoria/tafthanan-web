@@ -5,6 +5,7 @@
     import Password from '$lib/components/Password.svelte';
     import Back from '$lib/components/Back.svelte';
     import {enhance} from '$app/forms'
+    import { page } from '$app/stores'
 
     let width = 0;
 
@@ -13,6 +14,7 @@
     function toggle(){
         toggled = !toggled
     }
+    
 
 </script>
 

@@ -10,7 +10,7 @@ export const actions = {
     submit: async(event) => {
 
         if(event.locals.user == null){
-            redirect(303, '/login')
+            redirect(303, '/login?plsLogIn')
         }
 
         const data = await event.request.formData()

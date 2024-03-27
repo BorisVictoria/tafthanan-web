@@ -107,7 +107,7 @@
             <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
           </a>
 
-          <div class="options"> <Dropdown/> </div>
+          <div class="options"> <Dropdown post={data}/> </div>
 
           </div>
 

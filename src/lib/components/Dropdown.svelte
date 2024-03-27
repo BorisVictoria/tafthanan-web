@@ -1,13 +1,22 @@
 <script>
+    import { page } from  '$app/stores'
+    export let post;
+
     let showDropdown = false;    
+
+    console.log($page.data.user.username) 
+    console.log(post.username)
+
 </script>
 
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
 {#if showDropdown}
     <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
+        {#if $page.data.user.username === post.username}
         <a href="#">Edit</a>
         <a href="#">Delete</a>
-        <a href="#">Hide</a>
+        {/if}
+        <a href="#">Share</a>
     </div>
 {/if}    
 

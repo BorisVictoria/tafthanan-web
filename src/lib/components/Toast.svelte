@@ -3,7 +3,9 @@
 <script>
     import { flip } from "svelte/animate";
     import { fly } from "svelte/transition";
-    import { notifications } from "$db/notifications.js";
+    import { notifications } from "$lib/notifications.js";
+
+    console.log($notifications)
 
     export let themes = {
         default: "#aaaaaa",
@@ -18,7 +20,7 @@
         <div
             animate:flip
             class="toast"
-            style="background: {themes[notification.type]};"
+            style="background-color: {themes[notification.type]};"
             transition:fly={{ y: 30 }}
         >
             <div class="content">{notification.message}</div>
@@ -29,7 +31,7 @@
 
 <style>
     .notifs {
-        position: fixed;
+        position: absolute;
         top: 10px;
         left: 0;
         right: 0;
@@ -41,14 +43,17 @@
         justify-content: flex-start;
         align-items: center;
         pointer-events: none;
+        background-color: transparent;
     }
 
     .toast {
         flex: 0 0 auto;
         margin-bottom: 10px;
+        border-radius: 1em;
     }
 
     .content {
+        background-color: transparent;
         padding: 10px;
         display: block;
         color: white;

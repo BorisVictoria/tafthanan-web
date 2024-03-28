@@ -5,9 +5,11 @@
     import Back from '$lib/components/Back.svelte';
 
     import Toast from '$lib/components/Toast.svelte';
-    
+
+    import { notifications } from '$lib/notifications'
     import {enhance} from '$app/forms'
     import { page } from '$app/stores'
+    import { onMount } from 'svelte'
 
     let width = 0;
 
@@ -16,6 +18,16 @@
     function toggle(){
         toggled = !toggled
     }
+
+    $: if($page.url.searchParams.has('wrongPassword')){
+        console.log('test')
+        notifications.wrong_password("Invalid password", 2000)
+    }
+    $: if($page.url.searchParams.has('wrongUsername')){
+        console.log('test')
+        notifications.wrong_username("Invalid username", 2000)
+    }
+
     
 
 </script>
@@ -27,15 +39,15 @@
         justify-content: center;
         align-items: center;
         background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
     }
     </style>
 </svelte:head>
 
 <svelte:window bind:innerWidth={width}/>
 
-<Toast />
-
 <div class="wrapper">
+    <Toast />   
     <div class="login-container">
 
         <!-- show poster if screen size is greater than 768px -->
@@ -54,8 +66,8 @@
             </div>
 
             <!-- Login Form -->
-            <form id="login-form" method="POST" action="?/login" use:enhance
-                style:display={toggled ? 'block' : 'none'}>
+            <form id="login-form" method="POST" action="?/login"
+                style:display={toggled ? 'block' : 'none'} use:enhance>
                 <header>
                     <h1>Life is Taft.</h1>
                     <hr>

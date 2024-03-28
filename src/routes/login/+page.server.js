@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 // TODO: Add redirects for invalid form submission
 import {redirect} from '@sveltejs/kit'
 
-import { notifications } from '$db/notifications'
+
 
 export const load = async(event) => {
     if (event.locals.user) {
@@ -45,14 +45,15 @@ export const actions = {
 
         if (data === null) {
             // notifications.wrong_username("Invalid username")
-            return null
+            redirect(303, '/login?wrongUsername')
+            
         }
 
         const password = await bcrypt.compare(user.password, data.passwordHash)
 
         if (!password) {
             // notifications.wrong_password("Invalid password")
-            return null
+            redirect(303, '/login?wrongPassword')
         }
 
         data.token = crypto.randomUUID()

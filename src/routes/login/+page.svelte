@@ -1,9 +1,11 @@
 <script>
-
     import Text from '$lib/components/Text.svelte';
     import Button from '$lib/components/Button.svelte';
     import Password from '$lib/components/Password.svelte';
     import Back from '$lib/components/Back.svelte';
+
+    import Toast from '$lib/components/Toast.svelte';
+    
     import {enhance} from '$app/forms'
     import { page } from '$app/stores'
 
@@ -30,6 +32,8 @@
 </svelte:head>
 
 <svelte:window bind:innerWidth={width}/>
+
+<Toast />
 
 <div class="wrapper">
     <div class="login-container">
@@ -117,7 +121,6 @@
         </div>
     </div>
 </div>
-
     
 <style>
 

@@ -169,7 +169,9 @@ export const createPost = async(data) => {
 
 export const editPost = async(data) => {
     const objID = new ObjectId(data._id)
-    const result = await posts.updateOne({_id: objID}, {$set: {title: data.title, content: data.content}})
+
+    const result = await posts.updateOne({_id: objID}, {$set: {title: data.title, content: data.content, isEdited : true}})
+    console.log(data)
     if (result) {
         return result
     }

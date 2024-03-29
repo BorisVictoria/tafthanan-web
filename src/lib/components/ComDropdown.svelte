@@ -7,7 +7,7 @@
     console.log("comment id: " + comment._id)
     console.log("comment content: " + comment.content)
 
-    console.log($page.data)
+    //console.log($page.data)
 
     let showDropdown = false;    
 
@@ -39,6 +39,7 @@
 
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
 {#if showDropdown}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
         {#if $page.data.user && $page.data.user.username === comment.author}
         <button>Edit</button>

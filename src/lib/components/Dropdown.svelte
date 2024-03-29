@@ -1,9 +1,12 @@
 <script>
-    import { page } from  '$app/stores'
+
     import Modal from '$lib/components/Modal.svelte'
+    import EditPost from '$lib/components/EditPost.svelte'
+
+    import { page } from  '$app/stores'
     import { goto } from '$app/navigation'
     export let post = null;
-    console.log(post)
+    //console.log(post)
 
     let showDropdown = false;    
 
@@ -23,16 +26,16 @@
 
 </script>
 
-<Modal bind:showModalDelete>
+<Modal bind:showModal={showModalDelete}>
     <article class="full-width">
     <h1>Are you sure you want to delete your post?</h1>
     <button on:click={handleDelete(post)} class="action-button full-width"> Yes </button>
-    <button on:click={() => {showModal = false}} class="action-button full-width"> No </button>
+    <button on:click={() => {showModalDelete = false}} class="action-button full-width"> No </button>
     </article>
 </Modal>
 
-<Modal bind:showModalEdit>
-    
+<Modal bind:showModal={showModalEdit}>
+    <EditPost postID={post._id} title={post.title} content={post.content}/>
 </Modal>
 
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
@@ -40,7 +43,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
         {#if $page.data.user && $page.data.user.username === post.username}
-        <button on:click={() => {showModalEdit}}>Edit</button>
+        <button on:click={() => {console.log("should edit na"); showModalEdit = true}}>Edit</button>
         <button on:click={() => {showModalDelete = true}}>Delete</button>
         {/if}
         <button href="#">Share</button>

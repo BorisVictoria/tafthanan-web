@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { getPost } from "$db/posts";
+import { getPost, editPost } from "$db/posts";
 import { getParentComments } from "$db/comments"
 import { EJSON } from "bson";
 import { redirect } from "@sveltejs/kit";
@@ -32,7 +32,62 @@ export const actions = {
         }
 
         return false
+    },
+
+    editPost: async(event) => {
+
+        if(event.locals.user == null){
+            redirect(303, '/login?plsLogIn')
+        }
+
+        const data = await event.request.formData()
+
+        console.log('data')
+        console.log(data)
+
+        //check if the author of post data is equal to current user.
+        console.log('getting post')
+        const author = await getPost(data.get('postID'))
+        
+        console.log('verifying author and user')
+        console.log(event.locals.user.username, author.username)
+        if(event.locals.user.username !== author.username){
+            redirect(303, '/login')
+        }
+
+        //check if form is empty
+        console.log('checking empty field')
+        if(data.get('title') === "" || data.get('content') === ""){
+            
+            return false
+        }
+
+        //check if there are no changes
+        if(data.get('title') === author.title || data.get('content') === author.username){
+            console.log('no changes')
+        }
+
+        console.log('all forms good')
+
+        const newContent = {
+            _id : data.get('postID'),
+            title : data.get('title'),
+            content : data.get('content')
+        }
+
+        const result = await editPost(newContent)
+        console.log(result)
+
+        if(result) {
+            return true
+        }
+
+        return false
+
+
+
     }
+
 }
 
 export const load = async(event) => {

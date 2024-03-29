@@ -7,12 +7,13 @@
 
     let showDropdown = false;    
 
-    let showModal = false;
+    let showModalDelete = false;
+    let showModalEdit = false;
 
     const handleDelete = async(post) => {
         const response = await fetch (`/api/posts/delete/${post._id.toString()}`)
         location.reload()
-        showModal = false
+        showModalDelete = false
     }
 
     const handleEdit = async(post) => {
@@ -22,7 +23,7 @@
 
 </script>
 
-<Modal bind:showModal>
+<Modal bind:showModalDelete>
     <article class="full-width">
     <h1>Are you sure you want to delete your post?</h1>
     <button on:click={handleDelete(post)} class="action-button full-width"> Yes </button>
@@ -30,12 +31,17 @@
     </article>
 </Modal>
 
+<Modal bind:showModalEdit>
+    
+</Modal>
+
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
 {#if showDropdown}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
         {#if $page.data.user && $page.data.user.username === post.username}
-        <button>Edit</button>
-        <button on:click={() => {showModal = true}}>Delete</button>
+        <button on:click={() => {showModalEdit}}>Edit</button>
+        <button on:click={() => {showModalDelete = true}}>Delete</button>
         {/if}
         <button href="#">Share</button>
     </div>

@@ -66,17 +66,10 @@
 
     <!-- Right -->
     <div class="right">
-        {#if isLoggedIn}
         <a class="action-button pointer post-button full-width" href={postlink}>
             <img alt="add icon" src="/assets/add-black.svg">
             <h1>Create Post</h1>
         </a>
-        {:else}
-        <a class="action-button pointer post-button full-width" href="/login">
-            <img alt="add icon" src="/assets/add-black.svg">
-            <h1>Create Post</h1>
-        </a>
-        {/if}
         <Right neighbors={neighborlist}/>
     </div>
 

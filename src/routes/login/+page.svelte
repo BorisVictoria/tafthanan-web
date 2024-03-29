@@ -29,6 +29,11 @@
     }
 
     
+    if($page.url.searchParams.has('plsLogIn')){
+        notifications.send("Please log in to use that feature", 'default', 2000)
+    }
+
+    
 
 </script>
 

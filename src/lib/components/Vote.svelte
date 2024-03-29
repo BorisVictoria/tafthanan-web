@@ -70,7 +70,7 @@
 			})
 			const success = await response.json()
 			if (success == null) {
-				goto("/login")
+				goto("/login?plsLogIn")
 			}
 
 		} else {
@@ -81,7 +81,8 @@
 			})
 			const success = await response.json()
 			if (success == null) {
-				goto("/login")
+				console.log('line 84')
+				goto("/login?plsLogIn")
 			}
 
 		}

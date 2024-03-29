@@ -8,6 +8,8 @@
     export let title;
     export let content;
 
+    console.log(title)
+
     let show='none'
 
     var btn = ''
@@ -16,6 +18,7 @@
 
 
     function linkButton(button, url){
+        
 
         if(/http/i.test(url)){
         document.execCommand(button, false, url)
@@ -64,6 +67,7 @@
 
         document.getElementById('submitUrl').addEventListener('click', () =>{
             console.log('submit clicked.')
+            url = document.getElementById('url-place').value
             linkButton(btn, url)
         })
 

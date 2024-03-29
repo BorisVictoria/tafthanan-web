@@ -66,6 +66,7 @@
 
         document.getElementById('submitUrl').addEventListener('click', () =>{
             console.log('submit clicked.')
+            url = document.getElementById('url-place').value
             linkButton(btn, url)
         })
 

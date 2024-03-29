@@ -34,9 +34,11 @@
     </article>
 </Modal>
 
-<Modal bind:showModal={showModalEdit}>
-    <EditPost postID={post._id} title={post.title} content={post.content}/>
-</Modal>
+{#if showModalEdit}
+    <Modal bind:showModal={showModalEdit}>
+        <EditPost postID={post._id} title={post.title} content={post.content}/>
+    </Modal>
+{/if}
 
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
 {#if showDropdown}

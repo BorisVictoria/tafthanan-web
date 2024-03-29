@@ -49,7 +49,7 @@
                 console.log(button.id + " clicked!")
                 document.execCommand(button.id, false, null);
 
-        })
+        }) })
 
         const formButtons = document.querySelectorAll('.wrap');
         formButtons.forEach(button => {
@@ -62,7 +62,7 @@
                 })
 
             })
-        })
+        
 
         document.getElementById('submitUrl').addEventListener('click', () =>{
             console.log('submit clicked.')

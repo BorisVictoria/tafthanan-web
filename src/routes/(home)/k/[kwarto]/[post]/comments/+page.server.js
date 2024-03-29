@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 import { getPost, editPost } from "$db/posts";
-import { getParentComments } from "$db/comments"
+import { getParentComments, getComment } from "$db/comments"
 import { EJSON } from "bson";
 import { redirect } from "@sveltejs/kit";
 import { getKwarto } from "$db/kwarto.js";
-import { createComment } from "$db/comments"
+import { createComment, editComment } from "$db/comments"
 
 export const actions = {
     submit: async(event) => {
@@ -63,8 +63,9 @@ export const actions = {
         }
 
         //check if there are no changes
-        if(data.get('title') === author.title || data.get('content') === author.username){
+        if(data.get('title') === author.title || data.get('content') === author.content){
             console.log('no changes')
+            return false
         }
 
         console.log('all forms good')
@@ -86,9 +87,64 @@ export const actions = {
 
 
 
+    },
+
+    editComment: async(event) => {
+        if(event.locals.user == null){
+            redirect(303, '/login?plsLogIn')
+        }
+
+        const data = await event.request.formData()
+
+        console.log('data')
+        console.log(data)
+
+        //check if the author of post data is equal to current user.
+        console.log('getting post')
+        const author = await getComment(data.get('postID'))
+        
+        console.log('verifying author and user')
+        console.log(event.locals.user.username, author.author)
+        if(event.locals.user.username !== author.author){
+            redirect(303, '/login')
+        }
+
+        //check if form is empty
+        console.log('checking empty field')
+        if(data.get('content') === ""){
+            
+            return false
+        }
+
+        //check if there are no changes
+        if(data.get('content') === author.content){
+            console.log('no changes')
+            return false
+        }
+
+        console.log('all forms good')
+
+        const newContent = {
+            _id : data.get('postID'),
+            content : data.get('content')
+        }
+
+        const result = await editComment(newContent)
+        console.log(result)
+
+        if(result) {
+            return true
+        }
+
+        return false
+
+
+
     }
 
 }
+
+
 
 export const load = async(event) => {
 

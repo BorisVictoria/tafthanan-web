@@ -78,7 +78,7 @@ export const createComment = async(data) => {
 
 export const editComment = async(data) => {
     const objID = new ObjectId(data._id)
-    const result = await comments.updateOne({_id: objID}, {$set: {content: data.content}})
+    const result = await comments.updateOne({_id: objID}, {$set: {content: data.content, isEdited : true}})
     if (result) {
         return result
     }

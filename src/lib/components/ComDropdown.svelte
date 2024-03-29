@@ -2,7 +2,11 @@
     import { page } from  '$app/stores'
     import { goto } from '$app/navigation'
     import Modal from '$lib/components/Modal.svelte'
+    import EditComm from '$lib/components/EditComm.svelte'
+    
     export let comment = null;
+
+
    
     console.log("comment id: " + comment._id)
     console.log("comment content: " + comment.content)
@@ -11,7 +15,8 @@
 
     let showDropdown = false;    
 
-    let showModal = false;
+    let showModalDelete = false;
+    let showModalEdit = false;
 
     const handleDelete = async(comment) => {
         console.log(comment._id.toString())
@@ -19,7 +24,7 @@
         console.log('successfully deleted')
         location.reload()
 
-        showModal = false
+        showModalDelete = false
     }
 
     const handleEdit = async(comment) => {
@@ -29,21 +34,32 @@
 
 </script>
 
-<Modal bind:showModal>
+<Modal bind:showModal={showModalDelete}>
     <article class="full-width">
     <h1>Are you sure you want to delete your comment?</h1>
     <button on:click={handleDelete(comment)} class="action-button full-width"> Yes </button>
-    <button on:click={() => {showModal = false}} class="action-button full-width"> No </button>
+    <button on:click={() => {showModalDelete = false}} class="action-button full-width"> No </button>
     </article>
 </Modal>
+
+{#if showModalEdit}
+
+<Modal bind:showModal={showModalEdit}>
+    <EditComm postID={comment._id} content={comment.content}/>
+
+</Modal>
+
+{/if}
+
+
 
 <button class="action-button pointer" on:click={() => {showDropdown = !showDropdown;}}><img src="/assets/more-vert.svg"></button>
 {#if showDropdown}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="dropdown-content" on:mouseleave={()=>{showDropdown = !showDropdown}}>
         {#if $page.data.user && $page.data.user.username === comment.author}
-        <button>Edit</button>
-        <button on:click={() => {showModal = true}}>Delete</button>
+        <button on:click={() => {showModalEdit = true}}>Edit</button>
+        <button on:click={() => {showModalDelete = true}}>Delete</button>
         {/if}
         <button href="#">Share</button>
     </div>

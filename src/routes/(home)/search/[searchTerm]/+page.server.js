@@ -59,8 +59,9 @@ export const actions = {
         }
 
         //check if there are no changes
-        if(data.get('title') === author.title || data.get('content') === author.username){
+        if(data.get('title') === author.title || data.get('content') === author.content){
             console.log('no changes')
+            return false;
         }
 
         console.log('all forms good')

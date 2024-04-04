@@ -20,22 +20,26 @@ export const getReceivedReqs = async(user) => {
 
 
 export const addFriend = async(recepientName, senderName) => {
-    let recepient = await recepient.findOne({username : recepientName})
+    let recepient = await users.findOne({username : recepientName})
+
+    console.log("adding friend " + recepient)
 
     if(recepient.friends) {
         let friendlist = recepient.friends
-        friendlist.push(sender)
-        let result = user.updateOne({username : recepientName}, {$set : {friends : friendlist}})
+        friendlist.push(senderName)
+        let result = await users.updateOne({username : recepientName}, {$set : {friends : friendlist}})
         return result
     } else {
         let friendlist = []
-        let result = user.updateOne({username : recepientName}, {$set : { friends : friendlist}})
+        friendlist.push(senderName)
+        let result = await users.updateOne({username : recepientName}, {$set : { friends : friendlist}})
         return result
     }
 }
 
 export const getRequest = async(id) => {
-    let result = await requests.findOne({_id : ObjectId(id)})
+    let result = await requests.findOne({_id : new ObjectId(id)})
+    console.log(result)
 
     if(result){
         return result
@@ -104,16 +108,18 @@ export const acceptRequest = async(id) => {
     let request = await getRequest(id)
 
     //smart
-    addFriend(request.sender, request.recepient)
-    addFriend(request.recepient, request.sender)
-
+    await addFriend(request.sender, request.recepient)
+    await addFriend(request.recepient, request.sender)
     
-    let result = await requests.updateOne({_id : ObjectId(id)}, {$set : {status: "accepted"}})
+    let result = await requests.updateOne({_id : new ObjectId(id)}, {$set : {status: "accepted"}})
 
-    return true
+    if(result){
+        return result
+    }
 
 
     }catch(err){
+        console.log(err)
         return false
     }
 
@@ -142,11 +148,7 @@ export const findRequest = async(user, userB) => {
     console.log(result)
 
     if(result){
-        if(result.sender === user){
-            return "sentRequest"
-        } else {
-            return "receivedRequest"
-        }
+        return result
     }
 
     return false

@@ -91,6 +91,8 @@
 
     span img{
         height: calc(var(--fs-m) * 3);
+        width: calc(var(--fs-m) * 3);
+        object-fit: cover;
         border-radius: 3em;
     }
 

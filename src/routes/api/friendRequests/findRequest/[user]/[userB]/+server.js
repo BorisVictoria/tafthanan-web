@@ -8,9 +8,20 @@ export const GET = async(event) => {
     console.log(event)
     try{
 
+    const user = event.params.user
     let res = await findRequest(event.params.user, event.params.userB)
-    console.log('res: '+ res)
-    return json(res)
+    
+    if(res.status != "pending"){
+        return json(false)
+    }
+    
+    if(res.sender == user){
+        return json("sentRequest")
+    }
+
+    else if(res.recepient == user){
+        return json("receivedRequest")
+    }
 
     } catch(err){
         console.log(err)

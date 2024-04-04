@@ -14,6 +14,7 @@ export const handle = async({event, resolve}) => {
         event.locals.user = {
             username: user.username,
             userID: user._id.toString(),
+            friends : user.friends,
             token: user.token,
         }
     }

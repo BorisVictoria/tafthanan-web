@@ -22,9 +22,10 @@
     let btnAction = "Add Neighbor"
 
 
-    if($page.data.user.friends != undefined && $page.data.user.friends.includes(data.username)){
+    $: if($page.data.user.friends !== undefined && $page.data.user.friends.includes(data.username)){
         btnAction = "Remove Neighbor"
     } 
+    
     
     $: if(hasPendingRequest === "sentRequest") {
         btnAction = "Cancel"
@@ -49,8 +50,10 @@
             await getPendingRequest()
         } else if(btnAction == "Accept Request"){
             console.log('accept')
-            await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`)
-            await getPendingRequest()
+            await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
+            await getPendingRequest();
+            btnAction="Remove Neighbor"
+            notifications.success('Successfully added as a neighbor!', 1000)
         }
     }
 

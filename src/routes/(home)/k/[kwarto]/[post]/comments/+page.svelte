@@ -27,6 +27,8 @@
     $: allList = EJSON.deserialize(data.allList);
     $: kwartolist = EJSON.deserialize(data.kwartolist);
 
+    $: comment = true
+
     onMount(() => {
         const params = new URLSearchParams(window.location.search)
         console.log(params)

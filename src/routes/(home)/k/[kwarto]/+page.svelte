@@ -5,6 +5,7 @@
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
     import KwartoHead from '$lib/components/KwartoHead.svelte'
+    import Toast from '$lib/components/Toast.svelte'
     import {EJSON} from 'bson'
 
     export let data
@@ -14,7 +15,7 @@
     $: neighborlist = EJSON.deserialize(data.neighborlist);
     $: allList = EJSON.deserialize(data.allList);
     $: kwartolist = EJSON.deserialize(data.kwartolist);
-    
+
     $: console.log(kwarto.name)
     let width = 0;
 
@@ -29,6 +30,9 @@
 <svelte:window bind:innerWidth={width}/>
 
 <div class="wrapper main">
+
+    <Toast/>
+
 
     <!-- Left -->
     <div class="left">

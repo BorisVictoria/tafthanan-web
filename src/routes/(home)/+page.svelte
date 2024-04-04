@@ -7,6 +7,7 @@
     import Right from '$lib/components/Right.svelte'
     import { onMount } from 'svelte'
     import {EJSON} from 'bson'
+    import Toast from '$lib/components/Toast.svelte'
     
     let showModal = false;
     let width = 0;
@@ -31,7 +32,7 @@
 <svelte:window bind:innerWidth={width}/>
 
 <div class="wrapper main">
-
+    <Toast/>
     <!-- Left -->
     <div class="left">
         {#key kwartolist}

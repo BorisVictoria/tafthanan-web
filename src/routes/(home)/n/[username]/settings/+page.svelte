@@ -3,6 +3,7 @@
     import Password from '$lib/components/Password.svelte'
     import Text from '$lib/components/Text.svelte'
     import {enhance} from '$app/forms'
+    import Toast from '$lib/components/Toast.svelte'
 
     let show = 'none'
     let bioDiv
@@ -116,6 +117,9 @@
     })
 
 </script>
+
+<Toast/>
+
 
 <div class="wrapper main">
     <div class="left">

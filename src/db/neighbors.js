@@ -5,19 +5,6 @@ const requests = client.db("tafthanan").collection("neighborRequests")
 const users = client.db("tafthanan").collection("users")
 
 
-export const getReceivedReqs = async(user) => {
-    let result = await requests.findAll({recepient : user, status: pending})
-
-    result = result.toArray()
-
-    if(result){
-        return result
-    }
-
-
-    return null
-}
-
 
 export const addFriend = async(recepientName, senderName) => {
     let recepient = await users.findOne({username : recepientName})
@@ -129,7 +116,7 @@ export const acceptRequest = async(id) => {
 export const declineRequest = async(id) => {
 
     //set status to declined
-    let result =  await requests.updateOne({_id : ObjectId(id)}, {$set : {status: "declined"}})
+    let result =  await requests.updateOne({_id : new ObjectId(id)}, {$set : {status: "declined"}})
 
     if(result){
         return result
@@ -140,10 +127,14 @@ export const declineRequest = async(id) => {
 }
 
 export const findReceivedRequests = async(user) => {
-    let result = await requests.find({recepient : user})
+    console.log(user)
+    let result = await requests.find({recepient : user, status : "pending"})
+
+    console.log('145')
+    console.log(result)
 
     if(result){
-        return result
+        return result.toArray()
     }
 
     return false

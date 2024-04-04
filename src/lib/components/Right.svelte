@@ -4,13 +4,43 @@
     export let all;
     import { page } from '$app/stores'
     import { onMount } from 'svelte'
+    import { notifications} from '$lib/notifications'
 
     console.log(neighbors)
     console.log(all)
     
+    $: friendRequests = []
+    $: console.log(friendRequests)
 
-    //let friendRequests = await fetch(`api/friendRequests/getAll/${$user.username}`)
-   
+    var username
+    if($page.data.user == undefined){
+        username = null
+    } else {
+        username = $page.data.user.username
+    }
+    console.log(username)
+
+
+
+    const fetchRequests = async() => {
+        let res = await fetch(`/api/friendRequests/${username}`)
+        friendRequests = await res.json()
+    }
+
+    const handleAccept = async(name) => {
+        await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
+        notifications.success('Successfully added as a neighbor!', 5000)
+        await fetchRequests()
+        
+    }
+
+    const handleDecline = async(name) => {
+        await fetch(`/api/friendRequests/decline/${$page.data.user.username}/${name}`, {method : 'POST'})
+        notifications.success('Successfully declined request!', 5000)
+        await fetchRequests()
+        
+    }
+
 
 </script>
 
@@ -22,15 +52,38 @@
 
     <div class="neighbor-list">
 
+        {#await fetchRequests()}
+        {:then}
+        {#key friendRequests}
+        {#if friendRequests.length > 0}
+        <h3>Friend Requests ({friendRequests.length})</h3>
+            {#each friendRequests as request}
+            <span class="friend-req">
+                <a href={'/n/'+request.username} >
+                    <span class="pointer"> 
+                        <img src={request.pfp} alt="profile picture"> 
+                        <p>{request.username} </p> 
+                    </span>
+                </a> 
+                
+                <div class="button-holder">
+                <button class="action-button pointer" on:click={handleAccept(request.username)}><img src="/assets/check.svg"></button> <button on:click={handleDecline(request.username)} class="action-button pointer"><img src="/assets/cross-out.svg"></button></div></span>
+            {/each}
+            <hr>
+        {/if}
+        {/key}
+        {/await}
+
         {#if $page.data.user}
 
             {#if neighbors && neighbors.length > 0}
-            <h3>Your neighbors</h3>
+            <h3>Your neighbors ({neighbors.length})</h3>
                 {#each neighbors as neighbor}
                 <a href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
                 {/each}
 
             {:else}
+            <h3>Your neighbors (0)</h3>
                 Add more neighbors!
             {/if}
 
@@ -71,6 +124,10 @@
         
     }
 
+    .friend-req{
+        display: flex;
+        justify-content:space-between;
+    }
 
     .neighbor-list::-webkit-scrollbar-thumb{
         background-color: transparent;
@@ -101,6 +158,29 @@
         display: flex;
         flex-direction: column;
         gap: calc(var(--fs-m))
+    }
+
+    .button-holder{
+        justify-self: end;
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+    }
+
+    span span:hover{
+        background-color: transparent;
+    }
+
+    .action-button{
+        object-fit: contain;
+        overflow: hidden;
+        height: calc(var(--fs-l) * 1.0);
+        width: calc(var(--fs-l) * 1.0);
+        padding: 0px;
+    }
+
+    .action-button img{
+        height: 90%;
     }
 
     .kwarto-list-holder span:hover{

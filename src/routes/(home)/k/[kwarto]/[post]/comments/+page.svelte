@@ -9,6 +9,7 @@
     import Modal from '$lib/components/Modal.svelte'
     import Back from '$lib/components/Back.svelte'
     import TextEditor from '$lib/components/TextEditor.svelte'
+    import Toast from '$lib/components/Toast.svelte'
     import { onMount } from 'svelte';
 
     let replies = [];
@@ -42,6 +43,9 @@
 </Modal>
 
 <div class="wrapper main">
+
+    <Toast/>
+
 
 <!-- Left -->
 <div class="left">

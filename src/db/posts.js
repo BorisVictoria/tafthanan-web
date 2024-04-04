@@ -43,7 +43,6 @@ export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
         result.sort({datePosted : -1})
     }
 
-    console.log(result)
     result = result.toArray()
 
     if(result.length === 0){
@@ -171,7 +170,6 @@ export const editPost = async(data) => {
     const objID = new ObjectId(data._id)
 
     const result = await posts.updateOne({_id: objID}, {$set: {title: data.title, content: data.content, isEdited : true}})
-    console.log(data)
     if (result) {
         return result
     }

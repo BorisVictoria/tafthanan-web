@@ -31,8 +31,6 @@ export const getAllUsers = async() => {
 export const getUser = async(username) => {
 
     const result = await users.findOne({username: username}, {projection : {password : false, passwordHash : false, token: false, tokenExpiry: false}})
-    console.log('this is result')
-    console.log(result)
     if (result) {
         return result
     }
@@ -43,8 +41,7 @@ export const getUser = async(username) => {
 export const getUserAuth = async(username) => {
 
     const result = await users.findOne({username: username})
-    console.log('this is result')
-    console.log(result)
+
     if (result) {
         return result
     }

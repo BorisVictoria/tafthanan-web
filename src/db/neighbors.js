@@ -22,7 +22,6 @@ export const getReceivedReqs = async(user) => {
 export const addFriend = async(recepientName, senderName) => {
     let recepient = await users.findOne({username : recepientName})
 
-    console.log("adding friend " + recepient)
 
     if(recepient.friends) {
         let friendlist = recepient.friends
@@ -39,7 +38,6 @@ export const addFriend = async(recepientName, senderName) => {
 
 export const getRequest = async(id) => {
     let result = await requests.findOne({_id : new ObjectId(id)})
-    console.log(result)
 
     if(result){
         return result
@@ -54,7 +52,6 @@ export const sendRequest = async(sender, recepient) => {
     //sender
     //recepient
     //status: [pending, accepted, declined] 
-    console.log('nagsend ako sa db')
 
     let result = await requests.insertOne({time : Date.now(), sender : sender, recepient : recepient, status: "pending"})
 
@@ -143,9 +140,7 @@ export const declineRequest = async(id) => {
 }
 
 export const findRequest = async(user, userB) => {
-    console.log(user, userB)
     let result = await requests.findOne({$or : [{sender : user, recepient : userB}, {sender : userB, recepient : user}], status : "pending"})
-    console.log(result)
 
     if(result){
         return result

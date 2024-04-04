@@ -20,7 +20,6 @@
       let title = data.deleted ? "[deleted]" : data.title;
       let content = data.deleted ? "[deleted]" : data.content;
 
-      console.log(data.deleted)
 
       export let showModal = false
       export let replyingTo = null
@@ -36,7 +35,6 @@
   function comment(){
 
     if(hidden){
-      console.log('i was called')
       showModal = true
       goto('/k/'+kwarto+'/'+data._id+'/comments?showModal=true')
 

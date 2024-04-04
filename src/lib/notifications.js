@@ -9,7 +9,6 @@ function createNotificationStore (timeout) {
 
     // sends a notification and adds it to the list of notifications
     function send (message, type = "default", timeout) {
-        console.log('i was called lol')
         _notifications.update(state => {
             return [...state, { id: id(), type, message, timeout }]
         })

@@ -45,7 +45,7 @@
                 console.log('add')
                 await fetch(`/api/friendRequests/send/${$page.data.user.username}/${name}`, {method : 'POST'})
                 await getPendingRequest()
-                notifications.success('Successfully sent neighbor request!', 5000)
+                notifications.success('Successfully sent neighbor request!', 2000)
             }
             else if(btnAction == "Remove Neighbor"){
                 console.log('remove')
@@ -60,7 +60,7 @@
                 await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
                 await getPendingRequest();
                 btnAction="Remove Neighbor"
-                notifications.success('Successfully added as a neighbor!', 5000)
+                notifications.success('Successfully added as a neighbor!', 2000)
             }
         }else{
             goto('login?/plsLogIn')
@@ -84,8 +84,7 @@
         </div>
 
         {#if $page.data.user != undefined && $page.data.user.username !== name}
-        {#await getPendingRequest()}
-        {:then}
+        {#await getPendingRequest() then }
         <div class="follow-button-holder">
             <Button --url='url(/assets/add.svg)' on:click={handleButton}> {btnAction} </Button>
         </div>

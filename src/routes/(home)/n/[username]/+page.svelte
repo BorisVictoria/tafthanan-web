@@ -12,9 +12,9 @@
     $: data = EJSON.deserialize(data)
     $: ({userProfile, posts} = data)
 
-    $: neighborlist = data.neighborlist
-    $: kwartolist = data.kwartolist
-    $: allList = data.allList;
+    $: neighborlist = EJSON.deserialize(data.neighborlist);
+    $: allList = EJSON.deserialize(data.allList);
+    $: kwartolist = EJSON.deserialize(data.kwartolist);
 
     console.log(data)
 

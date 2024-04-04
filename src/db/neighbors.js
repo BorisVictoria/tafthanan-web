@@ -139,6 +139,16 @@ export const declineRequest = async(id) => {
 
 }
 
+export const findReceivedRequests = async(user) => {
+    let result = await requests.find({recepient : user})
+
+    if(result){
+        return result
+    }
+
+    return false
+}
+
 export const findRequest = async(user, userB) => {
     let result = await requests.findOne({$or : [{sender : user, recepient : userB}, {sender : userB, recepient : user}], status : "pending"})
 

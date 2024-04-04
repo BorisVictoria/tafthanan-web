@@ -11,8 +11,10 @@
     $: data = EJSON.deserialize(data)
     $: ({kwarto, posts} = data)
 
-    $: neighborlist = data.neighborlist
-    $: kwartolist = data.kwartolist
+    $: neighborlist = EJSON.deserialize(data.neighborlist);
+    $: allList = EJSON.deserialize(data.allList);
+    $: kwartolist = EJSON.deserialize(data.kwartolist);
+    
     $: console.log(kwarto.name)
     let width = 0;
 
@@ -70,7 +72,7 @@
             <img alt="add icon" src="/assets/add-black.svg">
             <h1>Create Post</h1>
         </a>
-        <Right neighbors={neighborlist}/>
+        <Right neighbors={neighborlist} all={allList}/>
     </div>
 
 </div>

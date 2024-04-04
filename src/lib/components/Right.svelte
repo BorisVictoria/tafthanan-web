@@ -3,9 +3,14 @@
     export let neighbors;
     export let all;
     import { page } from '$app/stores'
+    import { onMount } from 'svelte'
+
+    console.log(neighbors)
+    console.log(all)
     
 
     //let friendRequests = await fetch(`api/friendRequests/getAll/${$user.username}`)
+   
 
 </script>
 

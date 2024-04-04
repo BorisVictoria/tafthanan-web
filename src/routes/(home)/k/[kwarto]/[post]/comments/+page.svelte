@@ -23,10 +23,9 @@
 
     $: console.log(replyingTo)
 
-    $: neighborlist = EJSON.deserialize(data.neighborlist)
-    $: kwartolist = EJSON.deserialize(data.kwartolist)
-
-    $: comment = true
+    $: neighborlist = EJSON.deserialize(data.neighborlist);
+    $: allList = EJSON.deserialize(data.allList);
+    $: kwartolist = EJSON.deserialize(data.kwartolist);
 
     onMount(() => {
         const params = new URLSearchParams(window.location.search)
@@ -82,7 +81,7 @@
 <!-- Right -->
 <div class="right">
     {#key neighborlist}
-        <Right neighbors={neighborlist}/>
+    <Right neighbors={neighborlist} all={allList}/>
     {/key}
 </div>
 

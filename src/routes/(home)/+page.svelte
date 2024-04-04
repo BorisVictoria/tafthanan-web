@@ -15,9 +15,9 @@
     $: data = EJSON.deserialize(data)
     $: ({posts} = data)
 
-    $: neighborlist = data.neighborlist
-    $: kwartolist = data.kwartolist
-    $: allList = data.allList;
+    $: neighborlist = EJSON.deserialize(data.neighborlist);
+    $: allList = EJSON.deserialize(data.allList);
+    $: kwartolist = EJSON.deserialize(data.kwartolist);
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
     $: console.log(posts)

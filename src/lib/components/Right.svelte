@@ -1,9 +1,9 @@
 <script>
 
     export let neighbors;
+    export let all;
     import { page } from '$app/stores'
-
-    let pfp = "/assets/default-pfp.png"
+    
 
     //let friendRequests = await fetch(`api/friendRequests/getAll/${$user.username}`)
 
@@ -16,8 +16,29 @@
         </div>
 
     <div class="neighbor-list">
-        {#each neighbors as neighbor}
-        <a href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
+
+        {#if $page.data.user}
+
+            {#if neighbors && neighbors.length > 0}
+            <h3>Your neighbors</h3>
+                {#each neighbors as neighbor}
+                <a href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
+                {/each}
+
+            {:else}
+                Add more neighbors!
+            {/if}
+
+            {:else}
+            Sign in to see your neighbors!
+
+        {/if}
+
+        <hr>
+
+        <h3>All users</h3>
+        {#each all as user}
+        <a href={'/n/'+user.username} ><span class="pointer"> <img src={user.pfp} alt="profile picture"> <p>{user.username} </p> </span></a>
         {/each}
     </div>
 
@@ -36,11 +57,7 @@
 
     .neighbor-list{
         max-height: 23rem;
-        overflow: hidden;   
-    }
-
-    .neighbor-list:hover{
-        overflow: auto;
+        overflow: auto;  
     }
 
     ::-webkit-scrollbar{
@@ -49,12 +66,24 @@
         
     }
 
-    ::-webkit-scrollbar-thumb{
+
+    .neighbor-list::-webkit-scrollbar-thumb{
+        background-color: transparent;
+        border-radius: 1em;
+        width: 10px;
+        transition: background-color 0.3s ease-out;
+        
+        
+    }
+
+    .neighbor-list:hover::-webkit-scrollbar-thumb{
         background-color: lightgray;
         border-radius: 1em;
         width: 10px;
         
+        
     }
+        
 
      .kwarto-list-holder{
         background-color: var(--background-color);

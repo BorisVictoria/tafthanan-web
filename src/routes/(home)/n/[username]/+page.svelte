@@ -14,6 +14,7 @@
 
     $: neighborlist = data.neighborlist
     $: kwartolist = data.kwartolist
+    $: allList = data.allList;
 
     console.log(data)
 
@@ -57,7 +58,7 @@
     <!-- Right -->
     <div class="right">
         {#key neighborlist}
-            <Right neighbors={neighborlist}/>
+        <Right neighbors={neighborlist} all={allList}/>
         {/key}
     </div>
 

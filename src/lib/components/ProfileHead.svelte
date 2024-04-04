@@ -38,7 +38,7 @@
             console.log('add')
             await fetch(`/api/friendRequests/send/${$page.data.user.username}/${name}`, {method : 'POST'})
             await getPendingRequest()
-            notifications.success('Successfully sent neighbor request!', 1000)
+            notifications.success('Successfully sent neighbor request!', 5000)
         }
         else if(btnAction == "Remove Neighbor"){
             console.log('remove')
@@ -53,7 +53,7 @@
             await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
             await getPendingRequest();
             btnAction="Remove Neighbor"
-            notifications.success('Successfully added as a neighbor!', 1000)
+            notifications.success('Successfully added as a neighbor!', 5000)
         }
     }
 

@@ -19,7 +19,7 @@
 
 
 <div class="left-wrapper">
-    <a href="/">
+    <a href="/" data-sveltekit-reload>
         <div class="no-border home-button-holder">
             <BarButton tag='big' img="/assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
         </div>

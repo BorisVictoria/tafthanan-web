@@ -16,6 +16,7 @@
 
     $: neighborlist = data.neighborlist
     $: kwartolist = data.kwartolist
+    $: allList = data.allList;
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
 
@@ -58,7 +59,7 @@
     <!-- Right -->
     <div class="right">
         {#key neighborlist}
-            <Right neighbors={neighborlist}/>
+        <Right neighbors={neighborlist} all={allList}/>
         {/key}
     </div>
 </div>

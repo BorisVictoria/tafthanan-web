@@ -106,6 +106,22 @@ export const getUserByID = async(id) => {
     return null
 }
 
+export const getUserFromList = async(list) => {
+    
+
+    const result = await users.find({username : {$in : list}})
+    console.log(result)
+
+    console.log(result)
+
+    if(result){
+        return result.toArray()
+    }
+
+    return null;
+
+}
+
 export const getToken = async(token) => {
     
     const result = await users.findOne({token: token})

@@ -3,6 +3,7 @@
     import Button from '$lib/components/Button.svelte'
     import { page } from '$app/stores'
     import { notifications } from '$lib/notifications'
+    import { goto } from '$app/navigation'
     
     export let data;
 
@@ -15,14 +16,19 @@
     let hasPendingRequest = false;
 
     const getPendingRequest = async() => {
-        let status = await fetch(`/api/friendRequests/findRequest/${$page.data.user.username}/${name}`)
-        hasPendingRequest = await status.json()
-        console.log(hasPendingRequest)
+
+        if($page.data.user != undefined){
+            let status = await fetch(`/api/friendRequests/findRequest/${$page.data.user.username}/${name}`)
+            hasPendingRequest = await status.json()
+        }
+        else{
+            hasPendingRequest = false;
+        }
     }
     let btnAction = "Add Neighbor"
 
-
-    $: if($page.data.user.friends !== undefined && $page.data.user.friends.includes(data.username)){
+    
+    $: if($page.data.user != undefined && $page.data.user.friends != undefined && $page.data.user.friends.includes(data.username)){
         btnAction = "Remove Neighbor"
     } 
     
@@ -34,26 +40,30 @@
     } 
 
     const handleButton = async() => {
-        if(btnAction == "Add Neighbor"){
-            console.log('add')
-            await fetch(`/api/friendRequests/send/${$page.data.user.username}/${name}`, {method : 'POST'})
-            await getPendingRequest()
-            notifications.success('Successfully sent neighbor request!', 5000)
-        }
-        else if(btnAction == "Remove Neighbor"){
-            console.log('remove')
-            await fetch(`/api/friendRequests/remove/${$page.data.user.username}/${name}`)
-            await getPendingRequest()
-        } else if(btnAction == "Cancel"){
-            console.log('cancel')
-            await fetch(`/api/friendRequests/cancel/${$page.data.user.username}/${name}`) 
-            await getPendingRequest()
-        } else if(btnAction == "Accept Request"){
-            console.log('accept')
-            await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
-            await getPendingRequest();
-            btnAction="Remove Neighbor"
-            notifications.success('Successfully added as a neighbor!', 5000)
+        if($page.data.user !== undefined){
+            if(btnAction == "Add Neighbor"){
+                console.log('add')
+                await fetch(`/api/friendRequests/send/${$page.data.user.username}/${name}`, {method : 'POST'})
+                await getPendingRequest()
+                notifications.success('Successfully sent neighbor request!', 5000)
+            }
+            else if(btnAction == "Remove Neighbor"){
+                console.log('remove')
+                await fetch(`/api/friendRequests/remove/${$page.data.user.username}/${name}`)
+                await getPendingRequest()
+            } else if(btnAction == "Cancel"){
+                console.log('cancel')
+                await fetch(`/api/friendRequests/cancel/${$page.data.user.username}/${name}`) 
+                await getPendingRequest()
+            } else if(btnAction == "Accept Request"){
+                console.log('accept')
+                await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
+                await getPendingRequest();
+                btnAction="Remove Neighbor"
+                notifications.success('Successfully added as a neighbor!', 5000)
+            }
+        }else{
+            goto('login?/plsLogIn')
         }
     }
 
@@ -73,7 +83,7 @@
             </div>
         </div>
 
-        {#if $page.data.user.username !== name}
+        {#if $page.data.user != undefined && $page.data.user.username !== name}
         {#await getPendingRequest()}
         {:then}
         <div class="follow-button-holder">

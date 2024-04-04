@@ -1,6 +1,8 @@
 <script>
 
     import Button from '$lib/components/Button.svelte'
+    import { page } from '$app/stores'
+    import { notifications } from '$lib/notifications'
     
     export let data;
 
@@ -8,6 +10,50 @@
     let pfp = data.pfp;
     let name = data.username;
     let bio = data.bio;
+
+
+    let hasPendingRequest = false;
+
+    const getPendingRequest = async() => {
+        let status = await fetch(`/api/friendRequests/findRequest/${$page.data.user.username}/${name}`)
+        hasPendingRequest = await status.json()
+        console.log(hasPendingRequest)
+    }
+    let btnAction = "Add Neighbor"
+
+
+    if($page.data.user.friends != undefined && $page.data.user.friends.includes(data.username)){
+        btnAction = "Remove Neighbor"
+    } 
+    
+    $: if(hasPendingRequest === "sentRequest") {
+        btnAction = "Cancel"
+    } else if(hasPendingRequest === "receivedRequest") {
+        btnAction = "Accept Request"
+    } 
+
+    const handleButton = async() => {
+        if(btnAction == "Add Neighbor"){
+            console.log('add')
+            await fetch(`/api/friendRequests/send/${$page.data.user.username}/${name}`, {method : 'POST'})
+            await getPendingRequest()
+            notifications.success('Successfully sent neighbor request!', 1000)
+        }
+        else if(btnAction == "Remove Neighbor"){
+            console.log('remove')
+            await fetch(`/api/friendRequests/remove/${$page.data.user.username}/${name}`)
+            await getPendingRequest()
+        } else if(btnAction == "Cancel"){
+            console.log('cancel')
+            await fetch(`/api/friendRequests/cancel/${$page.data.user.username}/${name}`) 
+            await getPendingRequest()
+        } else if(btnAction == "Accept Request"){
+            console.log('accept')
+            await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`)
+            await getPendingRequest()
+        }
+    }
+
 
 </script>
 
@@ -23,9 +69,15 @@
             <p>{username}</p>
             </div>
         </div>
+
+        {#if $page.data.user.username !== name}
+        {#await getPendingRequest()}
+        {:then}
         <div class="follow-button-holder">
-            <Button --url='url(/assets/add.svg)'> Follow </Button>
+            <Button --url='url(/assets/add.svg)' on:click={handleButton}> {btnAction} </Button>
         </div>
+        {/await}
+        {/if}
     </div>
 
     <div class="bio-holder">
@@ -56,7 +108,7 @@
 
     .follow-button-holder{
         display: flex;
-        padding-right: calc(var(--fs-m) * 6)
+        padding-right: calc(var(--fs-m) * 3)
         
     }
 

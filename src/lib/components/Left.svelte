@@ -24,6 +24,7 @@
             <BarButton tag='big' img="/assets/home.svg" --bg-color="transparent" --color-hover="var(--button-contrast-color)">Home</BarButton>
         </div>
     </a>
+
     <div class="top-border kwarto-holder">
         
         <div class="kwarto-list-holder">

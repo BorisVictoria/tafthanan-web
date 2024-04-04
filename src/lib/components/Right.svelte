@@ -1,8 +1,11 @@
 <script>
 
     export let neighbors;
+    import { page } from '$app/stores'
 
     let pfp = "/assets/default-pfp.png"
+
+    let friendRequests = await fetch(`api/friendRequests/getAll/${$user.username}`)
 
 </script>
 

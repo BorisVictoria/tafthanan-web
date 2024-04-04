@@ -5,6 +5,7 @@
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
     import ProfileHead from '$lib/components/ProfileHead.svelte'
+    import Toast from '$lib/components/Toast.svelte'
     import {EJSON} from 'bson'
 
     export let data;
@@ -21,6 +22,8 @@
 </script> 
 
 <div class="wrapper main">
+
+    <Toast/>
 
     <!-- Left -->
     <div class="left">

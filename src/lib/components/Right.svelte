@@ -5,7 +5,7 @@
 
     let pfp = "/assets/default-pfp.png"
 
-    let friendRequests = await fetch(`api/friendRequests/getAll/${$user.username}`)
+    //let friendRequests = await fetch(`api/friendRequests/getAll/${$user.username}`)
 
 </script>
 

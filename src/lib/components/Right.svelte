@@ -29,15 +29,15 @@
 
     const handleAccept = async(name) => {
         await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
-        notifications.success('Successfully added as a neighbor!', 5000)
         await fetchRequests()
+        notifications.success('Successfully added as a neighbor!', 1500)
         
     }
 
     const handleDecline = async(name) => {
         await fetch(`/api/friendRequests/decline/${$page.data.user.username}/${name}`, {method : 'POST'})
-        notifications.success('Successfully declined request!', 5000)
         await fetchRequests()
+        notifications.success('Successfully declined request!', 1500)
         
     }
 

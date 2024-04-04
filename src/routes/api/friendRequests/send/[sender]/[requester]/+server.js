@@ -1,5 +1,5 @@
 import { sendRequest } from '$db/neighbors'
-
+import { json } from '@sveltejs/kit'
 
 export const POST = async(event) => {
 
@@ -8,7 +8,7 @@ export const POST = async(event) => {
     try{
     let res = await sendRequest(event.params.sender, event.params.requester)
     console.log(res)
-    return res
+    return json(res)
 
     } catch(err){
         console.log(err)

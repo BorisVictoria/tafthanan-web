@@ -31,7 +31,7 @@
 
 <style>
     .notifs {
-        position: absolute;
+        position: fixed;
         top: 10px;
         left: 0;
         right: 0;

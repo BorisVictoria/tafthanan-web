@@ -16,11 +16,10 @@ export const GET = async(event) => {
     })
     console.log("usernames " + usernames)
 
-    if(usernames.length > 0){
+
         const users = await getUserFromList(usernames)
         return ((json(users)))
-    }
-    return( json(null) )
+
 
 
     } catch(err){

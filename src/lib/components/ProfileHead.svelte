@@ -53,8 +53,10 @@
                 await getPendingRequest()
             } else if(btnAction == "Cancel"){
                 console.log('cancel')
-                await fetch(`/api/friendRequests/cancel/${$page.data.user.username}/${name}`) 
+                await fetch(`/api/friendRequests/decline/${$page.data.user.username}/${name}`, {method : 'POST'}) 
                 await getPendingRequest()
+                btnAction="Add Neighbor"
+                notifications.success('Successfully cancelled request!', 2000)
             } else if(btnAction == "Accept Request"){
                 console.log('accept')
                 await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})

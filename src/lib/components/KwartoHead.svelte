@@ -22,10 +22,6 @@
             </div>
         </div>
 
-        <div class="follow-button-holder">
-            <Button --url='url(/assets/add.svg)'> Join </Button>
-        </div>
-
     </div>
 
     <div class="bio-holder">

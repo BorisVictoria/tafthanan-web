@@ -42,7 +42,6 @@ export const actions = {
         const user = {
             email: registration.get('email'),
             username: registration.get('username'),
-            password: registration.get('password'),
             passwordHash: await bcrypt.hash(registration.get('password'), 10),
             token: crypto.randomUUID(),
             tokenExpiry: new Date(Date.now() + 1000 * 60 * 60 * 24 * 21), 

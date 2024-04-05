@@ -1,26 +1,45 @@
 
 <!-- This component is a radio input that should allow the user to select whether they want the posts to be sorted by top, new, default-->
 <!-- Should also contain a hamburger on mobile view to show settings/left div-->
-<!-- Formula for default: (number of votes) / (how long ago it was posted) proposal lang-->
 
-<script></script>
+<script>
+    import { goto } from "$app/navigation"
+    import { onMount } from 'svelte'
+
+    let newChecked = false
+    let topChecked = false
+
+    let sortBy = 'top';
+    onMount(() => {
+        const params = new URLSearchParams(window.location.search)
+        console.log(params)
+
+        if(params.has('sortBy')){
+            sortBy = params.get('sortBy')
+        }
+
+        console.log(topChecked)
+        console.log(newChecked)
+        
+    })
+
+
+
+
+</script>
 
 <article class="full-width filter">
     <form name="filter" class="filter">
         
         <strong>Sort by:</strong>
 
-        <input type="radio" id="default" name="filter-by" value="default" checked>
-        <div class="action-button pointer">
-        <label for="default"><strong>Default</strong></label> 
-        </div>
-
-        <input type="radio" id="top" name="filter-by" value="top">
+        
+        <input type="radio" id="top" name="filter-by" value="top" bind:group={sortBy} on:click={() => {goto('?sortBy=top')}}>
         <div class="action-button pointer">
         <label for="top"><strong>Top<strong></label>
         </div>
 
-        <input type="radio" id="new" name="filter-by" value="new">
+        <input type="radio" id="new" name="filter-by" value="new" bind:group={sortBy} on:click={() => {goto('?sortBy=new')}}>
         <div class="action-button pointer">
         <label for="new"><strong>New</strong></label>
         </div>

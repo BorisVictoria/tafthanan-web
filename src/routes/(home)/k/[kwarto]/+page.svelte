@@ -5,21 +5,23 @@
     import Left from '$lib/components/Left.svelte'
     import Right from '$lib/components/Right.svelte'
     import KwartoHead from '$lib/components/KwartoHead.svelte'
+    import Toast from '$lib/components/Toast.svelte'
     import {EJSON} from 'bson'
+
     export let data
-    data = EJSON.deserialize(data)
-    const {kwarto, posts} = data
+    $: data = EJSON.deserialize(data)
+    $: ({kwarto, posts} = data)
 
-    export let neighborlist = EJSON.deserialize(data.neighborlist)
-    export let kwartolist = EJSON.deserialize(data.kwartolist)
+    $: neighborlist = EJSON.deserialize(data.neighborlist);
+    $: allList = EJSON.deserialize(data.allList);
+    $: kwartolist = EJSON.deserialize(data.kwartolist);
 
+    $: console.log(kwarto.name)
     let width = 0;
 
-    let postlink = '/login'
-    let isLoggedin = !!(data.user)
-    if(isLoggedin){
-        postlink = '/k/'+kwarto.name+ '/compose'
-    }
+    $: postlink = '/k/'+ `${kwarto.name}` + '/compose'
+    
+    $: isLoggedIn = !!(data.user)
 
     //use this to make modal appear: <button on:click={() => {showModal = true;}}>Write a post</button>
 
@@ -29,15 +31,27 @@
 
 <div class="wrapper main">
 
-    <div class="left">
-        <Left kwartos={kwartolist}/>
-    </div>
-    <div class="middle">
+    <Toast/>
 
-    <KwartoHead data={kwarto}/>
+
+    <!-- Left -->
+    <div class="left">
+        {#key kwartolist}
+            <Left kwartos={kwartolist}/>
+        {/key}
+    </div>
+
+    <!-- Middle -->
+    <div class="middle">
+    {#key kwarto}
+        <KwartoHead data={kwarto}/>
+    {/key}
 
     {#if width < 768}
-    <a class="action-button pointer post-button" data-sveltekit-reload><img src="/assets/add-black.svg"><h1>Create Post</h1></a>
+        <a class="action-button pointer post-button">
+            <img src="/assets/add-black.svg">
+            <h1>Create Post</h1>
+        </a>
     {/if}
 
     {#if posts.length === 0}
@@ -49,34 +63,41 @@
             <Filters/>
     {/if}
 
-    {#each posts as post}
-        <Article data={post} hidden/>
-    {/each}
+    {#key posts}
+        {#each posts as post}
+            <Article data={post} hidden/>
+        {/each}
+    {/key}
     </div>
-    <div class="right">
-        <a class="action-button pointer post-button full-width" href={postlink}><img alt="add icon" src="/assets/add-black.svg"><h1>Create Post</h1></a>
-            <Right neighbors={neighborlist}/>
-    </div>
-</div>
 
+    <!-- Right -->
+    <div class="right">
+        <a class="action-button pointer post-button full-width" href={postlink}>
+            <img alt="add icon" src="/assets/add-black.svg">
+            <h1>Create Post</h1>
+        </a>
+        <Right neighbors={neighborlist} all={allList}/>
+    </div>
+
+</div>
 
 <style>
 
-    a{
+    a {
         text-decoration: none;
         color: var(--font-color)
     }
 
-    .post-button{
+    .post-button {
         font-size: var(--fs-m);
         margin-bottom: var(--fs-m);
     }
 
-    .right{
+    .right {
         padding-top: calc(var(--fs-xxl) * 1.75);
     }
 
-    .post-button img{
+    .post-button img {
         height: var(--fs-l);
         width: var(--fs-l);
     }

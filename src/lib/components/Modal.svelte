@@ -1,30 +1,19 @@
 <script>
-	export let showModal; // boolean
-
     import TextEditor from '$lib/components/TextEditor.svelte';
-
-    let dialog;
-
-	export let postID
-	export let comment = true;
-
-	export let replyingTo
+    
+	export let showModal; // boolean
+	let dialog;
    
-
 	$: if (dialog && showModal) dialog.showModal();
-
+	
 
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:close={() => (showModal = false)}
->
-
-    <TextEditor backFunction={() => dialog.close()} postID={postID} replyingTo={replyingTo} comment={comment}/>
-
-
+<dialog style={showModal ? "display:block" : "display:none"} bind:this={dialog} on:close={() => (showModal = false)} on:click|self={() => dialog.close()}>
+    <slot>
+	
+	</slot>
 </dialog>
 
 <style>
@@ -35,6 +24,7 @@
 		border: none;
 		padding: 0;
         margin: auto;
+		justify-content: center;
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);

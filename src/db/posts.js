@@ -16,34 +16,135 @@ export const getPost = async(id) => {
 
 }
 
-export const getAllPosts = async() => {
 
-    let result = await posts.find({})
+export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
+
+    console.log("search query: " + searchTerm)
+
+    let result = await posts.aggregate([{
+        $search : {
+            index : "default",
+            text : {
+                query : searchTerm,
+                path : ["title", "content", "username"]
+            }
+        }
+    }, 
+    {
+        $match : {
+            deleted : {$ne : true}
+        }
+
+    }])
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
     result = result.toArray()
+
+    if(result.length === 0){
+        return null
+    }
+ 
+
+    return result;
+
+    
+}
+
+export const getPostfromSearchQueryandKwarto = async(sortBy = 'top', searchTerm, kwarto) => {
+
+    console.log("search query: " + searchTerm)
+
+    let result = await posts.aggregate([{
+        $search : {
+            index : "default",
+            text : {
+                query : searchTerm,
+                path : ["title", "content", "username"]
+            }
+        },},
+        {$match : {
+            kwarto : kwarto,
+            deleted : {$ne : true}
+        }}
+    ])
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
+    console.log(result)
+    result = result.toArray()
+
+    if(result.length === 0){
+        return null
+    }
+ 
+
+    return result;
+
+    
+}
+
+
+export const getAllPosts = async(sortBy) => {
+
+    let result = await posts.find({deleted : {$ne: true}})
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
+    result = result.toArray()
+
+    console.log(result)
+
+    if(result.length === 0){
+        return null
+    }
+
+    return result
+}
+
+export const getPostsByKwarto = async(kwarto, sortBy = 'top') => {
+
+    let result = await posts.find({kwarto: kwarto, deleted : {$ne: true}})
+    
+
+    if(sortBy === 'top'){
+        result.sort({voteCount : -1, datePosted : -1})
+    } else if(sortBy == 'new') {
+        result.sort({datePosted : -1})
+    }
+
+    result = result.toArray()
+    return result
 
     if (result.length === 0) {
         return null
     }
 
     return result
-
 }
 
-export const getPostsByKwarto = async(kwarto) => {
+export const getPostsByUser = async(username, sortBy='top') => {
 
-    let result = await posts.find({kwarto: kwarto })
-    result = result.toArray()
+    let result = await posts.find({username: username, deleted : {$ne: true}})
 
-    if (result.length === 0) {
-        return null
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    } else {
+        result.sort({datePosted : -1})
     }
 
-    return result
-}
-
-export const getPostsByUser = async(username) => {
-
-    let result = await posts.find({username: username})
     result = result.toArray()
 
     if (result.length === 0) {
@@ -67,7 +168,8 @@ export const createPost = async(data) => {
 
 export const editPost = async(data) => {
     const objID = new ObjectId(data._id)
-    const result = await posts.updateOne({_id: objID}, {$set: {title: data.title, content: data.content}})
+
+    const result = await posts.updateOne({_id: objID}, {$set: {title: data.title, content: data.content, isEdited : true}})
     if (result) {
         return result
     }
@@ -151,5 +253,7 @@ export const downvotePost = async(data) => {
 
 export const deletePost = async(id) => {
     const objID = new ObjectId(id)
+    console.log(objID)
     const result = await posts.updateOne({_id: objID}, {$set: {deleted: true}})
+    console.log(result)
 }

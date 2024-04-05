@@ -1,8 +1,46 @@
 <script>
 
     export let neighbors;
+    export let all;
+    import { page } from '$app/stores'
+    import { onMount } from 'svelte'
+    import { notifications} from '$lib/notifications'
 
-    let pfp = "/assets/default-pfp.png"
+    console.log(neighbors)
+    console.log(all)
+    
+    $: friendRequests = []
+    $: console.log(friendRequests)
+
+    var username
+    if($page.data.user == undefined){
+        username = null
+    } else {
+        username = $page.data.user.username
+    }
+    console.log(username)
+
+
+
+    const fetchRequests = async() => {
+        let res = await fetch(`/api/friendRequests/${username}`)
+        friendRequests = await res.json()
+    }
+
+    const handleAccept = async(name) => {
+        await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
+        await fetchRequests()
+        notifications.success('Successfully added as a neighbor!', 1500)
+        
+    }
+
+    const handleDecline = async(name) => {
+        await fetch(`/api/friendRequests/decline/${$page.data.user.username}/${name}`, {method : 'POST'})
+        await fetchRequests()
+        notifications.success('Successfully declined request!', 1500)
+        
+    }
+
 
 </script>
 
@@ -13,8 +51,52 @@
         </div>
 
     <div class="neighbor-list">
-        {#each  neighbors as neighbor}
-        <a data-sveltekit-reload href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
+
+        {#await fetchRequests()}
+        {:then}
+        {#key friendRequests}
+        {#if friendRequests.length > 0}
+        <h3>Friend Requests ({friendRequests.length})</h3>
+            {#each friendRequests as request}
+            <span class="friend-req">
+                <a href={'/n/'+request.username} >
+                    <span class="pointer"> 
+                        <img src={request.pfp} alt="profile picture"> 
+                        <p>{request.username} </p> 
+                    </span>
+                </a> 
+                
+                <div class="button-holder">
+                <button class="action-button pointer" on:click={handleAccept(request.username)}><img src="/assets/check.svg"></button> <button on:click={handleDecline(request.username)} class="action-button pointer"><img src="/assets/cross-out.svg"></button></div></span>
+            {/each}
+            <hr>
+        {/if}
+        {/key}
+        {/await}
+
+        {#if $page.data.user}
+
+            {#if neighbors && neighbors.length > 0}
+            <h3>Your neighbors ({neighbors.length})</h3>
+                {#each neighbors as neighbor}
+                <a href={'/n/'+neighbor.username} ><span class="pointer"> <img src={neighbor.pfp} alt="profile picture"> <p>{neighbor.username} </p> </span></a>
+                {/each}
+
+            {:else}
+            <h3>Your neighbors (0)</h3>
+                Add more neighbors!
+            {/if}
+
+            {:else}
+            Sign in to see your neighbors!
+
+        {/if}
+
+        <hr>
+
+        <h3>All users</h3>
+        {#each all as user}
+        <a href={'/n/'+user.username} ><span class="pointer"> <img src={user.pfp} alt="profile picture"> <p>{user.username} </p> </span></a>
         {/each}
     </div>
 
@@ -33,11 +115,7 @@
 
     .neighbor-list{
         max-height: 23rem;
-        overflow: hidden;   
-    }
-
-    .neighbor-list:hover{
-        overflow: auto;
+        overflow: auto;  
     }
 
     ::-webkit-scrollbar{
@@ -46,12 +124,28 @@
         
     }
 
-    ::-webkit-scrollbar-thumb{
+    .friend-req{
+        display: flex;
+        justify-content:space-between;
+    }
+
+    .neighbor-list::-webkit-scrollbar-thumb{
+        background-color: transparent;
+        border-radius: 1em;
+        width: 10px;
+        transition: background-color 0.3s ease-out;
+        
+        
+    }
+
+    .neighbor-list:hover::-webkit-scrollbar-thumb{
         background-color: lightgray;
         border-radius: 1em;
         width: 10px;
         
+        
     }
+        
 
      .kwarto-list-holder{
         background-color: var(--background-color);
@@ -64,6 +158,29 @@
         display: flex;
         flex-direction: column;
         gap: calc(var(--fs-m))
+    }
+
+    .button-holder{
+        justify-self: end;
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+    }
+
+    span span:hover{
+        background-color: transparent;
+    }
+
+    .action-button{
+        object-fit: contain;
+        overflow: hidden;
+        height: calc(var(--fs-l) * 1.0);
+        width: calc(var(--fs-l) * 1.0);
+        padding: 0px;
+    }
+
+    .action-button img{
+        height: 90%;
     }
 
     .kwarto-list-holder span:hover{
@@ -88,6 +205,8 @@
 
     span img{
         height: calc(var(--fs-m) * 3);
+        width: calc(var(--fs-m) * 3);
+        object-fit: cover;
         border-radius: 3em;
     }
 

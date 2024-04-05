@@ -1,20 +1,76 @@
 <script>
 
     import Button from '$lib/components/Button.svelte'
-
+    import { page } from '$app/stores'
+    import { notifications } from '$lib/notifications'
+    import { goto } from '$app/navigation'
+    
     export let data;
 
     let username = "n\\" + data.username;
+    let pfp = data.pfp;
+    let name = data.username;
+    let bio = data.bio;
 
-    export let pfp = data.pfp;
 
-    export let name = data.username;
+    let hasPendingRequest = false;
 
-    export let bio = data.bio;
+    const getPendingRequest = async() => {
+
+        if($page.data.user != undefined){
+            let status = await fetch(`/api/friendRequests/findRequest/${$page.data.user.username}/${name}`)
+            hasPendingRequest = await status.json()
+        }
+        else{
+            hasPendingRequest = false;
+        }
+    }
+    let btnAction = "Add Neighbor"
+
+    
+    $: if($page.data.user != undefined && $page.data.user.friends != undefined && $page.data.user.friends.includes(data.username)){
+        btnAction = "Remove Neighbor"
+    } 
+    
+    
+    $: if(hasPendingRequest === "sentRequest") {
+        btnAction = "Cancel"
+    } else if(hasPendingRequest === "receivedRequest") {
+        btnAction = "Accept Request"
+    } 
+
+    const handleButton = async() => {
+        if($page.data.user !== undefined){
+            if(btnAction == "Add Neighbor"){
+                console.log('add')
+                await fetch(`/api/friendRequests/send/${$page.data.user.username}/${name}`, {method : 'POST'})
+                await getPendingRequest()
+                notifications.success('Successfully sent neighbor request!', 2000)
+            }
+            else if(btnAction == "Remove Neighbor"){
+                console.log('remove')
+                await fetch(`/api/friendRequests/remove/${$page.data.user.username}/${name}`)
+                await getPendingRequest()
+            } else if(btnAction == "Cancel"){
+                console.log('cancel')
+                await fetch(`/api/friendRequests/decline/${$page.data.user.username}/${name}`, {method : 'POST'}) 
+                await getPendingRequest()
+                btnAction="Add Neighbor"
+                notifications.success('Successfully cancelled request!', 2000)
+            } else if(btnAction == "Accept Request"){
+                console.log('accept')
+                await fetch(`/api/friendRequests/accept/${$page.data.user.username}/${name}`, {method : 'POST'})
+                await getPendingRequest();
+                btnAction="Remove Neighbor"
+                notifications.success('Successfully added as a neighbor!', 2000)
+            }
+        }else{
+            goto('login?/plsLogIn')
+        }
+    }
+
 
 </script>
-
-
 
 <article class="full-width profile-header-wrapper">
 
@@ -29,19 +85,20 @@
             </div>
         </div>
 
+        {#if $page.data.user != undefined && $page.data.user.username !== name}
+        {#await getPendingRequest() then }
         <div class="follow-button-holder">
-            <Button --url='url(/assets/add.svg)'> Follow </Button>
+            <Button --url='url(/assets/add.svg)' on:click={handleButton}> {btnAction} </Button>
         </div>
-
+        {/await}
+        {/if}
     </div>
-
 
     <div class="bio-holder">
         {@html bio}
     </div>
+
 </article>
-
-
 
 <style>
     .profile-header-wrapper{
@@ -49,8 +106,6 @@
         flex-direction: column;
         display: flex;
     }
-
-
     
     .name-username-wrapper p{
         color: var(--text-contrast-color);
@@ -67,7 +122,7 @@
 
     .follow-button-holder{
         display: flex;
-        padding-right: calc(var(--fs-m) * 6)
+        padding-right: calc(var(--fs-m) * 3)
         
     }
 

@@ -12,7 +12,6 @@
 <style>
 
     button {
-
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -26,7 +25,6 @@
         background-color: var(--primary-color);
         color: var(--contrast-color);
         transition: background-color 0.1s ease;
-
     }
 
     button::before {

@@ -1,11 +1,13 @@
 import client from '$db/mongo'
 import { ObjectId } from 'mongodb'
-
+import bcrypt from 'bcrypt'
 
 export const users = client.db('tafthanan').collection('users')
 
 export const registerUser = async(data) => {
 
+
+    data.pfp = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/510px-Default_pfp.svg.png"
     const result = await users.insertOne(data)
     if (result) {
         return result
@@ -16,7 +18,7 @@ export const registerUser = async(data) => {
 }
 
 export const getAllUsers = async() => {
-    let result = await users.find({})
+    let result = await users.find({}).project({password : false, passwordHash : false, token: false, tokenExpiry: false})
     result = result.toArray()
 
     if (result.length === 0) {
@@ -28,7 +30,7 @@ export const getAllUsers = async() => {
 
 export const getUser = async(username) => {
 
-    const result = await users.findOne({username: username})
+    const result = await users.findOne({username: username}, {projection : {password : false, passwordHash : false, token: false, tokenExpiry: false}})
     if (result) {
         return result
     }
@@ -36,10 +38,57 @@ export const getUser = async(username) => {
     return null
 }
 
+export const getUserAuth = async(username) => {
+
+    const result = await users.findOne({username: username})
+
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
+export const changePassword = async(data) => {
+    
+    const hash = await bcrypt.hash(data.password, 10)
+    const result = await users.updateOne({username: data.username}, {$set: {password: data.password, passwordHash: hash, token: crypto.randomUUID, tokenExpiry: Date.now()}})
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
+export const changePfp = async(data) => {
+    
+    const result = await users.updateOne({username: data.username}, {$set: {pfp: data.pfp}})
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
+export const changeBio = async(data) => {
+    
+    const result = await users.updateOne({username: data.username}, {$set: {bio: data.bio}})
+    if (result) {
+        return result
+    }
+
+    return null
+
+}
+
 export const getPfpByUsername = async(username) => {
     let result = await users.findOne({username: username})
-    result = {pfp : result.pfp}
+    
     if (result) {
+        result = {pfp : result.pfp}
         return result
     }
 
@@ -55,6 +104,22 @@ export const getUserByID = async(id) => {
     }
 
     return null
+}
+
+export const getUserFromList = async(list) => {
+    
+
+    const result = await users.find({username : {$in : list}})
+    console.log(result)
+
+    console.log(result)
+
+    if(result){
+        return result.toArray()
+    }
+
+    return null;
+
 }
 
 export const getToken = async(token) => {

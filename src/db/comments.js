@@ -6,9 +6,15 @@ const users = client.db('tafthanan').collection('users')
 const posts = client.db('tafthanan').collection('posts')
 const comments = client.db('tafthanan').collection('comments')
 
-export const getParentComments = async(id) => {
+export const getParentComments = async(id, sortBy='top') => {
     const objID = new ObjectId(id)
     let result = await comments.find({postID: objID, parentComment: null})
+    result.sort({voteCount : -1})
+
+    if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
     result = await result.toArray()
 
     if(result.length === 0) {
@@ -18,9 +24,16 @@ export const getParentComments = async(id) => {
     return result
 }
 
-export const getChildrenComments = async(id) => {
+export const getChildrenComments = async(id, sortBy = 'top') => {
     const objID = new ObjectId(id)
     let result = await comments.find({parentComment: objID})
+
+    if(sortBy == 'top'){
+        result.sort({voteCount : -1})
+    }else if(sortBy == 'new'){
+        result.sort({datePosted : -1})
+    }
+
     result = await result.toArray()
 
     if(result.length === 0) {
@@ -42,19 +55,17 @@ export const getComment = async(id) => {
 }
 
 export const createComment = async(data) => {
-    
-    console.log(data)
+
 
     let result
 
-    if (data.parentComment == null) {
+    if (data.parentComment === null) {
         const postID = new ObjectId(data.postID)
         result = await comments.insertOne({postID: postID, content: data.content, voteCount: 0, datePosted: Date.now(), isEdited: false, author: data.author})
     } else {
-        const kwartoID = new ObjectId(data.kwartoID)
         const postID = new ObjectId(data.postID)
         const parentComment = new ObjectId(data.parentComment)
-        result = await comments.insertOne({postID: data.postID, parentComment: data.parentComment, content: data.content, voteCount: 0, isEdited: false, author: data.author, datePosted: Date.now()})
+        result = await comments.insertOne({postID: postID, parentComment: parentComment, content: data.content, voteCount: 0, isEdited: false, author: data.author, datePosted: Date.now()})
     }
 
     if (result) {
@@ -67,7 +78,7 @@ export const createComment = async(data) => {
 
 export const editComment = async(data) => {
     const objID = new ObjectId(data._id)
-    const result = await comments.updateOne({_id: objID}, {$set: {content: data.content}})
+    const result = await comments.updateOne({_id: objID}, {$set: {content: data.content, isEdited : true}})
     if (result) {
         return result
     }
@@ -151,5 +162,7 @@ export const downvoteComment = async(data) => {
 
 export const deleteComment = async(id) => {
     const objID = new ObjectId(id)
+    console.log(objID)
     const result = await comments.updateOne({_id: objID}, {$set: {deleted: true}})
+    console.log(result)
 }

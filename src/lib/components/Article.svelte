@@ -2,6 +2,7 @@
 
       import Vote from '$lib/components/Vote.svelte';
       import Dropdown from '$lib/components/Dropdown.svelte';
+      import { goto } from '$app/navigation';
 
       export let data;
 
@@ -13,13 +14,15 @@
       
       let kwarto = data.kwarto;
       let kwarto_logo = "/assets/logo.svg"
-      let author = data.username;
+      let author = data.deleted ? "[deleted]" : data.username;
       let timePosted = data.datePosted;
       let time = timeAgo(timePosted);
-      let title = data.title;
-      let content = data.content;
+      let title = data.deleted ? "[deleted]" : data.title;
+      let content = data.deleted ? "[deleted]" : data.content;
 
-      export let showModal
+
+      export let showModal = false
+      export let replyingTo = null
 
       const vote = {
         isPost: true,
@@ -28,6 +31,21 @@
       }
 
       // console.log(vote)
+
+  function comment(){
+
+    if(hidden){
+      showModal = true
+      goto('/k/'+kwarto+'/'+data._id+'/comments?showModal=true')
+
+      
+    }else{
+      console.log('i was called')
+      showModal = true
+      replyingTo = null
+    }
+  
+  }
 
     // TODO: export this function to its separate .js file
   function timeAgo(datetime) {
@@ -89,7 +107,7 @@
             <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
           </a>
 
-          <div class="options"> <Dropdown/> </div>
+          <div class="options"> <Dropdown post={data}/> </div>
 
           </div>
 
@@ -103,7 +121,7 @@
       </span>
       </a>
       <footer>
-        <Vote data={vote}/> <div class="action-button"> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
+        <Vote data={vote}/> <div class="action-button" on:click={() => {comment()} }> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
          <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
@@ -122,7 +140,7 @@
             <a href={"/k/"+kwarto} class="logo-kwarto-holder">
               <img class="class-logo" src={kwarto_logo}> <img src="/assets/circle.svg" class="circle"> <small>{kwarto}</small>
             </a>
-            <div class="options"> <Dropdown/> </div>
+            <div class="options"> <Dropdown post={data}/> </div>
   
             </div>
   
@@ -130,11 +148,13 @@
             
             <small>{time} {#if isEdited} (edited) {/if}</small>
         </header>
-        <span class:hidden={gradient}>
-          {@html content}
-        </span>
+        {#key content}
+          <span class:hidden={gradient}>
+            {@html content}
+          </span>
+        {/key}
         <footer>
-          <Vote data={vote}/> <div class="action-button" on:click={() => {showModal=true}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
+          <Vote data={vote}/> <div class="action-button" on:click={() => {comment()}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
            <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>

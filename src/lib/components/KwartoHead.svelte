@@ -3,14 +3,11 @@
     import Button from '$lib/components/Button.svelte'
 
     export let data;
-
-    export let pfp = data.pfp;
+    let pfp = data.pfp;
     let kwartoname = 'k\\' + data.name;
-
-    export let bio = data.bio
+    let bio = data.bio
 
 </script>
-
 
 
 <article class="full-width profile-header-wrapper">
@@ -24,8 +21,6 @@
             <h1>{kwartoname}</h1>
             </div>
         </div>
-
-
 
         <div class="follow-button-holder">
             <Button --url='url(/assets/add.svg)'> Join </Button>

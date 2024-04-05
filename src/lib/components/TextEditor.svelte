@@ -4,16 +4,18 @@
     import Back from '$lib/components/Back.svelte'
 
     export let backFunction;
-    export let kwarto;
-    export let replyingTo;
-    export let postID;
-
+    export let kwarto = null;
+    export let replyingTo = null;
+    export let postID = null;
     export let comment = false;
 
     let show='none'
 
     var btn = ''
     var url = ''
+
+    $: console.log("replying to " + replyingTo)
+
 
     function linkButton(button, url){
 
@@ -47,7 +49,7 @@
                 console.log(button.id + " clicked!")
                 document.execCommand(button.id, false, null);
 
-        })
+        }) })
 
         const formButtons = document.querySelectorAll('.wrap');
         formButtons.forEach(button => {
@@ -60,10 +62,11 @@
                 })
 
             })
-        })
+        
 
         document.getElementById('submitUrl').addEventListener('click', () =>{
             console.log('submit clicked.')
+            url = document.getElementById('url-place').value
             linkButton(btn, url)
         })
 
@@ -88,9 +91,9 @@
 </script>
 <form method=POST action="?/submit">
 
-    {#if comment}
-    <textarea disabled name="replyingTo" >{replyingTo}</textarea>
-    <textarea diabled name="postID">{postID}</textarea>
+    <!--Sometimes the dumbest solution is the best huhu-->
+    {#if replyingTo}
+    <input style="display: none" name="replyingTo" value={replyingTo}>
     {/if}
 
 <div class="richtext-wrapper">
@@ -111,7 +114,7 @@
     </div>
 
     {#if kwarto}
-    <Text name="title" placeholder="Write a title..."/>
+        <Text name="title" placeholder="Write a title..."/>
     {/if}
 
 <div class="content-writer">
@@ -155,7 +158,6 @@
 
 <input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none"/>
 
-
 </div>
 <div id="url-prompt-holder" style="display:{show}">
     <input id="url-place" placeholder="Insert URL here:"/> <button class="action-button pointer" type="button" id="submitUrl"> <strong> Submit </strong> </button>
@@ -163,7 +165,6 @@
 
 </div>
 </form>
-
 
 <style>
     
@@ -173,7 +174,6 @@
         justify-content: center;
         padding-bottom: 2px;
         border-bottom: solid 2px lightgray;
-
     }
 
     .format-buttons-holder .action-button{
@@ -181,9 +181,7 @@
     }
 
     .text-area{
-
         min-height:90%;
-
     }
 
     .text-area:focus-within{
@@ -195,14 +193,12 @@
         border-color: inherit;
     }
 
-
     [contenteditable=true]:empty:before{
-    content: attr(placeholder);
-    color: var(--text-contrast-color);
-    pointer-events: none;
-    display: block;
+        content: attr(placeholder);
+        color: var(--text-contrast-color);
+        pointer-events: none;
+        display: block;
     }
-
 
     .exit-submit-wrapper .action-button{
         background-color: var(--accent-color);

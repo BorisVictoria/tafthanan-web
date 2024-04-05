@@ -1,39 +1,37 @@
 <script>
 
-    import Modal from '$lib/components/Modal.svelte'
+    // import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import TextEditor from '$lib/components/TextEditor.svelte';
     import {EJSON} from 'bson'
 
     export let data
-
-
-    export let kwartolist = EJSON.deserialize(data.kwartolist)
-    export let kwartoName = data.kwarto.name
+    $: data = EJSON.deserialize(data)
+    $: kwartolist = data.kwartolist
+    $: kwartoName = data.kwarto.name
 
 </script> 
 
 <div class="wrapper main">
 
     <div class="left">
-        <Left kwartos={kwartolist}/>
+        {#key kwartolist}
+            <Left kwartos={kwartolist}/>
+        {/key}
     </div>
     <div class="middle">
-
         <article class="full-width">
             <h1>Create A Post</h1>
         </article>
 
         <article class="full-width">
-        <TextEditor kwarto={kwartoName}/>
+            <TextEditor kwarto={kwartoName}/>
         </article>
-
     </div>
+
 </div>
 
-
 <style>
-
 
     @media (min-width: 0px) {
 

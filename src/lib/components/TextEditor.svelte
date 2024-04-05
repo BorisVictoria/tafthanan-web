@@ -2,8 +2,15 @@
     import { onMount } from 'svelte';
     import Text from '$lib/components/Text.svelte'
     import Back from '$lib/components/Back.svelte'
+    import { browser } from "$app/environment";
 
-    export let backFunction;
+
+    function nav_back() {
+        if (browser && window.history.back !== undefined){
+            window.history.back()
+        }
+    }
+
     export let kwarto = null;
     export let replyingTo = null;
     export let postID = null;
@@ -39,6 +46,7 @@
     let innerHTML
 
     onMount(()=>{
+
         const normButtons = document.querySelectorAll('.norm');
         console.log(normButtons);
         
@@ -99,7 +107,7 @@
 <div class="richtext-wrapper">
     <div class="exit-submit-wrapper">
         {#if kwarto}
-        <a href={"/k/"+kwarto}><Back --width="calc(var(--fs-l) * 1.5)"/></a>
+        <Back --width="calc(var(--fs-l) * 1.5)" on:click={() => {nav_back()}}/>
         {/if}
         <span>
             {#if kwarto}

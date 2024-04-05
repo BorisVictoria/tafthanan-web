@@ -3,13 +3,13 @@
     // import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import TextEditor from '$lib/components/TextEditor.svelte';
+    import { onMount } from 'svelte'
     import {EJSON} from 'bson'
 
     export let data
     $: data = EJSON.deserialize(data)
     $: kwartolist = data.kwartolist
     $: kwartoName = data.kwarto.name
-
 </script> 
 
 <div class="wrapper main">

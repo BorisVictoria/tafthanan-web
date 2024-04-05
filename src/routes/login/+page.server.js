@@ -1,4 +1,4 @@
-import {registerUser, getUserAuth, setToken} from '$db/users'
+import {registerUser, getUser, getUserAuth, setToken} from '$db/users'
 import bcrypt from 'bcrypt'
 
 // TODO: Add redirects for invalid form submission
@@ -16,6 +16,29 @@ export const load = async(event) => {
 export const actions = {
     register: async(event) => {
         const registration = await event.request.formData()
+
+        const isTaken = await getUser(registration.get('username'))
+        if(isTaken != null){
+            redirect(303, '/login?usernameTaken')
+        }
+
+        let noSpace = /^[a-zA-Z0-9]+$/
+
+        if(!noSpace.test(registration.get('username'))){
+            redirect(303, '/login?wrongUsernameFormat')
+        }
+
+
+        let regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/
+
+        if(!regex.test(registration.get('password'))){
+            redirect(303, '/login?wrongPasswordFormat')
+        }
+
+        if(registration.get('password') != registration.get('confirmPassword')){
+            redirect(303, '/login?confirmPasswordWrong')
+        }
+
         const user = {
             email: registration.get('email'),
             username: registration.get('username'),
@@ -28,9 +51,13 @@ export const actions = {
 
         const data = await registerUser(user)
 
+        redirect(303, '/login?successReg')
+
+        /*
         return {
             success: !!data
-        }
+        }*/
+        
 
     },
 

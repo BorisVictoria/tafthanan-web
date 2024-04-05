@@ -28,6 +28,28 @@
         notifications.wrong_username("Invalid username", 2000)
     }
 
+    $: if($page.url.searchParams.has('usernameTaken')){
+        notifications.wrong_password("Username is taken", 2000)
+    }
+
+    $: if($page.url.searchParams.has('confirmPasswordWrong')){
+        notifications.wrong_password("Passwords do not match!", 2000)
+    }
+
+    $: if($page.url.searchParams.has('wrongPasswordFormat')){
+        notifications.wrong_password("A password must contain at least 6 characters, one uppercase, and one lowercase", 2000)
+    }
+
+    $: if($page.url.searchParams.has('wrongUsernameFormat')){
+        notifications.wrong_password("Usernames must be one word alphanumeric only.", 2000)
+    }
+
+    
+
+    $: if($page.url.searchParams.has('successReg')){
+        notifications.success("Successfully created an account, you can now log in", 2000)
+    }
+
     
     if($page.url.searchParams.has('plsLogIn')){
         notifications.send("Please log in to use that feature", 'default', 2000)
@@ -115,7 +137,7 @@
                 <p>
                     Email:
                 </p>
-                <Text name="email" placeholder="Email"/>
+                <Text name="email" type="email" placeholder="Email"/>
                 <p>
                     Username:
                 </p>

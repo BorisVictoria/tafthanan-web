@@ -5,7 +5,7 @@ This repository contains the source code for Tafthanan, a centralized platform w
 
 ## Installation
 
-### Svelte
+### Svelte and SvelteKit
 
 #### create-svelte
 
@@ -24,7 +24,6 @@ npm create svelte@latest my-app
 ```
 
 ##### Developing
-
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
@@ -34,4 +33,8 @@ npm run dev
 npm run dev -- --open
 ```
 
+### MonggoDB+ Atlas
+1. Sign up for an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+2. Create a new cluster and follow the setup instructions.
+3. Once your cluster is set up, you can connect to it from your Svelte application using the MongoDB driver for Node.js.
 

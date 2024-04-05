@@ -3,6 +3,7 @@
     // import Modal from '$lib/components/Modal.svelte'
     import Left from '$lib/components/Left.svelte'
     import TextEditor from '$lib/components/TextEditor.svelte';
+    import Toast from '$lib/components/Toast.svelte'
     import { onMount } from 'svelte'
     import {EJSON} from 'bson'
 
@@ -13,6 +14,8 @@
 </script> 
 
 <div class="wrapper main">
+
+    <Toast/>
 
     <div class="left">
         {#key kwartolist}

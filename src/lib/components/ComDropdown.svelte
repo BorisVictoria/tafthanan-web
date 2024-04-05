@@ -8,9 +8,6 @@
 
 
    
-    console.log("comment id: " + comment._id)
-    console.log("comment content: " + comment.content)
-
     //console.log($page.data)
 
     let showDropdown = false;    

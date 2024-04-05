@@ -3,12 +3,17 @@
     import Text from '$lib/components/Text.svelte'
     import Back from '$lib/components/Back.svelte'
     import { browser } from "$app/environment";
-
+    import { notifications } from "$lib/notifications"
+    import { page } from '$app/stores'
 
     function nav_back() {
         if (browser && window.history.back !== undefined){
             window.history.back()
         }
+    }
+
+    if($page.url.searchParams.has('emptyContent')){
+        notifications.wrong_password('content cannot be empty', 1000)
     }
 
     export let kwarto = null;
@@ -164,7 +169,7 @@
   
 </div>
 
-<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none" required/>
+<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none"/>
 
 </div>
 <div id="url-prompt-holder" style="display:{show}">

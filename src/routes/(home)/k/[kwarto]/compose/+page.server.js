@@ -6,6 +6,12 @@ import { EJSON } from "bson"
 export const actions = {
     submit: async(event) => {
         const data = await event.request.formData()
+        
+
+        if(data.get('content') == ""){
+            redirect(303, '?emptyContent')
+        }
+
         const post = {
             title: data.get('title'),
             content: data.get('content'),

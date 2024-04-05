@@ -22,8 +22,6 @@ export const actions = {
             votes: 0,
         }
 
-        console.log(post)
-
         const result = createComment(post)
 
         if (result) {
@@ -41,33 +39,23 @@ export const actions = {
 
         const data = await event.request.formData()
 
-        console.log('data')
-        console.log(data)
-
         //check if the author of post data is equal to current user.
-        console.log('getting post')
         const author = await getPost(data.get('postID'))
-        
-        console.log('verifying author and user')
-        console.log(event.locals.user.username, author.username)
         if(event.locals.user.username !== author.username){
             redirect(303, '/login')
         }
 
         //check if form is empty
-        console.log('checking empty field')
         if(data.get('title') === "" || data.get('content') === ""){
             
-            return false
+            redirect(303, "?emptyContent&showModal=true")
         }
+
 
         //check if there are no changes
-        if(data.get('title') === author.title || data.get('content') === author.content){
-            console.log('no changes')
+        if(data.get('title') === author.title && data.get('content') === author.content){
             return false
         }
-
-        console.log('all forms good')
 
         const newContent = {
             _id : data.get('postID'),
@@ -76,7 +64,6 @@ export const actions = {
         }
 
         const result = await editPost(newContent)
-        console.log(result)
 
         if(result) {
             return true
@@ -93,15 +80,11 @@ export const actions = {
 export const load = async(event) => {
 
     const kwarto = await getKwarto(event.params.kwarto)
-    console.log(kwarto)
 
     if (!kwarto) {
 
         if(event.locals.user === undefined)
             redirect(303, '/login?plsLogIn')
-
-        console.log('may male')
-        console.log(event.params.kwarto)
         redirect(303, "/")
 
 
@@ -111,7 +94,6 @@ export const load = async(event) => {
     let posts
     if(event.url.searchParams.has('sortBy')){
         let query = event.url.searchParams.get('sortBy')
-        console.log(query)
         posts = await getPostsByKwarto(event.params.kwarto, query)
     } else {
         posts = await getPostsByKwarto(event.params.kwarto)

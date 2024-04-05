@@ -63,7 +63,6 @@ export const removeFriend = async(senderName, recepientName) => {
         let index = recepientlist.indexOf(senderName)
         const x = recepientlist.splice(index, 1)
 
-        console.log("after popping: " + recepientlist)
         
         let result = await users.updateOne({username : recepientName}, {$set : {friends : recepientlist}})
         
@@ -74,15 +73,12 @@ export const removeFriend = async(senderName, recepientName) => {
         let index1 = senderlist.indexOf(recepientName)
         const y = senderlist.splice(index1, 1)
 
-        console.log("after popping: " + senderlist)
-
         let result1 = await users.updateOne({username : senderName}, {$set : {friends : senderlist}})
 
         return result1;
 
 
     } catch(err) {
-        console.log(err)
         return false;
     }
 
@@ -108,7 +104,6 @@ export const acceptRequest = async(id) => {
 
 
     }catch(err){
-        console.log(err)
         return false
     }
 
@@ -132,11 +127,7 @@ export const declineRequest = async(id) => {
 }
 
 export const findReceivedRequests = async(user) => {
-    console.log(user)
     let result = await requests.find({recepient : user, status : "pending"})
-
-    console.log('145')
-    console.log(result)
 
     if(result){
         return result.toArray()

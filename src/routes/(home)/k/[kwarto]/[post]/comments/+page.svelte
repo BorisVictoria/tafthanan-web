@@ -41,7 +41,6 @@
 
     onMount(() => {
         const params = new URLSearchParams(window.location.search)
-        console.log(params)
         showModal = params.get('showModal')
     })
 

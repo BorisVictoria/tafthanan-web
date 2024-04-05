@@ -5,8 +5,6 @@
     import { fly } from "svelte/transition";
     import { notifications } from "$lib/notifications.js";
 
-    console.log($notifications)
-
     export let themes = {
         default: "#aaaaaa",
         success: "#84C991",

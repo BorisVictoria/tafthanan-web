@@ -2,6 +2,13 @@
     import { onMount } from 'svelte';
     import Text from '$lib/components/Text.svelte'
     import Back from '$lib/components/Back.svelte'
+    import { notifications } from "$lib/notifications"
+    import { page } from "$app/stores"
+
+    if($page.url.searchParams.has('emptyContent')){
+        notifications.wrong_password('content cannot be empty', 1000)
+    }
+
 
 
     export let postID;
@@ -41,7 +48,6 @@
 
     onMount(()=>{
         const normButtons = document.querySelectorAll('.norm');
-        console.log(normButtons);
         
 
         normButtons.forEach(button=>{
@@ -149,7 +155,7 @@
     {@html content}
 </div>
 
-<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none" required />
+<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none"/>
 
 </div>
 <div id="url-prompt-holder" style="display:{show}">

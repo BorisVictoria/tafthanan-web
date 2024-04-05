@@ -57,11 +57,12 @@ export const actions = {
         console.log('checking empty field')
         if(data.get('title') === "" || data.get('content') === ""){
             
-            return false
+            redirect(303, "?emptyContent")
         }
 
+
         //check if there are no changes
-        if(data.get('title') === author.title || data.get('content') === author.content){
+        if(data.get('title') === author.title && data.get('content') === author.content){
             console.log('no changes')
             return false;
         }

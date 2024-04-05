@@ -6,11 +6,7 @@
     import { onMount } from 'svelte'
     import { notifications} from '$lib/notifications'
 
-    console.log(neighbors)
-    console.log(all)
-    
     $: friendRequests = []
-    $: console.log(friendRequests)
 
     var username
     if($page.data.user == undefined){
@@ -18,7 +14,6 @@
     } else {
         username = $page.data.user.username
     }
-    console.log(username)
 
 
 

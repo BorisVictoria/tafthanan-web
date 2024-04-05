@@ -7,7 +7,7 @@ This repository contains the source code for Tafthanan, a centralized platform w
 
 ### Svelte and SvelteKit
 
-#### create-svelte
+<b>create-svelte<b>
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 

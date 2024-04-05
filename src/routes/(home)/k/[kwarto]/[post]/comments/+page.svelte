@@ -12,6 +12,15 @@
     import Toast from '$lib/components/Toast.svelte'
     import { onMount } from 'svelte';
 
+    import { browser } from "$app/environment";
+
+
+    function nav_back() {
+        if (browser && window.history.back !== undefined){
+            window.history.back()
+        }
+    }
+
     let replies = [];
     let showModal = false;
 
@@ -39,7 +48,7 @@
 </script>
 
 <Modal bind:showModal replyingTo={replyingTo} postID={postID}>
-    <TextEditor backFunction={() => dialog.close()} bind:postID bind:replyingTo comment={comment}/>
+    <TextEditor bind:postID bind:replyingTo comment={comment}/>
 </Modal>
 
 <div class="wrapper main">
@@ -57,7 +66,7 @@
 <!-- Middle -->
 <div class="middle">
     <article class="full-width heading">
-        <a href={"/k/"+post.kwarto} data-sveltekit-reload><Back --width="var(--fs-xxl)"/></a> <h1>Post</h1>
+        <Back on:click={() => {nav_back()}} --width="var(--fs-xxl)"/> <h1>Post</h1>
     </article>
 
     {#key post}

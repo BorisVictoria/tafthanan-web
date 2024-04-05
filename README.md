@@ -33,6 +33,8 @@ npm run dev
 npm run dev -- --open
 ```
 
+<br />
+
 ### MonggoDB+ Atlas
 1. Sign up for an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. Create a new cluster and follow the setup instructions.

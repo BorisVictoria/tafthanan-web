@@ -7,11 +7,11 @@ This repository contains the source code for Tafthanan, a centralized platform w
 
 ### Svelte and SvelteKit
 
-<b>create-svelte<b>
+#### create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-##### Creating a project
+#### Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!
 
@@ -23,7 +23,7 @@ npm create svelte@latest
 npm create svelte@latest my-app
 ```
 
-##### Developing
+#### Developing
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
@@ -38,5 +38,26 @@ npm run dev -- --open
 ### MonggoDB+ Atlas
 1. Sign up for an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. Create a new cluster and follow the setup instructions.
-3. Once your cluster is set up, you can connect to it from your Svelte application using the MongoDB driver for Node.js.
+3. Once your cluster is set up, you can connect to it from your Svelte application using the MongoDB driver for Svelte.
 
+### Vercel
+a cloud platform for static sites and serverless functions
+
+#### Deploying the Application
+1. Sign up for an account on [Vercel](https://vercel.com/).
+2. Install Vercel CLI globally using npm:
+   ```bash
+   npm install -g vercel
+   ```
+
+3. Login to your Vercel account using the CLI:
+   ```bash
+   vercel login
+   ```
+
+4. Navigate to your SvelteKit project directory and run:
+   ```bash
+   vercel
+   ```
+
+5. Follow the prompts to deploy your application.

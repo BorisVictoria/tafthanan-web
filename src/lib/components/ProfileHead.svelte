@@ -49,8 +49,10 @@
             }
             else if(btnAction == "Remove Neighbor"){
                 console.log('remove')
-                await fetch(`/api/friendRequests/remove/${$page.data.user.username}/${name}`)
+                await fetch(`/api/friendRequests/remove/${$page.data.user.username}/${name}`, {method : 'POST'})
                 await getPendingRequest()
+                notifications.success('Successfully removed as a neighbor!', 2000)
+                btnAction = "Add Neighbor"
             } else if(btnAction == "Cancel"){
                 console.log('cancel')
                 await fetch(`/api/friendRequests/decline/${$page.data.user.username}/${name}`, {method : 'POST'}) 

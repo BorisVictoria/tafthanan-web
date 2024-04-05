@@ -62,8 +62,11 @@ export const removeFriend = async(senderName, recepientName) => {
 
         let index = recepientlist.indexOf(senderName)
         const x = recepientlist.splice(index, 1)
+
+        console.log("after popping: " + recepientlist)
         
-        let result = await user.updateOne({username : recepeintName}, {$set : {friends : recepientlist}})
+        let result = await users.updateOne({username : recepientName}, {$set : {friends : recepientlist}})
+        
         
  
         let senderlist = sender.friends
@@ -71,9 +74,11 @@ export const removeFriend = async(senderName, recepientName) => {
         let index1 = senderlist.indexOf(recepientName)
         const y = senderlist.splice(index1, 1)
 
-        let result1 = await user.updateOne({username : senderName}, {$set : {friends : senderlist}})
+        console.log("after popping: " + senderlist)
 
-        return true;
+        let result1 = await users.updateOne({username : senderName}, {$set : {friends : senderlist}})
+
+        return result1;
 
 
     } catch(err) {

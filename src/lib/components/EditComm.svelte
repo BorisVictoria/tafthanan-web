@@ -147,7 +147,7 @@
     {@html content}
 </div>
 
-<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none"/>
+<input name="content" bind:value={innerHTML} type="text" placeholder="text" style="display:none" required/>
 
 </div>
 <div id="url-prompt-holder" style="display:{show}">

@@ -2,10 +2,11 @@
     export let name = 'text';
     export let placeholder = 'placeholder';
     export let value = ''
+    export let type = 'text'
 </script>
 
 <div class="text-container">
-    <input type="text" name={name} placeholder={placeholder} value={value}>
+    <input type={type} name={name} placeholder={placeholder} value={value} required>
 </div>
 
 <style>

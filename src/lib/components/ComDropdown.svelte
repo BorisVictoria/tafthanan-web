@@ -57,8 +57,9 @@
         {#if $page.data.user && $page.data.user.username === comment.author}
         <button on:click={() => {showModalEdit = true}}>Edit</button>
         <button on:click={() => {showModalDelete = true}}>Delete</button>
+        {:else}
+            You can only edit your own posts
         {/if}
-        <button href="#">Share</button>
     </div>
 {/if}    
 

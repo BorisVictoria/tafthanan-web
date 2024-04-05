@@ -122,7 +122,6 @@
       </a>
       <footer>
         <Vote data={vote}/> <div class="action-button" on:click={() => {comment()} }> <img src="/assets/comment-icon.svg" alt="reply button">  <b>Comment</b> </div>
-         <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
       </footer>
   </article>
 
@@ -155,7 +154,6 @@
         {/key}
         <footer>
           <Vote data={vote}/> <div class="action-button" on:click={() => {comment()}}> <img src="/assets/comment-icon.svg" alt="reply button"> <b>Comment</b> </div>
-           <div class="action-button"> <img src="/assets/share-icon.svg"> <b>Share</b> </div>
         </footer>
     </article>
 

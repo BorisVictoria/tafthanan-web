@@ -17,7 +17,7 @@ export const getPost = async(id) => {
 }
 
 
-export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
+export const getPostfromSearchQuery = async(sortBy = 'new', searchTerm) => {
 
     console.log("search query: " + searchTerm)
 
@@ -55,7 +55,7 @@ export const getPostfromSearchQuery = async(sortBy = 'top', searchTerm) => {
     
 }
 
-export const getPostfromSearchQueryandKwarto = async(sortBy = 'top', searchTerm, kwarto) => {
+export const getPostfromSearchQueryandKwarto = async(sortBy = 'new', searchTerm, kwarto) => {
 
     console.log("search query: " + searchTerm)
 
@@ -114,7 +114,7 @@ export const getAllPosts = async(sortBy) => {
     return result
 }
 
-export const getPostsByKwarto = async(kwarto, sortBy = 'top') => {
+export const getPostsByKwarto = async(kwarto, sortBy = 'new') => {
 
     let result = await posts.find({kwarto: kwarto, deleted : {$ne: true}})
     
@@ -135,7 +135,7 @@ export const getPostsByKwarto = async(kwarto, sortBy = 'top') => {
     return result
 }
 
-export const getPostsByUser = async(username, sortBy='top') => {
+export const getPostsByUser = async(username, sortBy='new') => {
 
     let result = await posts.find({username: username, deleted : {$ne: true}})
 

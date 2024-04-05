@@ -6,7 +6,7 @@ const users = client.db('tafthanan').collection('users')
 const posts = client.db('tafthanan').collection('posts')
 const comments = client.db('tafthanan').collection('comments')
 
-export const getParentComments = async(id, sortBy='top') => {
+export const getParentComments = async(id, sortBy='new') => {
     const objID = new ObjectId(id)
     let result = await comments.find({postID: objID, parentComment: null})
     result.sort({voteCount : -1})
@@ -24,7 +24,7 @@ export const getParentComments = async(id, sortBy='top') => {
     return result
 }
 
-export const getChildrenComments = async(id, sortBy = 'top') => {
+export const getChildrenComments = async(id, sortBy = 'new') => {
     const objID = new ObjectId(id)
     let result = await comments.find({parentComment: objID})
 
@@ -162,7 +162,5 @@ export const downvoteComment = async(data) => {
 
 export const deleteComment = async(id) => {
     const objID = new ObjectId(id)
-    console.log(objID)
     const result = await comments.updateOne({_id: objID}, {$set: {deleted: true}})
-    console.log(result)
 }

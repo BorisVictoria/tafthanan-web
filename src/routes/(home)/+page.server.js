@@ -102,7 +102,7 @@ export const load = async({params, url}) => {
 
     }else{
 
-        const result = await getAllPosts('top')
+        const result = await getAllPosts('new')
         const data = {}
         data.posts = result
     

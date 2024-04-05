@@ -16,7 +16,7 @@
     showModal = true
   }
 
-  let sortBy = 'top'
+  let sortBy = 'new'
 
   if($page.url.searchParams.has('sortBy')){
     sortBy = $page.url.searchParams.get('sortBy')

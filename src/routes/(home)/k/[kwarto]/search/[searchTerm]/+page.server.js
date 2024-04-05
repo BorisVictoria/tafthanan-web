@@ -108,7 +108,7 @@ export const load = async({params, url}) => {
 
     }else{
 
-        const result = await getPostfromSearchQueryandKwarto('top', searchTerm, params.kwarto)
+        const result = await getPostfromSearchQueryandKwarto('new', searchTerm, params.kwarto)
         const data = {}
         data.posts = result
         data.query = searchTerm

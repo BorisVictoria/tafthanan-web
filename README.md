@@ -40,6 +40,8 @@ npm run dev -- --open
 2. Create a new cluster and follow the setup instructions.
 3. Once your cluster is set up, you can connect to it from your Svelte application using the MongoDB driver for Svelte.
 
+<br />
+
 ### Vercel
 a cloud platform for static sites and serverless functions
 

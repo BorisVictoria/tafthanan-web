@@ -124,8 +124,9 @@
                 </div>
                 <footer>
                     <a href="/">continue without an account</a>
-                    <a href="/about">about</a>
+                    
                 </footer>
+                <a href="/about">about</a>
             </form>
 
             <!-- Create Account Form -->

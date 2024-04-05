@@ -27,15 +27,6 @@
         transition: background-color 0.1s ease;
     }
 
-    button::before {
-        display: var(--display, block);
-        content: "";
-        width: var(--fs-m);
-        height: var(--fs-m);
-        background-image: var(--url, url("/assets/search.svg"));
-        background-size: contain;
-    } 
-
     button:hover {
         background-color: var(--accent-color);
     }

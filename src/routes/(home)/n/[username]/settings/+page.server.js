@@ -4,6 +4,12 @@ import {redirect} from '@sveltejs/kit'
 export const actions = {
     password: async(event) => {
         const request = await event.request.formData()
+        
+        let regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/
+
+        if(!regex.test(request.get('newpass'))){
+            redirect(303, `/n\\${event.locals.user.username}/settings?wrongPasswordFormat`)
+        }
 
         console.log(event.locals.user)
         const data = {

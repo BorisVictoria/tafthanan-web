@@ -4,12 +4,18 @@
     import Text from '$lib/components/Text.svelte'
     import {enhance} from '$app/forms'
     import Toast from '$lib/components/Toast.svelte'
+    import { notifications } from '$lib/notifications'
+    import { page } from '$app/stores'
 
     let show = 'none'
     let bioDiv
 
     var url = ''
     var btn = ''
+
+    $: if($page.url.searchParams.has('wrongPasswordFormat')){
+        notifications.wrong_password("A password must contain at least 6 characters, one uppercase, and one lowercase", 2000)
+    }
 
     function linkButton(button, url){
 
@@ -145,7 +151,7 @@
             </div>
             <hr>
             <div class="setting-button-container">
-                <a href="/">
+                <a href="/logout" data-sveltekit-reload>
                     <button class="action-button pointer" id="btn-log-out">
                         <h1 class="red">Log out</h1>
                     </button>

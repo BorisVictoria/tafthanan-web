@@ -56,7 +56,7 @@
         {:then}
         {#key friendRequests}
         {#if friendRequests.length > 0}
-        <h3>Friend Requests ({friendRequests.length})</h3>
+        <h3>Neighbor Requests ({friendRequests.length})</h3>
             {#each friendRequests as request}
             <span class="friend-req">
                 <a href={'/n/'+request.username} >

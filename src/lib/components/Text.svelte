@@ -5,7 +5,7 @@
 </script>
 
 <div class="text-container">
-    <input type="text" name={name} placeholder={placeholder} value={value}>
+    <input type="text" name={name} placeholder={placeholder} value={value} required>
 </div>
 
 <style>
